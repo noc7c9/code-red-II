@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Defines basic gun behaviour.
+ */
 public class Gun : MonoBehaviour {
 
     public Transform muzzle;

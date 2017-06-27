@@ -6,14 +6,16 @@ using UnityEngine.AI;
 /* Defines basic enemy behaviour.
  */
 [RequireComponent (typeof (NavMeshAgent))]
-public class Enemy : MonoBehaviour {
+public class Enemy : LivingEntity {
 
     float pathRefreshRate = 0.25f;
 
     NavMeshAgent pathfinder;
     Transform target;
 
-    void Start() {
+    protected override void Start() {
+        base.Start();
+
         pathfinder = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -21,9 +23,9 @@ public class Enemy : MonoBehaviour {
     }
 
     IEnumerator UpdatePath() {
-        while (target != null) {
+        while (target != null && !dead) {
             Vector3 targetPosition = new Vector3(
-                    target.position.x,0, target.position.z);
+                    target.position.x, 0, target.position.z);
             pathfinder.SetDestination(targetPosition);
 
             yield return new WaitForSeconds(pathRefreshRate);

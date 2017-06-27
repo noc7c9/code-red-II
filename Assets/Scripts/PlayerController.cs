@@ -5,14 +5,16 @@ using UnityEngine;
 /* Defines the player entity's behaviour.
  */
 [RequireComponent (typeof (Rigidbody))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : LivingEntity {
 
     public float moveSpeed;
 
     Vector3 velocity;
     Rigidbody myRigidbody;
 
-    void Start() {
+    protected override void Start() {
+        base.Start();
+
         myRigidbody = GetComponent<Rigidbody>();
     }
 

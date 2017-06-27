@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f41fe282ab449419e0ccd7e49b37ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 5
 --- !u!23 &1498020921
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -617,6 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebbe31216aaf434c9ccbf8b1b37f5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 10
   moveSpeed: 5
 --- !u!54 &1980282776
 Rigidbody:

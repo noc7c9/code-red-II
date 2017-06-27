@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Defines behaviour of projectiles.
+ */
 public class Projectile : MonoBehaviour {
 
     public LayerMask collisionMask;
+    public float damage;
 
     [HideInInspector]
     public float speed;
@@ -27,6 +30,10 @@ public class Projectile : MonoBehaviour {
     }
 
     void OnHitObject(RaycastHit hit) {
+        IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();
+        if (damageableObject != null) {
+            damageableObject.TakeHit(damage, hit);
+        }
         GameObject.Destroy(gameObject);
     }
 
