@@ -7,7 +7,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
 
     public Transform muzzle;
-    public Projectile projectile;
+    public Projectile projectilePrefab;
     public float msBetweenShots;
     public float muzzleVelocity;
 
@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour {
         if (Time.time > nextShotTime) {
             nextShotTime = Time.time + msBetweenShots / 1000;
 
-            Projectile newProjectile = Instantiate(projectile,
+            Projectile newProjectile = Instantiate(projectilePrefab,
                     muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.speed = muzzleVelocity;
         }
