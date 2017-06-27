@@ -95,6 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
+  attackDistanceThreshold: 0.5
+  timeBetweenAttacks: 1
+  attackSpeed: 3
+  attackingColor: {r: 1, g: 0.51724136, b: 0, a: 0}
 --- !u!136 &136680157681464118
 CapsuleCollider:
   m_ObjectHideFlags: 1
