@@ -6,20 +6,25 @@ using UnityEngine;
  * and passes it off to the player controller component.
  */
 [RequireComponent (typeof (PlayerController))]
+[RequireComponent (typeof (GunWielder))]
 public class PlayerInput : MonoBehaviour {
 
     Camera viewCamera;
-    PlayerController controller;
+    PlayerController playerController;
+    GunWielder gunWielder;
 
     void Start() {
-        controller = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerController>();
+        gunWielder = GetComponent<GunWielder>();
         viewCamera = Camera.main;
     }
 
     void Update() {
-        controller.Move(GetMoveInput());
-
-        controller.LookAt(GetLookAtPoint());
+        playerController.Move(GetMoveInput());
+        playerController.LookAt(GetLookAtPoint());
+        if (GetShoot()) {
+            gunWielder.Shoot();
+        }
     }
 
     Vector3 GetMoveInput() {
@@ -40,6 +45,11 @@ public class PlayerInput : MonoBehaviour {
             return point;
         }
         return Vector3.zero;
+    }
+
+    bool GetShoot() {
+        // left mouse button
+        return Input.GetMouseButton(0);
     }
 
 }
