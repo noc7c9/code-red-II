@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 /* Defines basic enemy behaviour.
  */
+[RequireComponent (typeof (Renderer))]
 [RequireComponent (typeof (NavMeshAgent))]
 public class Enemy : LivingEntity {
 
@@ -36,31 +37,45 @@ public class Enemy : LivingEntity {
 
     bool hasTarget;
 
-    protected override void Start() {
-        base.Start();
-
+    void Awake() {
         pathfinder = GetComponent<NavMeshAgent>();
         skinMaterial = GetComponent<Renderer>().material;
-        originalColor = skinMaterial.color;
 
         GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
 
         if (targetObject != null) {
-            currentState = State.Chasing;
             hasTarget = true;
 
             target = targetObject.transform;
             targetEntity = target.GetComponent<LivingEntity>();
-            targetEntity.OnDeath += OnTargetDeath;
 
             myCollisionRadius = GetComponent<CapsuleCollider>().radius;
             targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
+        } else {
+            hasTarget = false;
+        }
+    }
 
+    protected override void Start() {
+        base.Start();
+
+        originalColor = skinMaterial.color;
+
+        if (hasTarget) {
+            currentState = State.Chasing;
+            targetEntity.OnDeath += OnTargetDeath;
             StartCoroutine(UpdatePath());
         } else {
             currentState = State.Idle;
-            hasTarget = false;
         }
+    }
+
+    public void SetCharacteristics(
+            float moveSpeed, float damage, float health, Color color) {
+        pathfinder.speed = moveSpeed;
+        attackDamage = damage;
+        startingHealth = health;
+        skinMaterial.color = color;
     }
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {

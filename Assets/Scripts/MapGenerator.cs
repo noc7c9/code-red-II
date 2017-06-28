@@ -17,6 +17,8 @@ public class MapGenerator : MonoBehaviour {
     public Transform navmesh;
     public Transform navmeshMaskPrefab;
 
+    public Transform mapFloor;
+
     public Vector2 maxMapSize;
     public float tileSize;
 
@@ -50,11 +52,6 @@ public class MapGenerator : MonoBehaviour {
         // create new map
         currentMap = maps[mapIndex];
         System.Random prng = new System.Random(currentMap.seed);
-
-        GetComponent<BoxCollider>().size = new Vector3(
-                currentMap.mapSize.x * tileSize,
-                0.05f,
-                currentMap.mapSize.y * tileSize);
 
         // create holder
         mapHolder = new GameObject(MAP_HOLDER_NAME).transform;
@@ -153,6 +150,8 @@ public class MapGenerator : MonoBehaviour {
                 Vector3.forward * verticalOffset, verticalScale);
         InstantiateNavmeshMask(mapHolder,
                 Vector3.back * verticalOffset, verticalScale);
+
+        mapFloor.localScale = new Vector3(currentMap.mapSize.x, currentMap.mapSize.y) * tileSize;
     }
 
     void InstantiateNavmeshMask(Transform parent, Vector3 position, Vector3 scale) {

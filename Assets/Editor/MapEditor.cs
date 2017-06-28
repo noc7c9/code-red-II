@@ -13,8 +13,6 @@ public class MapEditor : Editor {
         MapGenerator map = target as MapGenerator;
 
         if (DrawDefaultInspector()) {
-            base.OnInspectorGUI();
-
             map.GenerateMap();
         }
 
