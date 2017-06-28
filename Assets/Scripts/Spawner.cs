@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour {
 
     public Wave[] waves;
 
+    public float playerSpawnHeight;
+
     public float spawnDelay;
     public Color tileFlashColor;
     public float tileFlashSpeed;
@@ -33,6 +35,8 @@ public class Spawner : MonoBehaviour {
     bool isCamping;
 
     bool isDisabled;
+
+    public event System.Action<int> OnNewWave;
 
     void Start() {
         map = FindObjectOfType<MapGenerator>();
@@ -105,6 +109,11 @@ public class Spawner : MonoBehaviour {
         }
     }
 
+    void ResetPlayerPosition() {
+        player.position = map.GetMapCenterTile().position
+            + Vector3.up * playerSpawnHeight;
+    }
+
     void NextWave() {
         currentWaveNumber++;
         if (currentWaveNumber - 1 < waves.Length) {
@@ -112,6 +121,11 @@ public class Spawner : MonoBehaviour {
 
             enemiesRemainingToSpawn = currentWave.enemyCount;
             enemiesRemainingAlive = enemiesRemainingToSpawn;
+
+            if (OnNewWave != null) {
+                OnNewWave(currentWaveNumber);
+            }
+            ResetPlayerPosition();
         }
     }
 

@@ -30,7 +30,12 @@ public class MapGenerator : MonoBehaviour {
     Queue<Coord> shuffledOpenTileCoords;
     Transform[,] tileMap;
 
-    void Start() {
+    void Awake() {
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    }
+
+    void OnNewWave(int waveNumber) {
+        mapIndex = waveNumber - 1;
         GenerateMap();
     }
 
@@ -226,6 +231,10 @@ public class MapGenerator : MonoBehaviour {
         x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
         y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
         return tileMap[x, y];
+    }
+
+    public Transform GetMapCenterTile() {
+        return tileMap[currentMap.mapCenter.x, currentMap.mapCenter.y];
     }
 
     Coord GetRandomCoord() {
