@@ -22,8 +22,13 @@ public class PlayerInput : MonoBehaviour {
     void Update() {
         playerController.Move(GetMoveInput());
         playerController.LookAt(GetLookAtPoint());
-        if (GetShoot()) {
-            gunWielder.Shoot();
+
+        // left mouse button
+        if (Input.GetMouseButton(0)) {
+            gunWielder.OnTriggerHold();
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            gunWielder.OnTriggerRelease();
         }
     }
 
@@ -45,11 +50,6 @@ public class PlayerInput : MonoBehaviour {
             return point;
         }
         return Vector3.zero;
-    }
-
-    bool GetShoot() {
-        // left mouse button
-        return Input.GetMouseButton(0);
     }
 
 }

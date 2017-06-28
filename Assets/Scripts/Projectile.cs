@@ -4,9 +4,11 @@ using UnityEngine;
 
 /* Defines behaviour of projectiles.
  */
+[RequireComponent (typeof (TrailRenderer))]
 public class Projectile : MonoBehaviour {
 
     public LayerMask collisionMask;
+    public Color trailColor;
     public float damage;
     public float secsLifetime;
 
@@ -19,6 +21,8 @@ public class Projectile : MonoBehaviour {
         Destroy(gameObject, secsLifetime);
 
         CheckOverlapCollisions(overlapThreshold);
+
+        GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
     }
 
     void Update() {
