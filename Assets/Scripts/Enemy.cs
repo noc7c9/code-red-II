@@ -13,6 +13,8 @@ public class Enemy : LivingEntity {
     }
     State currentState;
 
+    public ParticleSystem deathEffect;
+
     public float attackDistanceThreshold;
     public float timeBetweenAttacks;
     public float attackSpeed;
@@ -59,6 +61,16 @@ public class Enemy : LivingEntity {
             currentState = State.Idle;
             hasTarget = false;
         }
+    }
+
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
+        if (damage >= health) {
+            Quaternion rotation =
+                Quaternion.FromToRotation(Vector3.forward, hitDirection);
+            Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)
+                    as GameObject, deathEffect.startLifetime);
+        }
+        base.TakeHit(damage, hitPoint, hitDirection);
     }
 
     void OnTargetDeath() {
