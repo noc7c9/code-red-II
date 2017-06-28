@@ -68,7 +68,7 @@ public class Enemy : LivingEntity {
             Quaternion rotation =
                 Quaternion.FromToRotation(Vector3.forward, hitDirection);
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)
-                    as GameObject, deathEffect.startLifetime);
+                    as GameObject, deathEffect.main.startLifetime.constant);
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }

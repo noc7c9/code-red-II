@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
-  deathEffect: {fileID: 1467444766911136, guid: a0ebec74fa2933d418830f0bb3fc9146,
+  deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
   attackDistanceThreshold: 0.5
   timeBetweenAttacks: 1
