@@ -29,12 +29,22 @@ public class PlayerInput : MonoBehaviour {
         crosshairs.transform.position = point;
         crosshairs.DetectTargets(MouseAimRay());
 
+        Vector2 aimPoint = new Vector2(point.x, point.z);
+        Vector2 playerPos = new Vector2(transform.position.x, transform.position.z);
+        if ((aimPoint - playerPos).sqrMagnitude > 1) {
+            gunWielder.Aim(point);
+        }
+
         // left mouse button
         if (Input.GetMouseButton(0)) {
             gunWielder.OnTriggerHold();
         }
         if (Input.GetMouseButtonUp(0)) {
             gunWielder.OnTriggerRelease();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            gunWielder.Reload();
         }
     }
 

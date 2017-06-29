@@ -144,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4819942544145522}
   - component: {fileID: 33349086141655556}
-  - component: {fileID: 65427614805029316}
   - component: {fileID: 23593997929316326}
   m_Layer: 0
   m_Name: Cube (2)
@@ -193,7 +192,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4322125910003438}
   - component: {fileID: 33578088455039198}
-  - component: {fileID: 65444866095827656}
   - component: {fileID: 23563406453275314}
   m_Layer: 0
   m_Name: Cube (1)
@@ -211,7 +209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4505889534444214}
   - component: {fileID: 33524066208413738}
-  - component: {fileID: 65018376453680240}
   - component: {fileID: 23045384535658758}
   m_Layer: 0
   m_Name: Cube
@@ -227,7 +224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372029449161480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4302459, y: 0.025, z: -1.2158394}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4454615101558954}
@@ -301,7 +298,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370421014347036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4505889534444214}
@@ -518,42 +515,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914457444267144}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65018376453680240
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1933316765609046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65427614805029316
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1544576921570560}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65444866095827656
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1914457444267144}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!108 &108483092477186680
 Light:
   m_ObjectHideFlags: 1
@@ -602,18 +563,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireMode: 0
+  msBetweenShots: 100
+  muzzleVelocity: 35
+  burstCount: 3
   projectilePrefab: {fileID: 114285579837237930, guid: 6fb95895ee1c68e40858a51daa932024,
-    type: 2}
-  shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,
     type: 2}
   projectileSpawnPoints:
   - {fileID: 4803277569145576}
   - {fileID: 4997576800866922}
   - {fileID: 4699420194634366}
+  projectilesPerMag: 20
+  reloadTime: 0.33
+  maxReloadAngle: 35
+  shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,
+    type: 2}
   shellEjectionPoint: {fileID: 4376511815606086}
-  msBetweenShots: 100
-  muzzleVelocity: 35
-  burstCount: 3
+  recoilMin: 0.05
+  recoilMax: 0.2
+  recoilRecoveryTime: 0.1
+  recoilAngleOffsetMin: 3
+  recoilAngleOffsetMax: 5
+  recoilAngleAbsoluteMax: 30
+  recoilAngleRecoverTime: 0.1
 --- !u!114 &114783008430500706
 MonoBehaviour:
   m_ObjectHideFlags: 1
