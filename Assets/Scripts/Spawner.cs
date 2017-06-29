@@ -79,18 +79,9 @@ public class Spawner : MonoBehaviour {
         }
 
         // flash the spawn tile
-        Material tileMat = spawnTile.GetComponent<Renderer>().material;
-        Color initialColor = tileMat.color;
-        float spawnTimer = 0;
-        while (spawnTimer < spawnDelay) {
-            tileMat.color = Color.Lerp(initialColor, tileFlashColor,
-                    Mathf.PingPong(spawnTimer * tileFlashSpeed, 1));
-
-            spawnTimer += Time.deltaTime;
-
-            yield return null;
-        }
-        tileMat.color = initialColor;
+        Tile tile = spawnTile.GetComponent<Tile>();
+        yield return StartCoroutine(
+                tile.Flash(tileFlashColor, spawnDelay, tileFlashSpeed));
 
         // actually spawn the enemy
         Enemy spawnedEnemy = Instantiate(enemyPrefab,

@@ -9,6 +9,8 @@ using UnityEngine;
 [RequireComponent (typeof (GunWielder))]
 public class PlayerInput : MonoBehaviour {
 
+    public Crosshairs crosshairs;
+
     Camera viewCamera;
     PlayerController playerController;
     GunWielder gunWielder;
@@ -21,7 +23,11 @@ public class PlayerInput : MonoBehaviour {
 
     void Update() {
         playerController.Move(GetMoveInput());
-        playerController.LookAt(GetLookAtPoint());
+
+        Vector3 point = GetLookAtPoint();
+        playerController.LookAt(point);
+        crosshairs.transform.position = point;
+        crosshairs.DetectTargets(MouseAimRay());
 
         // left mouse button
         if (Input.GetMouseButton(0)) {
@@ -39,10 +45,14 @@ public class PlayerInput : MonoBehaviour {
         return moveInput.normalized;
     }
 
+    Ray MouseAimRay() {
+        return viewCamera.ScreenPointToRay(Input.mousePosition);
+    }
+
     Vector3 GetLookAtPoint() {
         // raycast to figure out where on the ground the mouse is pointing at.
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Ray ray = MouseAimRay();
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunWielder.GunHeight);
         float intersectDistance;
 
         if (groundPlane.Raycast(ray, out intersectDistance)) {

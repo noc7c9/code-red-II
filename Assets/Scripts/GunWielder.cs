@@ -38,4 +38,10 @@ public class GunWielder : MonoBehaviour {
         }
     }
 
+    public float GunHeight {
+        get {
+            return gunPosition.position.y;
+        }
+    }
+
 }
