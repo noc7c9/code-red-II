@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114144144069035692}
   - component: {fileID: 114230235546476568}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: Burst Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,17 +504,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c72307a765ed3f4782b1c901c2d2108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireMode: 0
-  msBetweenShots: 10
-  muzzleVelocity: 20
-  burstCount: 5
+  fireMode: 1
+  msBetweenShots: 50
+  muzzleVelocity: 50
+  burstCount: 7
   projectilePrefab: {fileID: 114285579837237930, guid: 6fb95895ee1c68e40858a51daa932024,
     type: 2}
   projectileSpawnPoints:
   - {fileID: 4453767249291294}
-  projectilesPerMag: 2500
-  reloadTime: 0.2
-  maxReloadAngle: 90
+  projectilesPerMag: 250
+  reloadTime: 0.5
+  maxReloadAngle: -45
   shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,
     type: 2}
   shellEjectionPoint: {fileID: 4341922095719136}
@@ -525,6 +525,8 @@ MonoBehaviour:
   recoilAngleOffsetMax: 5
   recoilAngleAbsoluteMax: 30
   recoilAngleRecoverTime: 0.1
+  shootAudio: {fileID: 8300000, guid: e562904eb722e72488a3419496dafe9b, type: 3}
+  reloadAudio: {fileID: 8300000, guid: b2b7e40cedc2bf24c883082efcaec688, type: 3}
 --- !u!114 &114230235546476568
 MonoBehaviour:
   m_ObjectHideFlags: 1

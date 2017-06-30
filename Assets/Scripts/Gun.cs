@@ -36,6 +36,10 @@ public class Gun : MonoBehaviour {
     public float recoilAngleAbsoluteMax;
     public float recoilAngleRecoverTime;
 
+    [Header("Audio")]
+    public AudioClip shootAudio;
+    public AudioClip reloadAudio;
+
     MuzzleFlash muzzleFlash;
 
     float nextShotTime;
@@ -107,12 +111,15 @@ public class Gun : MonoBehaviour {
                 * Random.Range(recoilMax, recoilMin);
             recoilAngle += Random.Range(recoilAngleOffsetMax, recoilAngleOffsetMin);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, recoilAngleAbsoluteMax);
+
+            AudioManager.Instance.PlaySound(shootAudio, transform.position);
         }
     }
 
     public void Reload() {
         if (!isReloading && projectilesRemainingInMag != projectilesPerMag) {
             StartCoroutine(AnimateReload());
+            AudioManager.Instance.PlaySound(reloadAudio, transform.position);
         }
     }
 

@@ -585,6 +585,8 @@ MonoBehaviour:
   recoilAngleOffsetMax: 5
   recoilAngleAbsoluteMax: 30
   recoilAngleRecoverTime: 0.1
+  shootAudio: {fileID: 8300000, guid: 5b7c6a4ef8d87cb4aa354e05b1f3150c, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 54aa192b2e2cc9846aac7b87b0f5f6dd, type: 3}
 --- !u!114 &114783008430500706
 MonoBehaviour:
   m_ObjectHideFlags: 1
