@@ -41,4 +41,9 @@ public class PlayerController : LivingEntity {
         transform.LookAt(point);
     }
 
+    protected override void Die() {
+        AudioManager.Instance.PlaySound("Player Death", transform.position);
+        base.Die();
+    }
+
 }
