@@ -26,6 +26,12 @@ public class PlayerController : LivingEntity {
         base.Start();
     }
 
+    void Update() {
+        if (transform.position.y < -10) {
+            Die();
+        }
+    }
+
     void FixedUpdate() {
         myRigidbody.MovePosition(myRigidbody.position
                 + velocity * Time.fixedDeltaTime);

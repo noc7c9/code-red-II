@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114144144069035692}
   - component: {fileID: 114230235546476568}
   m_Layer: 0
-  m_Name: Burst Pistol
+  m_Name: Gatling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,15 +504,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c72307a765ed3f4782b1c901c2d2108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireMode: 1
-  msBetweenShots: 50
+  fireMode: 0
+  msBetweenShots: 150
   muzzleVelocity: 50
-  burstCount: 7
+  burstCount: 0
   projectilePrefab: {fileID: 114285579837237930, guid: 6fb95895ee1c68e40858a51daa932024,
     type: 2}
   projectileSpawnPoints:
   - {fileID: 4453767249291294}
-  projectilesPerMag: 250
+  projectilesPerMag: 50
   reloadTime: 0.5
   maxReloadAngle: -45
   shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,

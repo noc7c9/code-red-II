@@ -58,6 +58,9 @@ public class Gun : MonoBehaviour {
     void Start() {
         muzzleFlash = GetComponent<MuzzleFlash>();
         shotsRemainingInBurst = burstCount;
+        projectilesRemainingInMag = projectilesPerMag;
+        nextShotTime = Time.time;
+        triggerReleasedSinceLastShot = true;
     }
 
     void LateUpdate() {

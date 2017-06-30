@@ -131,5 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca31a83c96f40e49b548ea3bd40acca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crossFadeDuration: 2
   mainTheme: {fileID: 8300000, guid: 58f53d4e9083b6b4595a64d66923b709, type: 3}
   menuTheme: {fileID: 8300000, guid: 135620de1713c4547968bfce410d2f8d, type: 3}

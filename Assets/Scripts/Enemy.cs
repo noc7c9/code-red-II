@@ -9,6 +9,8 @@ using UnityEngine.AI;
 [RequireComponent (typeof (NavMeshAgent))]
 public class Enemy : LivingEntity {
 
+    public static event System.Action OnDeathStatic;
+
     enum State {
         Idle, Chasing, Attacking,
     }
@@ -82,12 +84,16 @@ public class Enemy : LivingEntity {
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
         AudioManager.Instance.PlaySound("Impact", transform.position);
-        if (damage >= health) {
+        if (damage >= health && !dead) {
             AudioManager.Instance.PlaySound("Enemy Death", transform.position);
             Quaternion rotation =
                 Quaternion.FromToRotation(Vector3.forward, hitDirection);
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)
                     as GameObject, deathEffect.main.startLifetime.constant);
+
+            if (OnDeathStatic != null) {
+                OnDeathStatic();
+            }
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }

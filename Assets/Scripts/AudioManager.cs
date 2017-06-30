@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour {
 
@@ -40,25 +41,35 @@ public class AudioManager : MonoBehaviour {
         musicSources = new AudioSource[2];
         for (int i = 0; i < 2; i++) {
             GameObject newMusicSource = new GameObject("Music Source " + (i + 1));
-            musicSources[i] = newMusicSource.AddComponent<AudioSource>();
             newMusicSource.transform.parent = transform;
+
+            musicSources[i] = newMusicSource.AddComponent<AudioSource>();
+            musicSources[i].loop = true;
         }
 
         GameObject newSfx2DSource = new GameObject("Sfx 2D Source");
-        sfx2DSource = newSfx2DSource.AddComponent<AudioSource>();
         newSfx2DSource.transform.parent = transform;
 
+        sfx2DSource = newSfx2DSource.AddComponent<AudioSource>();
+
         audioListener = FindObjectOfType<AudioListener>().transform;
-        PlayerController playerGO = FindObjectOfType<PlayerController>();
-        if (playerGO != null) {
-            player = playerGO.transform;
-        }
 
         library = GetComponent<SoundLibrary>();
 
         masterVolumePercent = PlayerPrefs.GetFloat("master volume", 1);
         sfxVolumePercent = PlayerPrefs.GetFloat("sfx volume", 1);
         musicVolumePercent = PlayerPrefs.GetFloat("music volume", 1);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (player == null) {
+            PlayerController playerGO = FindObjectOfType<PlayerController>();
+            if (playerGO != null) {
+                player = playerGO.transform;
+            }
+        }
     }
 
     void Update() {
@@ -84,8 +95,8 @@ public class AudioManager : MonoBehaviour {
         }
         PlayerPrefs.Save();
 
-        musicSources[0].volume = musicVolumePercent * masterVolumePercent;
-        musicSources[1].volume = musicVolumePercent * masterVolumePercent;
+        musicSources[activeMusicSourceIndex].volume
+            = musicVolumePercent * masterVolumePercent;
     }
 
     public void PlayMusic(AudioClip clip, float fadeDuration=1) {

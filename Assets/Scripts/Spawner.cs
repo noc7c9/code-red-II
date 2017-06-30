@@ -21,6 +21,8 @@ public class Spawner : MonoBehaviour {
 
     Transform player;
 
+    public int startingWaveNumber;
+
     Wave currentWave;
     int currentWaveNumber;
 
@@ -48,6 +50,7 @@ public class Spawner : MonoBehaviour {
         nextCampCheckTime = timeBetweenCampingChecks + Time.time;
         prevCampPosition = player.position;
 
+        currentWaveNumber = startingWaveNumber - 1;
         NextWave();
     }
 
