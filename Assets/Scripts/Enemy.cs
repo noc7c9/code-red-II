@@ -27,7 +27,8 @@ public class Enemy : LivingEntity {
     NavMeshAgent pathfinder;
     Transform target;
     LivingEntity targetEntity;
-    Material skinMaterial;
+    Material sharedMaterial;
+    Material material;
 
     Color originalColor;
 
@@ -39,7 +40,7 @@ public class Enemy : LivingEntity {
 
     void Awake() {
         pathfinder = GetComponent<NavMeshAgent>();
-        skinMaterial = GetComponent<Renderer>().material;
+        sharedMaterial = GetComponent<Renderer>().sharedMaterial;
 
         GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
 
@@ -59,7 +60,7 @@ public class Enemy : LivingEntity {
     protected override void Start() {
         base.Start();
 
-        originalColor = skinMaterial.color;
+        originalColor = sharedMaterial.color;
 
         if (hasTarget) {
             currentState = State.Chasing;
@@ -75,7 +76,8 @@ public class Enemy : LivingEntity {
         pathfinder.speed = moveSpeed;
         attackDamage = damage;
         startingHealth = health;
-        skinMaterial.color = color;
+        sharedMaterial.color = color;
+        material = GetComponent<Renderer>().material;
     }
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
@@ -121,7 +123,7 @@ public class Enemy : LivingEntity {
         pathfinder.enabled = false;
 
         // change color when attacking
-        skinMaterial.color = attackingColor;
+        material.color = attackingColor;
 
         bool hasAppliedDamage = false;
 
@@ -141,7 +143,7 @@ public class Enemy : LivingEntity {
         }
 
         // restore original color
-        skinMaterial.color = originalColor;
+        material.color = originalColor;
 
         // start chasing again
         currentState = State.Chasing;

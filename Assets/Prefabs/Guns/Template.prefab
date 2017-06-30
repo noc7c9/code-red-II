@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 114259224214730528}
   - component: {fileID: 114783008430500706}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,7 +572,7 @@ MonoBehaviour:
   - {fileID: 4803277569145576}
   - {fileID: 4997576800866922}
   - {fileID: 4699420194634366}
-  projectilesPerMag: 20
+  projectilesPerMag: 2000
   reloadTime: 0.33
   maxReloadAngle: 35
   shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,

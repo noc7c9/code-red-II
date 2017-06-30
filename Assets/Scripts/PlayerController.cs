@@ -12,10 +12,18 @@ public class PlayerController : LivingEntity {
     Vector3 velocity;
     Rigidbody myRigidbody;
 
+    void Awake() {
+        myRigidbody = GetComponent<Rigidbody>();
+
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    }
+
+    void OnNewWave(int waveNumber) {
+        health = startingHealth;
+    }
+
     protected override void Start() {
         base.Start();
-
-        myRigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate() {

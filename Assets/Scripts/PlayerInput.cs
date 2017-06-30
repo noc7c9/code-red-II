@@ -15,10 +15,15 @@ public class PlayerInput : MonoBehaviour {
     PlayerController playerController;
     GunWielder gunWielder;
 
-    void Start() {
+    void Awake() {
         playerController = GetComponent<PlayerController>();
         gunWielder = GetComponent<GunWielder>();
         viewCamera = Camera.main;
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    }
+
+    void OnNewWave(int waveNumber) {
+        gunWielder.EquipGun(waveNumber - 1);
     }
 
     void Update() {

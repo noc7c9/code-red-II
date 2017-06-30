@@ -6,15 +6,13 @@ using UnityEngine;
  */
 public class GunWielder : MonoBehaviour {
 
-    public Gun startingGun;
+    public Gun[] allGuns;
     public Transform gunPosition;
 
     Gun equippedGun;
 
-    void Start() {
-        if (startingGun != null) {
-            EquipGun(startingGun);
-        }
+    public void EquipGun(int index) {
+        EquipGun(allGuns[index]);
     }
 
     public void EquipGun(Gun gunToEquip) {

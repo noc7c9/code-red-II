@@ -11,10 +11,77 @@ public class GameUI : MonoBehaviour {
     public Image fadeScreen;
     public GameObject gameOverUI;
 
+    public RectTransform newWaveBanner;
+    public Text newWaveNumber;
+    public Text newWaveEnemyCount;
+
     public float fadeTime;
 
-    void Start() {
+    Spawner spawner;
+
+    void Awake() {
+        spawner = FindObjectOfType<Spawner>();
+        spawner.OnNewWave += OnNewWave;
+
         FindObjectOfType<PlayerController>().OnDeath += OnGameOver;
+    }
+
+    void OnNewWave(int waveNumber) {
+        Spawner.Wave wave = spawner.waves[waveNumber - 1];
+
+        if (wave.infinite) {
+            newWaveNumber.text = "- Last Wave -";
+            newWaveEnemyCount.text = "Enemies: Infinite";
+        } else {
+            newWaveNumber.text = "- Wave: " + NumberToWord(waveNumber) + " -";
+            newWaveEnemyCount.text = "Enemies: " + wave.enemyCount;
+        }
+
+        DisplayNewWaveBanner();
+    }
+
+    IEnumerator currentNewWaveCoroutine;
+    void DisplayNewWaveBanner() {
+        if (currentNewWaveCoroutine != null) {
+            StopCoroutine(currentNewWaveCoroutine);
+        }
+        StartCoroutine(currentNewWaveCoroutine = AnimateBanner());
+    }
+
+    IEnumerator AnimateBanner() {
+        float visibleY = -200;
+        float hiddenY = -450;
+        float delay = 2f;
+        float speed = 1.5f;
+        float percent = 0;
+
+        // display banner
+        newWaveBanner.gameObject.SetActive(true);
+        while (percent <= 1) {
+            percent += Time.deltaTime * speed;
+
+            newWaveBanner.anchoredPosition = Vector2.up
+                * Mathf.Lerp(hiddenY, visibleY, percent);
+            yield return null;
+        }
+
+        // wait a moment
+        yield return new WaitForSeconds(delay);
+
+        // hide banner
+        while (percent >= 0) {
+            percent -= Time.deltaTime * speed;
+
+            newWaveBanner.anchoredPosition = Vector2.up
+                * Mathf.Lerp(hiddenY, visibleY, percent);
+            yield return null;
+        }
+        newWaveBanner.gameObject.SetActive(false);
+    }
+
+    string NumberToWord(int num) {
+        string[] words = {"One", "Two", "Three", "Four", "Five"};
+        return words[num-1];
     }
 
     void OnGameOver() {
