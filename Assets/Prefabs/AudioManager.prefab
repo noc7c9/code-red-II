@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1452952690169660}
+  m_IsPrefabParent: 1
+--- !u!1 &1452952690169660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4205982959765306}
+  - component: {fileID: 114452072142156466}
+  - component: {fileID: 114836752199973026}
+  - component: {fileID: 114434045340569894}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1817106923597190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4471909395128008}
+  - component: {fileID: 81594587471136980}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4205982959765306
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452952690169660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4471909395128008}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4471909395128008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817106923597190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4205982959765306}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &81594587471136980
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817106923597190}
+  m_Enabled: 1
+--- !u!114 &114434045340569894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452952690169660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc28244f5d1c6645a04e822c2fd57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundGroups:
+  - groupID: Impact
+    group:
+    - {fileID: 8300000, guid: c81a65c3e9ea5204ba8b10b79efb13de, type: 3}
+    - {fileID: 8300000, guid: bb66cff8ec4b1fb4383cc76fb9780caa, type: 3}
+    - {fileID: 8300000, guid: 5bc7a7d184ce4024eb6c0b7646eb21c4, type: 3}
+  - groupID: Enemy Death
+    group:
+    - {fileID: 8300000, guid: 3ac6cbc571dd5b242a9d312af95c017d, type: 3}
+    - {fileID: 8300000, guid: a03db678f8db1c34280ce08ebed0cfb3, type: 3}
+  - groupID: Enemy Attack
+    group:
+    - {fileID: 8300000, guid: e06586baf663e1649bee915e5f65f286, type: 3}
+  - groupID: Player Death
+    group:
+    - {fileID: 8300000, guid: 51a79250f3f29c5428b9e151b5d95fcb, type: 3}
+  - groupID: Level Complete
+    group:
+    - {fileID: 8300000, guid: 516740b3efc4d924699bd3271c74ff93, type: 3}
+--- !u!114 &114452072142156466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452952690169660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f137062c9f17b4da3c1080efb80b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114836752199973026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452952690169660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca31a83c96f40e49b548ea3bd40acca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTheme: {fileID: 8300000, guid: 58f53d4e9083b6b4595a64d66923b709, type: 3}
+  menuTheme: {fileID: 8300000, guid: 135620de1713c4547968bfce410d2f8d, type: 3}

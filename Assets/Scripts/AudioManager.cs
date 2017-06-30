@@ -17,9 +17,9 @@ public class AudioManager : MonoBehaviour {
 
     public enum AudioChannel {Master, Sfx, Music};
 
-    float masterVolumePercent = 1;
-    float sfxVolumePercent = 1;
-    float musicVolumePercent = 1;
+    public float masterVolumePercent { get; private set; }
+    public float sfxVolumePercent { get; private set; }
+    public float musicVolumePercent { get; private set; }
 
     AudioSource sfx2DSource;
 
@@ -49,13 +49,16 @@ public class AudioManager : MonoBehaviour {
         newSfx2DSource.transform.parent = transform;
 
         audioListener = FindObjectOfType<AudioListener>().transform;
-        player = FindObjectOfType<PlayerController>().transform;
+        PlayerController playerGO = FindObjectOfType<PlayerController>();
+        if (playerGO != null) {
+            player = playerGO.transform;
+        }
 
         library = GetComponent<SoundLibrary>();
 
-        masterVolumePercent = PlayerPrefs.GetFloat("master volume", masterVolumePercent);
-        sfxVolumePercent = PlayerPrefs.GetFloat("sfx volume", sfxVolumePercent);
-        musicVolumePercent = PlayerPrefs.GetFloat("music volume", musicVolumePercent);
+        masterVolumePercent = PlayerPrefs.GetFloat("master volume", 1);
+        sfxVolumePercent = PlayerPrefs.GetFloat("sfx volume", 1);
+        musicVolumePercent = PlayerPrefs.GetFloat("music volume", 1);
     }
 
     void Update() {
@@ -64,7 +67,7 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void SetMasterVolume(float volumePercent, AudioChannel channel) {
+    public void SetVolume(float volumePercent, AudioChannel channel) {
         switch (channel) {
             case AudioChannel.Master:
                 masterVolumePercent = volumePercent;
@@ -79,6 +82,7 @@ public class AudioManager : MonoBehaviour {
                 PlayerPrefs.SetFloat("music volume", volumePercent);
                 break;
         }
+        PlayerPrefs.Save();
 
         musicSources[0].volume = musicVolumePercent * masterVolumePercent;
         musicSources[1].volume = musicVolumePercent * masterVolumePercent;

@@ -11,7 +11,4 @@ public class MusicManager : MonoBehaviour {
         AudioManager.Instance.PlayMusic(menuTheme, 2);
     }
 
-    void Update() {
-    }
-
 }

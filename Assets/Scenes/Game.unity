@@ -1930,6 +1930,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689543530}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &715362006
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205982959765306, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: aaf8c523aee894743a416ef5e069232d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &720700202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,42 +2704,6 @@ Transform:
   m_Father: {fileID: 1305166503}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &892674879
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 892674880}
-  - component: {fileID: 892674881}
-  m_Layer: 0
-  m_Name: AudioListener
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &892674880
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 892674879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1259382576}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &892674881
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 892674879}
-  m_Enabled: 1
 --- !u!1 &938028517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3442,92 +3448,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1256559480}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1259382573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1259382576}
-  - component: {fileID: 1259382575}
-  - component: {fileID: 1259382574}
-  - component: {fileID: 1259382577}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1259382574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1259382573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca31a83c96f40e49b548ea3bd40acca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainTheme: {fileID: 8300000, guid: 58f53d4e9083b6b4595a64d66923b709, type: 3}
-  menuTheme: {fileID: 8300000, guid: 135620de1713c4547968bfce410d2f8d, type: 3}
---- !u!114 &1259382575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1259382573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f137062c9f17b4da3c1080efb80b56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1259382576
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1259382573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 892674880}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1259382577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1259382573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc28244f5d1c6645a04e822c2fd57d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundGroups:
-  - groupID: Impact
-    group:
-    - {fileID: 8300000, guid: c81a65c3e9ea5204ba8b10b79efb13de, type: 3}
-    - {fileID: 8300000, guid: bb66cff8ec4b1fb4383cc76fb9780caa, type: 3}
-    - {fileID: 8300000, guid: 5bc7a7d184ce4024eb6c0b7646eb21c4, type: 3}
-  - groupID: Enemy Death
-    group:
-    - {fileID: 8300000, guid: 3ac6cbc571dd5b242a9d312af95c017d, type: 3}
-    - {fileID: 8300000, guid: a03db678f8db1c34280ce08ebed0cfb3, type: 3}
-  - groupID: Enemy Attack
-    group:
-    - {fileID: 8300000, guid: e06586baf663e1649bee915e5f65f286, type: 3}
-  - groupID: Player Death
-    group:
-    - {fileID: 8300000, guid: 51a79250f3f29c5428b9e151b5d95fcb, type: 3}
-  - groupID: Level Complete
-    group:
-    - {fileID: 8300000, guid: 516740b3efc4d924699bd3271c74ff93, type: 3}
 --- !u!21 &1300547289
 Material:
   serializedVersion: 6
