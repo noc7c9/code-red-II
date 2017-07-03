@@ -64,7 +64,7 @@ public class PlayerInput : MonoBehaviour {
         return viewCamera.ScreenPointToRay(Input.mousePosition);
     }
 
-    Vector3 GetLookAtPoint() {
+    public Vector3 GetLookAtPoint() {
         // raycast to figure out where on the ground the mouse is pointing at.
         Ray ray = MouseAimRay();
         Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunWielder.GunHeight);
