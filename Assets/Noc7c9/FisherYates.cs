@@ -5,6 +5,8 @@ using System.Collections.Generic;
 namespace Noc7c9 {
 
     /* Fisher-Yates shuffle functions.
+     *
+     * Original Source: https://github.com/SebLague/Create-a-Game-Source
      */
     public static class FisherYates {
 
