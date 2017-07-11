@@ -14,7 +14,7 @@ namespace Noc7c9.TheDigitalFrontier {
         float streakExpiryTime = 1;
 
         void Awake() {
-            FindObjectOfType<PlayerController>().OnDeath += OnPlayerDeath;
+            GameManager.Instance.GetPlayerController().OnDeath += OnPlayerDeath;
             Enemy.OnDeathStatic += OnEnemyKilled;
 
             score = 0;

@@ -29,10 +29,10 @@ namespace Noc7c9.TheDigitalFrontier {
         PlayerController player;
 
         void Awake() {
-            spawner = FindObjectOfType<Spawner>();
+            spawner = GameManager.Instance.GetSpawner();
             spawner.OnNewWave += OnNewWave;
 
-            player = FindObjectOfType<PlayerController>();
+            player = GameManager.Instance.GetPlayerController();
             player.OnDeath += OnGameOver;
         }
 
@@ -47,7 +47,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void OnNewWave(int waveNumber) {
-            Spawner.Wave wave = spawner.waves[waveNumber - 1];
+            Spawner.Wave wave = GameManager.Instance.GetWave(waveNumber - 1);
 
             if (wave.infinite) {
                 newWaveNumber.text = "- Last Wave -";

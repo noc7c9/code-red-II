@@ -21,7 +21,7 @@ namespace Noc7c9.TheDigitalFrontier {
             playerController = GetComponent<PlayerController>();
             gunWielder = GetComponent<GunWielder>();
             viewCamera = Camera.main;
-            FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+            GameManager.Instance.GetSpawner().OnNewWave += OnNewWave;
         }
 
         void OnNewWave(int waveNumber) {

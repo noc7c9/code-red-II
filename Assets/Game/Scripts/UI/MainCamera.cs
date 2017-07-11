@@ -17,22 +17,22 @@ namespace Noc7c9.TheDigitalFrontier {
         Vector3 offset;
         Vector3 smoothVel;
 
-        GameObject player;
+        Transform player;
 
         void Awake() {
-            player = GameManager.Instance.GetPlayer();
+            player = GameManager.Instance.GetPlayerController().transform;
         }
 
         void Start() {
             if (player != null) {
-                offset = transform.position - player.transform.position;
+                offset = transform.position - player.position;
             }
         }
 
         void Update() {
             if (player != null) {
                 Vector3 targetPosition = offset;
-                targetPosition += player.transform.position * (1 - cursorWeight);
+                targetPosition += player.position * (1 - cursorWeight);
                 targetPosition += GameManager.Instance.GetCursorPosition() * cursorWeight;
 
                 transform.position = Vector3.SmoothDamp(transform.position,

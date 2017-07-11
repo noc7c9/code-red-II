@@ -9,20 +9,72 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GameManager : Singleton<GameManager> {
 
-        public PlayerController playerController;
+        // singleton manager getter methods
 
-        PlayerInput playerInput;
+        Spawner spawner;
+        public Spawner GetSpawner() {
+            if (spawner == null) {
+                spawner = FindObjectOfType<Spawner>();
+            }
+            return spawner;
+        }
+
+        RoomLoader roomLoader;
+        public RoomLoader GetRoomLoader() {
+            if (roomLoader == null) {
+                roomLoader = FindObjectOfType<RoomLoader>();
+            }
+            return roomLoader;
+        }
+
+        PlayerController playerController;
+        public PlayerController GetPlayerController() {
+            if (playerController == null) {
+                playerController = FindObjectOfType<PlayerController>();
+            }
+            return playerController;
+        }
 
         void Awake() {
             playerInput = FindObjectOfType<PlayerInput>();
         }
 
-        public GameObject GetPlayer() {
-            return playerController.gameObject;
+        PlayerInput playerInput;
+
+        // TODO: this needs to be in an input manager class
+        public Vector3 GetCursorPosition() {
+            if (playerInput == null) {
+                return Vector3.zero;
+            }
+            return playerInput.GetLookAtPoint();
         }
 
-        public Vector3 GetCursorPosition() {
-            return playerInput.GetLookAtPoint();
+        // level information
+
+        public int visibleLevel;
+        public Level[] levels;
+
+        public Gun GetGun(int levelIndex) {
+            return levels[levelIndex].gun;
+        }
+
+        public Spawner.Wave GetWave(int levelIndex) {
+            return levels[levelIndex].wave;
+        }
+
+        public RoomSettings GetRoomSettings(int levelIndex) {
+            return levels[levelIndex].roomSettings;
+        }
+
+        public int GetLevelsCount() {
+            return levels.Length;
+        }
+
+        [System.Serializable]
+        public struct Level {
+            public Gun gun;
+            public Spawner.Wave wave;
+            public RoomSettings roomSettings;
         }
 
     }

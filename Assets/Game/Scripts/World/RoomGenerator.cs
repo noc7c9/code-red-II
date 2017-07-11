@@ -34,7 +34,7 @@ namespace Noc7c9.TheDigitalFrontier {
             // place doors
 
             // place obstacles
-            PlaceObstacles();
+            PlaceRandomObstacles();
 
             return room;
         }
@@ -54,7 +54,7 @@ namespace Noc7c9.TheDigitalFrontier {
             room.SetTile(c, obs);
         }
 
-        static void PlaceObstacles() {
+        static void PlaceRandomObstacles() {
             int targetCount = (int)(room.tileCount * settings.obstaclePercent);
             int currentCount = 0;
             bool[,] obstacleMap = new bool[room.size.x, room.size.y];

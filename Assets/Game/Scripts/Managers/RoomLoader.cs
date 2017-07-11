@@ -23,12 +23,20 @@ namespace Noc7c9.TheDigitalFrontier {
         [Range(0, 1)]
         public float outlinePercent;
 
-        public RoomSettings roomSettings;
-
-        Room currentRoom;
+        public Room currentRoom;
         Transform currentRoomTransform;
 
-        public void Generate() {
+        Transform[,] tileMap;
+
+        void Awake() {
+            GameManager.Instance.GetSpawner().OnNewWave += OnNewWave;
+        }
+
+        void OnNewWave(int waveNumber) {
+            Load(GameManager.Instance.GetRoomSettings(waveNumber - 1));
+        }
+
+        public void Load(RoomSettings roomSettings) {
             // delete old room (if any)
             if (currentRoomTransform == null) {
                 currentRoomTransform = transform.Find(HOLDER_NAME);
@@ -43,6 +51,8 @@ namespace Noc7c9.TheDigitalFrontier {
             // create holder
             currentRoomTransform = new GameObject(HOLDER_NAME).transform;
             currentRoomTransform.parent = transform;
+
+            tileMap = new Transform[currentRoom.size.x, currentRoom.size.y];
 
             // create entities
             for (int x = 0; x < currentRoom.size.x; x++) {
@@ -118,6 +128,8 @@ namespace Noc7c9.TheDigitalFrontier {
             newTile.localScale = Vector3.one * (1 - outlinePercent) * tileSize;
 
             newTile.parent = currentRoomTransform;
+
+            tileMap[x, y] = newTile;
         }
 
         void InstantiateObstacle(Obstacle obs) {
@@ -139,6 +151,23 @@ namespace Noc7c9.TheDigitalFrontier {
             renderer.sharedMaterial = material;
 
             newObstacle.parent = currentRoomTransform;
+        }
+
+        public Transform GetTileFromPosition(Vector3 position) {
+            int x = Mathf.RoundToInt(position.x / tileSize + (currentRoom.size.x - 1) / 2f);
+            int y = Mathf.RoundToInt(position.z / tileSize + (currentRoom.size.y - 1) / 2f);
+            x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
+            y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
+            return tileMap[x, y];
+        }
+
+        public Transform GetMapCenterTile() {
+            return tileMap[currentRoom.center.x, currentRoom.center.y];
+        }
+
+        public Transform GetRandomOpenTile() {
+            Coord c = currentRoom.GetRandomOpenCoord();
+            return tileMap[c.x, c.y];
         }
 
     }

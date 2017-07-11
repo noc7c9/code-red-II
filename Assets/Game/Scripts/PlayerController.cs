@@ -17,7 +17,7 @@ namespace Noc7c9.TheDigitalFrontier {
         void Awake() {
             myRigidbody = GetComponent<Rigidbody>();
 
-            FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+            GameManager.Instance.GetSpawner().OnNewWave += OnNewWave;
         }
 
         void OnNewWave(int waveNumber) {

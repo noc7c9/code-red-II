@@ -67,9 +67,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
             if (player == null) {
-                PlayerController playerGO = FindObjectOfType<PlayerController>();
-                if (playerGO != null) {
-                    player = playerGO.transform;
+                PlayerController playerController
+                    = GameManager.Instance.GetPlayerController();
+                if (playerController != null) {
+                    player = playerController.transform;
                 }
             }
         }

@@ -10,8 +10,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Enemy enemyPrefab;
 
-        public Wave[] waves;
-
         public float playerSpawnHeight;
 
         public float spawnDelay;
@@ -32,7 +30,7 @@ namespace Noc7c9.TheDigitalFrontier {
         int enemiesRemainingAlive;
         float nextSpawnTime;
 
-        MapGenerator map;
+        RoomLoader roomLoader;
 
         float nextCampCheckTime;
         Vector3 prevCampPosition;
@@ -43,8 +41,9 @@ namespace Noc7c9.TheDigitalFrontier {
         public event System.Action<int> OnNewWave;
 
         void Start() {
-            map = FindObjectOfType<MapGenerator>();
-            LivingEntity playerEntity = FindObjectOfType<PlayerController>();
+            roomLoader = GameManager.Instance.GetRoomLoader();
+
+            LivingEntity playerEntity = GameManager.Instance.GetPlayerController();
             player = playerEntity.transform;
 
             playerEntity.OnDeath += OnPlayerDeath;
@@ -78,9 +77,9 @@ namespace Noc7c9.TheDigitalFrontier {
 
         IEnumerator SpawnEnemy() {
             // get the spawn tile
-            Transform spawnTile = map.GetRandomOpenTile();
+            Transform spawnTile = roomLoader.GetRandomOpenTile();
             if (isCamping) {
-                spawnTile = map.GetTileFromPosition(player.position);
+                spawnTile = roomLoader.GetTileFromPosition(player.position);
             }
 
             // flash the spawn tile
@@ -110,7 +109,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void ResetPlayerPosition() {
-            player.position = map.GetMapCenterTile().position
+            player.position = roomLoader.GetMapCenterTile().position
                 + Vector3.up * playerSpawnHeight;
         }
 
@@ -120,8 +119,8 @@ namespace Noc7c9.TheDigitalFrontier {
             }
 
             currentWaveNumber++;
-            if (currentWaveNumber - 1 < waves.Length) {
-                currentWave = waves[currentWaveNumber - 1];
+            if (currentWaveNumber - 1 < GameManager.Instance.GetLevelsCount()) {
+                currentWave = GameManager.Instance.GetWave(currentWaveNumber - 1);
 
                 enemiesRemainingToSpawn = currentWave.enemyCount;
                 enemiesRemainingAlive = enemiesRemainingToSpawn;

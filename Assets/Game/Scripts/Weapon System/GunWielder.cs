@@ -8,13 +8,12 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GunWielder : MonoBehaviour {
 
-        public Gun[] allGuns;
         public Transform gunPosition;
 
         Gun equippedGun;
 
         public void EquipGun(int index) {
-            EquipGun(allGuns[index]);
+            EquipGun(GameManager.Instance.GetGun(index));
         }
 
         public void EquipGun(Gun gunToEquip) {
