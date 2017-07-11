@@ -11,7 +11,13 @@ namespace Noc7c9.TheDigitalFrontier {
     [RequireComponent (typeof (NavMeshAgent))]
     public class Enemy : LivingEntity {
 
-        public static event System.Action OnDeathStatic;
+        public static event System.Action DyingStatic;
+        protected static void OnDyingStatic() {
+            var evt = DyingStatic;
+            if (evt != null) {
+                evt();
+            }
+        }
 
         enum State {
             Idle, Chasing, Attacking,
@@ -68,7 +74,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             if (hasTarget) {
                 currentState = State.Chasing;
-                targetEntity.OnDeath += OnTargetDeath;
+                targetEntity.Dying += TargetDyingEventHandler;
                 StartCoroutine(UpdatePath());
             } else {
                 currentState = State.Idle;
@@ -87,20 +93,18 @@ namespace Noc7c9.TheDigitalFrontier {
         public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
             AudioManager.Instance.PlaySound("Impact", transform.position);
             if (damage >= health && !dead) {
+                OnDyingStatic();
+
                 AudioManager.Instance.PlaySound("Enemy Death", transform.position);
                 Quaternion rotation =
                     Quaternion.FromToRotation(Vector3.forward, hitDirection);
                 Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)
                         as GameObject, deathEffect.main.startLifetime.constant);
-
-                if (OnDeathStatic != null) {
-                    OnDeathStatic();
-                }
             }
             base.TakeHit(damage, hitPoint, hitDirection);
         }
 
-        void OnTargetDeath() {
+        void TargetDyingEventHandler() {
             hasTarget = false;
             currentState = State.Idle;
         }

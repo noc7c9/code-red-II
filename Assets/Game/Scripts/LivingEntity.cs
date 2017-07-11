@@ -13,7 +13,13 @@ namespace Noc7c9.TheDigitalFrontier {
         public float health { get; protected set; }
         protected bool dead;
 
-        public event System.Action OnDeath;
+        public event System.Action Dying;
+        protected virtual void OnDying() {
+            var evt = Dying;
+            if (evt != null) {
+                evt();
+            }
+        }
 
         protected virtual void Start() {
             health = startingHealth;
@@ -33,11 +39,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         protected virtual void Die() {
             if (!dead) {
+                OnDying();
+
                 dead = true;
                 health = 0;
-                if (OnDeath != null) {
-                    OnDeath();
-                }
                 GameObject.Destroy(gameObject);
             }
         }

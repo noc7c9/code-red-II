@@ -29,10 +29,11 @@ namespace Noc7c9.TheDigitalFrontier {
         Transform[,] tileMap;
 
         void Awake() {
-            GameManager.Instance.GetSpawner().OnNewWave += OnNewWave;
+            GameManager.Instance.GetSpawner().StartedNewWave
+                += StartedNewWaveEventHandler;
         }
 
-        void OnNewWave(int waveNumber) {
+        void StartedNewWaveEventHandler(int waveNumber) {
             GenerateAndLoad(GameManager.Instance.GetRoomSettings(waveNumber - 1));
         }
 

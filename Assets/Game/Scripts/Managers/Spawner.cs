@@ -38,7 +38,13 @@ namespace Noc7c9.TheDigitalFrontier {
 
         bool isDisabled;
 
-        public event System.Action<int> OnNewWave;
+        public event System.Action<int> StartedNewWave;
+        protected virtual void OnStartedNewWave(int number) {
+            var evt = StartedNewWave;
+            if (evt != null) {
+                evt(number);
+            }
+        }
 
         void Start() {
             roomLoader = GameManager.Instance.GetRoomLoader();
@@ -46,7 +52,7 @@ namespace Noc7c9.TheDigitalFrontier {
             LivingEntity playerEntity = GameManager.Instance.GetPlayerController();
             player = playerEntity.transform;
 
-            playerEntity.OnDeath += OnPlayerDeath;
+            playerEntity.Dying += PlayerDyingEventHandler;
 
             nextCampCheckTime = timeBetweenCampingChecks + Time.time;
             prevCampPosition = player.position;
@@ -90,17 +96,17 @@ namespace Noc7c9.TheDigitalFrontier {
             // actually spawn the enemy
             Enemy spawnedEnemy = Instantiate(enemyPrefab,
                     spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
-            spawnedEnemy.OnDeath += OnEnemyDeath;
+            spawnedEnemy.Dying += EnemyDyingEventHandler;
             spawnedEnemy.SetCharacteristics(
                     currentWave.enemyMoveSpeed, currentWave.enemyDamage,
                     currentWave.enemyHealth, currentWave.enemyColor);
         }
 
-        void OnPlayerDeath() {
+        void PlayerDyingEventHandler() {
             isDisabled = true;
         }
 
-        void OnEnemyDeath() {
+        void EnemyDyingEventHandler() {
             enemiesRemainingAlive--;
 
             if (enemiesRemainingAlive == 0) {
@@ -125,10 +131,9 @@ namespace Noc7c9.TheDigitalFrontier {
                 enemiesRemainingToSpawn = currentWave.enemyCount;
                 enemiesRemainingAlive = enemiesRemainingToSpawn;
 
-                if (OnNewWave != null) {
-                    OnNewWave(currentWaveNumber);
-                }
                 ResetPlayerPosition();
+
+                OnStartedNewWave(currentWaveNumber);
             }
         }
 

@@ -14,13 +14,13 @@ namespace Noc7c9.TheDigitalFrontier {
         float streakExpiryTime = 1;
 
         void Awake() {
-            GameManager.Instance.GetPlayerController().OnDeath += OnPlayerDeath;
-            Enemy.OnDeathStatic += OnEnemyKilled;
+            GameManager.Instance.GetPlayerController().Dying += PlayerDyingEventHandler;
+            Enemy.DyingStatic += EnemyDyingEventHandler;
 
             score = 0;
         }
 
-        void OnEnemyKilled() {
+        void EnemyDyingEventHandler() {
             if (Time.time < lastEnemyKillTime + streakExpiryTime) {
                 streakCount++;
             } else {
@@ -32,8 +32,8 @@ namespace Noc7c9.TheDigitalFrontier {
             score += 5 + Mathf.Min(2 * streakCount, maxStreakBonus);
         }
 
-        void OnPlayerDeath() {
-            Enemy.OnDeathStatic -= OnEnemyKilled;
+        void PlayerDyingEventHandler() {
+            Enemy.DyingStatic -= EnemyDyingEventHandler;
         }
 
     }

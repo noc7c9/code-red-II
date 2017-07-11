@@ -30,10 +30,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Awake() {
             spawner = GameManager.Instance.GetSpawner();
-            spawner.OnNewWave += OnNewWave;
+            spawner.StartedNewWave += StartedNewWaveEventHandler;
 
             player = GameManager.Instance.GetPlayerController();
-            player.OnDeath += OnGameOver;
+            player.Dying += PlayerDyingEventHandler;
         }
 
         void Update() {
@@ -46,7 +46,7 @@ namespace Noc7c9.TheDigitalFrontier {
             healthBar.localScale = new Vector3(healthPercent, 1, 1);
         }
 
-        void OnNewWave(int waveNumber) {
+        void StartedNewWaveEventHandler(int waveNumber) {
             Spawner.Wave wave = GameManager.Instance.GetWave(waveNumber - 1);
 
             if (wave.infinite) {
@@ -104,7 +104,9 @@ namespace Noc7c9.TheDigitalFrontier {
             return words[num-1];
         }
 
-        void OnGameOver() {
+        void PlayerDyingEventHandler() {
+            // trigger gameover
+
             Cursor.visible = true;
 
             StartCoroutine(Fade(Color.clear, fadeOutColor, fadeTime));
