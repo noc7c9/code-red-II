@@ -70,6 +70,10 @@ namespace Noc7c9.TheDigitalFrontier {
             return levels.Length;
         }
 
+        public void LoadRoom(int levelIndex) {
+            roomLoader.GenerateAndLoad(levels[levelIndex].roomSettings);
+        }
+
         [System.Serializable]
         public struct Level {
             public Gun gun;

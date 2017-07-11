@@ -12,7 +12,10 @@ namespace Noc7c9 {
                 lock (getLock) {
                     if (instance_ == null) {
                         instance_ = (T) FindObjectOfType(typeof(T));
-                        DontDestroyOnLoad(instance_);
+
+                        #if !UNITY_EDITOR
+                            DontDestroyOnLoad(instance_);
+                        #endif
                     }
                     return instance_;
                 }

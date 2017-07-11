@@ -23,8 +23,8 @@ namespace Noc7c9.TheDigitalFrontier {
         [Range(0, 1)]
         public float outlinePercent;
 
-        public Room currentRoom;
-        Transform currentRoomTransform;
+        Room loadedRoom;
+        Transform loadedRoomHolder;
 
         Transform[,] tileMap;
 
@@ -33,34 +33,38 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void OnNewWave(int waveNumber) {
-            Load(GameManager.Instance.GetRoomSettings(waveNumber - 1));
+            GenerateAndLoad(GameManager.Instance.GetRoomSettings(waveNumber - 1));
         }
 
-        public void Load(RoomSettings roomSettings) {
+        public void GenerateAndLoad(RoomSettings settings) {
+            Load(RoomGenerator.Generate(settings));
+        }
+
+        public void Load(Room newRoom) {
             // delete old room (if any)
-            if (currentRoomTransform == null) {
-                currentRoomTransform = transform.Find(HOLDER_NAME);
+            if (loadedRoomHolder == null) {
+                loadedRoomHolder = transform.Find(HOLDER_NAME);
             }
-            if (currentRoomTransform != null) {
-                DestroyImmediate(currentRoomTransform.gameObject);
+            if (loadedRoomHolder != null) {
+                DestroyImmediate(loadedRoomHolder.gameObject);
             }
 
-            // create new room
-            currentRoom = RoomGenerator.Generate(roomSettings);
+            // load new room
+            loadedRoom = newRoom;
 
             // create holder
-            currentRoomTransform = new GameObject(HOLDER_NAME).transform;
-            currentRoomTransform.parent = transform;
+            loadedRoomHolder = new GameObject(HOLDER_NAME).transform;
+            loadedRoomHolder.parent = transform;
 
-            tileMap = new Transform[currentRoom.size.x, currentRoom.size.y];
+            tileMap = new Transform[loadedRoom.size.x, loadedRoom.size.y];
 
             // create entities
-            for (int x = 0; x < currentRoom.size.x; x++) {
-                for (int y = 0; y < currentRoom.size.y; y++) {
+            for (int x = 0; x < loadedRoom.size.x; x++) {
+                for (int y = 0; y < loadedRoom.size.y; y++) {
                     // tile for every position in room
                     InstantiateTile(x, y);
 
-                    ITile tile = currentRoom.GetTile(x, y);
+                    ITile tile = loadedRoom.GetTile(x, y);
                     switch (tile.type) {
                         case TileType.Obstacle:
                             InstantiateObstacle((Obstacle) tile);
@@ -73,7 +77,7 @@ namespace Noc7c9.TheDigitalFrontier {
             SetupNavmeshMasks();
 
             floor.localScale = tileSize
-                * new Vector3(currentRoom.size.x, currentRoom.size.y);
+                * new Vector3(loadedRoom.size.x, loadedRoom.size.y);
         }
 
         Vector3 CoordToPosition(Coord c) {
@@ -82,32 +86,33 @@ namespace Noc7c9.TheDigitalFrontier {
 
         Vector3 CoordToPosition(int x, int y) {
             return new Vector3(
-                    -currentRoom.size.x / 2f + 0.5f + x,
+                    -loadedRoom.size.x / 2f + 0.5f + x,
                     0,
-                    -currentRoom.size.y / 2f + 0.5f + y) * tileSize;
+                    -loadedRoom.size.y / 2f + 0.5f + y) * tileSize;
         }
 
         void SetupNavmeshMasks() {
-            navmesh.localScale = new Vector3(navmeshSize.x, navmeshSize.y, 0) * tileSize;
+            navmesh.localScale = tileSize
+                * new Vector3(navmeshSize.x, navmeshSize.y, 0);
 
-            float horizontalOffset = (currentRoom.size.x + navmeshSize.x) / 4f * tileSize;
+            float horizontalOffset = (loadedRoom.size.x + navmeshSize.x) / 4f * tileSize;
             Vector3 horizontalScale = new Vector3(
-                    (navmeshSize.x - currentRoom.size.x) / 2f,
+                    (navmeshSize.x - loadedRoom.size.x) / 2f,
                     1,
-                    currentRoom.size.y) * tileSize;
-            InstantiateNavmeshMask(currentRoomTransform,
+                    loadedRoom.size.y) * tileSize;
+            InstantiateNavmeshMask(loadedRoomHolder,
                     Vector3.left * horizontalOffset, horizontalScale);
-            InstantiateNavmeshMask(currentRoomTransform,
+            InstantiateNavmeshMask(loadedRoomHolder,
                     Vector3.right * horizontalOffset, horizontalScale);
 
-            float verticalOffset = (currentRoom.size.y + navmeshSize.y) / 4f * tileSize;
+            float verticalOffset = (loadedRoom.size.y + navmeshSize.y) / 4f * tileSize;
             Vector3 verticalScale = new Vector3(
                     navmeshSize.x,
                     1,
-                    (navmeshSize.y - currentRoom.size.y) / 2f) * tileSize;
-            InstantiateNavmeshMask(currentRoomTransform,
+                    (navmeshSize.y - loadedRoom.size.y) / 2f) * tileSize;
+            InstantiateNavmeshMask(loadedRoomHolder,
                     Vector3.forward * verticalOffset, verticalScale);
-            InstantiateNavmeshMask(currentRoomTransform,
+            InstantiateNavmeshMask(loadedRoomHolder,
                     Vector3.back * verticalOffset, verticalScale);
         }
 
@@ -127,7 +132,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             newTile.localScale = Vector3.one * (1 - outlinePercent) * tileSize;
 
-            newTile.parent = currentRoomTransform;
+            newTile.parent = loadedRoomHolder;
 
             tileMap[x, y] = newTile;
         }
@@ -150,23 +155,25 @@ namespace Noc7c9.TheDigitalFrontier {
             material.color = obs.color;
             renderer.sharedMaterial = material;
 
-            newObstacle.parent = currentRoomTransform;
+            newObstacle.parent = loadedRoomHolder;
         }
 
         public Transform GetTileFromPosition(Vector3 position) {
-            int x = Mathf.RoundToInt(position.x / tileSize + (currentRoom.size.x - 1) / 2f);
-            int y = Mathf.RoundToInt(position.z / tileSize + (currentRoom.size.y - 1) / 2f);
+            int x = Mathf.RoundToInt(position.x / tileSize
+                    + (loadedRoom.size.x - 1) / 2f);
+            int y = Mathf.RoundToInt(position.z / tileSize
+                    + (loadedRoom.size.y - 1) / 2f);
             x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
             y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
             return tileMap[x, y];
         }
 
         public Transform GetMapCenterTile() {
-            return tileMap[currentRoom.center.x, currentRoom.center.y];
+            return tileMap[loadedRoom.center.x, loadedRoom.center.y];
         }
 
         public Transform GetRandomOpenTile() {
-            Coord c = currentRoom.GetRandomOpenCoord();
+            Coord c = loadedRoom.GetRandomOpenCoord();
             return tileMap[c.x, c.y];
         }
 

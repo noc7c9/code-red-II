@@ -3,11 +3,12 @@ using UnityEditor;
 
 namespace Noc7c9.TheDigitalFrontier {
 
-    /* Editor script for the RoomLoader component.
+    /* Editor script for both the GameManager and RoomLoader components.
      * Adds automatic room regeneration on changing properties.
      */
-    [CustomEditor (typeof (RoomLoader))]
-    public class AutoReloadRoomLoaderEditor : Editor {
+
+
+    public abstract class AutoReloadEditor : Editor {
 
         public override void OnInspectorGUI() {
             if (DrawDefaultInspector()) {
@@ -21,29 +22,15 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Regenerate() {
             GameManager gm = GameManager.Instance;
-            gm.GetRoomLoader().Load(gm.levels[gm.visibleLevel].roomSettings);
+            gm.LoadRoom(gm.visibleLevel);
         }
 
     }
+
+    [CustomEditor (typeof (RoomLoader))]
+    public class AutoReloadRoomLoaderEditor : AutoReloadEditor { }
 
     [CustomEditor (typeof (GameManager))]
-    public class AutoReloadGameManagerEditor : Editor {
-
-        public override void OnInspectorGUI() {
-            if (DrawDefaultInspector()) {
-                Regenerate();
-            }
-
-            if (GUILayout.Button("Generate Room")) {
-                Regenerate();
-            }
-        }
-
-        void Regenerate() {
-            GameManager gm = target as GameManager;
-            gm.GetRoomLoader().Load(gm.levels[gm.visibleLevel].roomSettings);
-        }
-
-    }
+    public class AutoReloadGameManagerEditor : AutoReloadEditor { }
 
 }
