@@ -3,6 +3,7 @@ namespace Noc7c9.TheDigitalFrontier {
     public enum TileType {
         Empty,
         Obstacle,
+        Warp,
     }
 
     public interface ITile {

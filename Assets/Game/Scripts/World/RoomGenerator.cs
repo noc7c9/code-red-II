@@ -17,7 +17,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public static Room Generate(RoomSettings settings) {
             RoomGenerator.settings = settings;
-            room = new Room(settings.width, settings.height);
+            room = new Room(settings);
             prng = new System.Random(settings.seed);
 
             openCoords = new FisherYates.ShuffleList<Coord>(room.tileCount, prng);
@@ -26,32 +26,38 @@ namespace Noc7c9.TheDigitalFrontier {
             for (int x = 0; x < settings.width; x++) {
                 for (int y = 0; y < settings.height; y++) {
                     Coord c = new Coord(x, y);
-                    InstantiateEmpty(c);
+                    InsertEmpty(c);
                     openCoords.Add(c);
                 }
             }
 
-            // place doors
+            // place Warps
+            foreach (RoomSettings.WarpSettings warp in settings.warps) {
+                InsertWarp(warp.position, warp.target);
+            }
 
-            // place obstacles
             PlaceRandomObstacles();
 
             return room;
         }
 
-        static void InstantiateEmpty(Coord c) {
-            room.SetTile(c, new Empty(c));
+        static void InsertEmpty(Coord c) {
+            room.SetTile(c, new EmptyTile(c));
         }
 
-        static void InstantiateObstacle(Coord c) {
+        static void InsertObstacle(Coord c) {
             float height = Mathf.Lerp(
                     settings.minObstacleHeight, settings.maxObstacleHeight,
                     (float) prng.NextDouble());
             Color color = Color.Lerp(
                     settings.foregroundColor, settings.backgroundColor,
                     c.y / (float)room.size.y);
-            Obstacle obs = new Obstacle(c, height, color);
+            ObstacleTile obs = new ObstacleTile(c, height, color);
             room.SetTile(c, obs);
+        }
+
+        static void InsertWarp(Coord c, int target) {
+            room.SetTile(c, new WarpTile(c, target));
         }
 
         static void PlaceRandomObstacles() {
@@ -66,7 +72,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
                 if (randomCoord != room.center && (room.tileCount - currentCount)
                         == GetAccessibleCount(room.center, obstacleMap)) {
-                    InstantiateObstacle(randomCoord);
+                    InsertObstacle(randomCoord);
                     openCoords.Remove(randomCoord);
                 } else {
                     obstacleMap[randomCoord.x, randomCoord.y] = false;

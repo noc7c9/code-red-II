@@ -13,9 +13,9 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public static event System.Action DyingStatic;
         protected static void OnDyingStatic() {
-            var evt = DyingStatic;
-            if (evt != null) {
-                evt();
+            var d = DyingStatic;
+            if (d != null) {
+                d();
             }
         }
 

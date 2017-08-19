@@ -12,6 +12,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Transform tilePrefab;
         public Transform obstaclePrefab;
+        public Transform warpPrefab;
 
         public Transform navmesh;
         public Transform navmeshMaskPrefab;
@@ -68,7 +69,10 @@ namespace Noc7c9.TheDigitalFrontier {
                     ITile tile = loadedRoom.GetTile(x, y);
                     switch (tile.type) {
                         case TileType.Obstacle:
-                            InstantiateObstacle((Obstacle) tile);
+                            InstantiateObstacle((ObstacleTile) tile);
+                        break;
+                        case TileType.Warp:
+                            InstantiateWarp((WarpTile) tile);
                         break;
                         default: break;
                     }
@@ -138,7 +142,7 @@ namespace Noc7c9.TheDigitalFrontier {
             tileMap[x, y] = newTile;
         }
 
-        void InstantiateObstacle(Obstacle obs) {
+        void InstantiateObstacle(ObstacleTile obs) {
             Vector3 position = CoordToPosition(obs.pos);
             Transform newObstacle = Instantiate(obstaclePrefab,
                     position + Vector3.up * obs.height / 2,
@@ -159,7 +163,26 @@ namespace Noc7c9.TheDigitalFrontier {
             newObstacle.parent = loadedRoomHolder;
         }
 
+        void InstantiateWarp(WarpTile warp) {
+            Vector3 position = CoordToPosition(warp.pos);
+            Transform newWarp = Instantiate(warpPrefab,
+                    position,
+                    Quaternion.identity) as Transform;
+
+            Vector3 scale = Vector3.one * (1 - outlinePercent) * tileSize;
+            scale.y = 1;
+            newWarp.localScale = scale;
+
+            newWarp.GetComponentInChildren<Warp>().target = warp.target;
+
+            newWarp.parent = loadedRoomHolder;
+        }
+
         public Transform GetTileFromPosition(Vector3 position) {
+            if (loadedRoom == null) {
+                return null;
+            }
+
             int x = Mathf.RoundToInt(position.x / tileSize
                     + (loadedRoom.size.x - 1) / 2f);
             int y = Mathf.RoundToInt(position.z / tileSize
@@ -170,10 +193,18 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public Transform GetMapCenterTile() {
+            if (loadedRoom == null) {
+                return null;
+            }
+
             return tileMap[loadedRoom.center.x, loadedRoom.center.y];
         }
 
         public Transform GetRandomOpenTile() {
+            if (loadedRoom == null) {
+                return null;
+            }
+
             Coord c = loadedRoom.GetRandomOpenCoord();
             return tileMap[c.x, c.y];
         }
@@ -181,4 +212,3 @@ namespace Noc7c9.TheDigitalFrontier {
     }
 
 }
-

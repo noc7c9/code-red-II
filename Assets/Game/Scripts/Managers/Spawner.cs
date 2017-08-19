@@ -115,8 +115,10 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void ResetPlayerPosition() {
-            player.position = roomLoader.GetMapCenterTile().position
-                + Vector3.up * playerSpawnHeight;
+            Transform center = roomLoader.GetMapCenterTile();
+            if (center != null) {
+                player.position = center.position + Vector3.up * playerSpawnHeight;
+            }
         }
 
         void NextWave() {

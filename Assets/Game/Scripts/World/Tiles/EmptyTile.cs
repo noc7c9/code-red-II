@@ -1,6 +1,6 @@
 namespace Noc7c9.TheDigitalFrontier {
 
-    public struct Empty : ITile {
+    public struct EmptyTile : ITile {
 
         public TileType type {
             get {
@@ -10,8 +10,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Coord pos { get; }
 
-        public Empty(int x, int y) : this(new Coord(x, y)) {}
-        public Empty(Coord pos) {
+        public EmptyTile(int x, int y) : this(new Coord(x, y)) {}
+        public EmptyTile(Coord pos) {
             this.pos = pos;
         }
 

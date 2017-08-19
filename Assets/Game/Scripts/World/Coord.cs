@@ -1,9 +1,10 @@
 namespace Noc7c9.TheDigitalFrontier {
 
+    [System.Serializable]
     public struct Coord {
 
-        public readonly int x;
-        public readonly int y;
+        public int x;
+        public int y;
 
         readonly int hash;
 
@@ -29,6 +30,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public override int GetHashCode() {
             return hash;
+        }
+
+        public override string ToString() {
+            return System.String.Format("Coord({0}, {1})", x, y);
         }
 
     }

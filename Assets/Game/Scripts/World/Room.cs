@@ -1,7 +1,10 @@
 namespace Noc7c9.TheDigitalFrontier {
 
+    /* Represents a single room.
+     */
     public class Room {
 
+        public readonly RoomSettings settings;
         public readonly Coord size;
         public readonly int tileCount;
         public readonly Coord center;
@@ -10,7 +13,12 @@ namespace Noc7c9.TheDigitalFrontier {
 
         FisherYates.ShuffleList<Coord> openTiles;
 
-        public Room(int width, int height) {
+        public Room(RoomSettings settings) {
+            this.settings = settings;
+
+            var width = settings.width;
+            var height = settings.height;
+
             size = new Coord(width, height);
             tileCount = width * height;
             center = new Coord(width / 2, height / 2);

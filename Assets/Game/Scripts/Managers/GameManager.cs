@@ -71,7 +71,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public void LoadRoom(int levelIndex) {
-            roomLoader.GenerateAndLoad(levels[levelIndex].roomSettings);
+            GetRoomLoader().GenerateAndLoad(levels[levelIndex].roomSettings);
         }
 
         [System.Serializable]
