@@ -26,6 +26,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public ParticleSystem deathEffect;
 
+        public float minPathSqrDistance;
         public float attackDistanceThreshold;
         public float timeBetweenAttacks;
         public float attackSpeed;
@@ -167,14 +168,19 @@ namespace Noc7c9.TheDigitalFrontier {
 
         IEnumerator UpdatePath() {
             // while alive and there is a target, move towards the target
+            // if the target is close enough
             while (hasTarget && !dead) {
                 if (currentState == State.Chasing) {
-                    Vector3 dirToTarget = (target.position - transform.position)
-                        .normalized;
-                    Vector3 targetPosition = target.position
-                        - dirToTarget * (myCollisionRadius + targetCollisionRadius
-                                + attackDistanceThreshold / 2);
-                    pathfinder.SetDestination(targetPosition);
+                    Vector3 dirToTarget = target.position - transform.position;
+
+                    // make sure target is close enough
+                    if (dirToTarget.sqrMagnitude <= minPathSqrDistance) {
+                        Vector3 targetPosition = target.position
+                            - dirToTarget.normalized
+                            * (myCollisionRadius + targetCollisionRadius
+                                    + attackDistanceThreshold / 2);
+                        pathfinder.SetDestination(targetPosition);
+                    }
                 }
 
                 // recalculate path at an interval for performance

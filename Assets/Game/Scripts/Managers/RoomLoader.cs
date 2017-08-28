@@ -10,6 +10,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         const string HOLDER_NAME = "Generated Room";
 
+        public Enemy enemyPrefab;
         public Transform tilePrefab;
         public Transform obstaclePrefab;
         public Transform warpPrefab;
@@ -83,6 +84,15 @@ namespace Noc7c9.TheDigitalFrontier {
 
             floor.localScale = tileSize
                 * new Vector3(loadedRoom.size.x, loadedRoom.size.y);
+
+            // spawn enemies
+            for (int x = 0; x < loadedRoom.size.x; x++) {
+                for (int y = 0; y < loadedRoom.size.y; y++) {
+                    if (loadedRoom.IsEnemySpawnPoint(x, y)) {
+                        SpawnEnemy(x, y);
+                    }
+                }
+            }
         }
 
         Vector3 CoordToPosition(Coord c) {
@@ -176,6 +186,19 @@ namespace Noc7c9.TheDigitalFrontier {
             newWarp.GetComponentInChildren<Warp>().target = warp.target;
 
             newWarp.parent = loadedRoomHolder;
+        }
+
+        void SpawnEnemy(int x, int y) {
+            Vector3 position = CoordToPosition(x, y) + Vector3.up;
+            Enemy spawnedEnemy = Instantiate(enemyPrefab,
+                    position, Quaternion.identity) as Enemy;
+            // TODO: temporary, enemy behaviour should be defined elsewhere
+            Spawner.Wave currentWave = GameManager.Instance.GetWave(0);
+            spawnedEnemy.SetCharacteristics(
+                    currentWave.enemyMoveSpeed, currentWave.enemyDamage,
+                    currentWave.enemyHealth, currentWave.enemyColor);
+
+            spawnedEnemy.transform.parent = loadedRoomHolder;
         }
 
         public Transform GetTileFromPosition(Vector3 position) {

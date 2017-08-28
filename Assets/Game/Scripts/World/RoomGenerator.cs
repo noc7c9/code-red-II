@@ -38,6 +38,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
             PlaceRandomObstacles();
 
+            PlaceEnemySpawnPoints();
+
             return room;
         }
 
@@ -78,6 +80,12 @@ namespace Noc7c9.TheDigitalFrontier {
                     obstacleMap[randomCoord.x, randomCoord.y] = false;
                     currentCount--;
                 }
+            }
+        }
+
+        static void PlaceEnemySpawnPoints() {
+            for (int i = 0; i < 20; i++) {
+                room.SetEnemySpawnPoint(openCoords.Next());
             }
         }
 

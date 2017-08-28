@@ -10,6 +10,7 @@ namespace Noc7c9.TheDigitalFrontier {
         public readonly Coord center;
 
         ITile[,] tiles;
+        bool[,] enemySpawnPoints;
 
         FisherYates.ShuffleList<Coord> openTiles;
 
@@ -24,6 +25,7 @@ namespace Noc7c9.TheDigitalFrontier {
             center = new Coord(width / 2, height / 2);
 
             tiles = new ITile[width, height];
+            enemySpawnPoints = new bool[width, height];
 
             openTiles = new FisherYates.ShuffleList<Coord>(tileCount);
         }
@@ -54,6 +56,21 @@ namespace Noc7c9.TheDigitalFrontier {
         public Coord GetRandomOpenCoord() {
             return openTiles.Next();
         }
+
+        public void SetEnemySpawnPoint(Coord c) {
+            SetEnemySpawnPoint(c.x, c.y);
+        }
+        public void SetEnemySpawnPoint(int x, int y) {
+            enemySpawnPoints[x, y] = true;
+        }
+
+        public bool IsEnemySpawnPoint(Coord c) {
+            return IsEnemySpawnPoint(c.x, c.y);
+        }
+        public bool IsEnemySpawnPoint(int x, int y) {
+            return enemySpawnPoints[x, y];
+        }
+
 
     }
 
