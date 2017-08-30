@@ -27,6 +27,8 @@ namespace Noc7c9.TheDigitalFrontier {
         [ColorUsageAttribute(false)]
         public Color backgroundColor;
 
+        public int numberOfEnemies;
+
         public WarpSettings[] warps;
 
         [System.Serializable]

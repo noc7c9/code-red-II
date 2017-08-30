@@ -84,7 +84,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         static void PlaceEnemySpawnPoints() {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < settings.numberOfEnemies; i++) {
                 room.SetEnemySpawnPoint(openCoords.Next());
             }
         }
