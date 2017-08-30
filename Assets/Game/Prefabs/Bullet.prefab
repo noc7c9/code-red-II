@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4140922814532390}
   - component: {fileID: 33701699751058080}
   - component: {fileID: 23371039022662290}
-  - component: {fileID: 114285579837237930}
   - component: {fileID: 96594441737111072}
+  - component: {fileID: 114285579837237930}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -170,6 +170,7 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
 --- !u!114 &114285579837237930
@@ -183,9 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08b52815ca92b24bb529e6d7953707e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 198511785864114910, guid: b02451583208b0e4c8e6747f491ff510,
+    type: 2}
   collisionMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   trailColor: {r: 1, g: 0.9939148, b: 0.7794118, a: 1}
   damage: 1
   secsLifetime: 3

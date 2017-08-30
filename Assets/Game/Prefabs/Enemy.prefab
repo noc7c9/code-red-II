@@ -99,7 +99,7 @@ MonoBehaviour:
     type: 2}
   minPathSqrDistance: 350
   moveSpeed: 2
-  originalColor: {r: 0, g: 0.51156175, b: 0.7647059, a: 0}
+  originalColor: {r: 0, g: 0.7647059, b: 0.13184588, a: 0}
   attackDistanceThreshold: 0.5
   timeBetweenAttacks: 1
   attackSpeed: 3

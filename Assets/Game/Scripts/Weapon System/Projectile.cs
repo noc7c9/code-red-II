@@ -9,6 +9,8 @@ namespace Noc7c9.TheDigitalFrontier {
     [RequireComponent (typeof (TrailRenderer))]
     public class Projectile : MonoBehaviour {
 
+        public ParticleSystem hitEffect;
+
         public LayerMask collisionMask;
         public Color trailColor;
         public float damage;
@@ -54,9 +56,20 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void OnHitObject(Collider c, Vector3 hitPoint) {
             IDamageable damageableObject = c.GetComponent<IDamageable>();
+            Vector3 hitDirection = transform.forward;
+
             if (damageableObject != null) {
-                damageableObject.TakeHit(damage, hitPoint, transform.forward);
+                damageableObject.TakeHit(damage, hitPoint, hitDirection);
+
+            } else {
+                // show hit effect
+                Quaternion rotation =
+                    Quaternion.FromToRotation(Vector3.forward, -hitDirection);
+                Destroy(Instantiate(hitEffect.gameObject, hitPoint, rotation)
+                        as GameObject, hitEffect.main.startLifetime.constant);
             }
+
+            // and destroy the projectile
             GameObject.Destroy(gameObject);
         }
 
