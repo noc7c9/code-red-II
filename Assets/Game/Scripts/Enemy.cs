@@ -27,6 +27,11 @@ namespace Noc7c9.TheDigitalFrontier {
         public ParticleSystem deathEffect;
 
         public float minPathSqrDistance;
+
+        public float moveSpeed;
+
+        public Color originalColor;
+
         public float attackDistanceThreshold;
         public float timeBetweenAttacks;
         public float attackSpeed;
@@ -40,8 +45,6 @@ namespace Noc7c9.TheDigitalFrontier {
         LivingEntity targetEntity;
         Material sharedMaterial;
         Material material;
-
-        Color originalColor;
 
         float nextAttackTime;
         float myCollisionRadius;
@@ -71,7 +74,10 @@ namespace Noc7c9.TheDigitalFrontier {
         protected override void Start() {
             base.Start();
 
-            originalColor = sharedMaterial.color;
+            pathfinder.speed = moveSpeed;
+
+            material = GetComponent<Renderer>().material;
+            material.color = originalColor;
 
             if (hasTarget) {
                 currentState = State.Chasing;
@@ -80,15 +86,6 @@ namespace Noc7c9.TheDigitalFrontier {
             } else {
                 currentState = State.Idle;
             }
-        }
-
-        public void SetCharacteristics(
-                float moveSpeed, float damage, float health, Color color) {
-            pathfinder.speed = moveSpeed;
-            attackDamage = damage;
-            startingHealth = health;
-            sharedMaterial.color = color;
-            material = GetComponent<Renderer>().material;
         }
 
         public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {

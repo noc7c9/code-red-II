@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33413971107936428}
   - component: {fileID: 136680157681464118}
   - component: {fileID: 23241358565122920}
-  - component: {fileID: 114691583028203116}
   - component: {fileID: 195680490878059882}
+  - component: {fileID: 114691583028203116}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -97,7 +97,9 @@ MonoBehaviour:
   startingHealth: 5
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
-  minPathSqrDistance: 100
+  minPathSqrDistance: 250
+  moveSpeed: 2
+  originalColor: {r: 0, g: 1, b: 0.08965516, a: 0}
   attackDistanceThreshold: 0.5
   timeBetweenAttacks: 1
   attackSpeed: 3

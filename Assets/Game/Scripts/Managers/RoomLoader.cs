@@ -30,15 +30,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         Transform[,] tileMap;
 
-        void Awake() {
-            GameManager.Instance.GetSpawner().StartedNewWave
-                += StartedNewWaveEventHandler;
-        }
-
-        void StartedNewWaveEventHandler(int waveNumber) {
-            GenerateAndLoad(GameManager.Instance.GetRoomSettings(waveNumber - 1));
-        }
-
         public void GenerateAndLoad(RoomSettings settings) {
             Load(RoomGenerator.Generate(settings));
         }
@@ -192,11 +183,6 @@ namespace Noc7c9.TheDigitalFrontier {
             Vector3 position = CoordToPosition(x, y) + Vector3.up;
             Enemy spawnedEnemy = Instantiate(enemyPrefab,
                     position, Quaternion.identity) as Enemy;
-            // TODO: temporary, enemy behaviour should be defined elsewhere
-            Spawner.Wave currentWave = GameManager.Instance.GetWave(0);
-            spawnedEnemy.SetCharacteristics(
-                    currentWave.enemyMoveSpeed, currentWave.enemyDamage,
-                    currentWave.enemyHealth, currentWave.enemyColor);
 
             spawnedEnemy.transform.parent = loadedRoomHolder;
         }

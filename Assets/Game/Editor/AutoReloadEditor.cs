@@ -22,7 +22,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Regenerate() {
             GameManager gm = GameManager.Instance;
-            gm.LoadRoom(gm.visibleLevel);
+            gm.ReloadRoom();
         }
 
     }

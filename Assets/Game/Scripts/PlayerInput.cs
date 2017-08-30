@@ -21,12 +21,8 @@ namespace Noc7c9.TheDigitalFrontier {
             playerController = GetComponent<PlayerController>();
             gunWielder = GetComponent<GunWielder>();
             viewCamera = Camera.main;
-            GameManager.Instance.GetSpawner().StartedNewWave
-                += StartedNewWaveEventHandler;
-        }
 
-        void StartedNewWaveEventHandler(int waveNumber) {
-            gunWielder.EquipGun(waveNumber - 1);
+            gunWielder.EquipGun();
         }
 
         void Update() {

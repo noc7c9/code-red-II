@@ -11,14 +11,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         // singleton manager getter methods
 
-        Spawner spawner;
-        public Spawner GetSpawner() {
-            if (spawner == null) {
-                spawner = FindObjectOfType<Spawner>();
-            }
-            return spawner;
-        }
-
         RoomLoader roomLoader;
         public RoomLoader GetRoomLoader() {
             if (roomLoader == null) {
@@ -37,6 +29,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Awake() {
             playerInput = FindObjectOfType<PlayerInput>();
+
+            ReloadRoom();
         }
 
         PlayerInput playerInput;
@@ -49,36 +43,12 @@ namespace Noc7c9.TheDigitalFrontier {
             return playerInput.GetLookAtPoint();
         }
 
-        // level information
+        // gameplay settings
+        public Gun gun;
+        public RoomSettings roomSettings;
 
-        public int visibleLevel;
-        public Level[] levels;
-
-        public Gun GetGun(int levelIndex) {
-            return levels[levelIndex].gun;
-        }
-
-        public Spawner.Wave GetWave(int levelIndex) {
-            return levels[levelIndex].wave;
-        }
-
-        public RoomSettings GetRoomSettings(int levelIndex) {
-            return levels[levelIndex].roomSettings;
-        }
-
-        public int GetLevelsCount() {
-            return levels.Length;
-        }
-
-        public void LoadRoom(int levelIndex) {
-            GetRoomLoader().GenerateAndLoad(levels[levelIndex].roomSettings);
-        }
-
-        [System.Serializable]
-        public struct Level {
-            public Gun gun;
-            public Spawner.Wave wave;
-            public RoomSettings roomSettings;
+        public void ReloadRoom() {
+            GetRoomLoader().GenerateAndLoad(roomSettings);
         }
 
     }

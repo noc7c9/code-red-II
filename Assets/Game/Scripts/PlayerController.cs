@@ -16,17 +16,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Awake() {
             myRigidbody = GetComponent<Rigidbody>();
-
-            GameManager.Instance.GetSpawner().StartedNewWave
-                += StartedNewWaveEventHandler;
-        }
-
-        void StartedNewWaveEventHandler(int waveNumber) {
-            health = startingHealth;
-        }
-
-        protected override void Start() {
-            base.Start();
         }
 
         void Update() {

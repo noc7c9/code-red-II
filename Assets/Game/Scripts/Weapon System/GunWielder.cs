@@ -12,8 +12,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         Gun equippedGun;
 
-        public void EquipGun(int index) {
-            EquipGun(GameManager.Instance.GetGun(index));
+        public void EquipGun() {
+            EquipGun(GameManager.Instance.gun);
         }
 
         public void EquipGun(Gun gunToEquip) {

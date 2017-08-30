@@ -17,47 +17,24 @@ namespace Noc7c9.TheDigitalFrontier {
         public Text newWaveNumber;
         public Text newWaveEnemyCount;
 
-        public Text scoreText;
-        public Text gameOverScoreText;
-
         public RectTransform healthBar;
 
         public float fadeTime;
         public Color fadeOutColor;
 
-        Spawner spawner;
         PlayerController player;
 
         void Awake() {
-            spawner = GameManager.Instance.GetSpawner();
-            spawner.StartedNewWave += StartedNewWaveEventHandler;
-
             player = GameManager.Instance.GetPlayerController();
             player.Dying += PlayerDyingEventHandler;
         }
 
         void Update() {
-            scoreText.text = ScoreKeeper.score.ToString("D7");
-
             float healthPercent = 0;
             if (player != null) {
                 healthPercent = player.health / player.startingHealth;
             }
             healthBar.localScale = new Vector3(healthPercent, 1, 1);
-        }
-
-        void StartedNewWaveEventHandler(int waveNumber) {
-            Spawner.Wave wave = GameManager.Instance.GetWave(waveNumber - 1);
-
-            if (wave.infinite) {
-                newWaveNumber.text = "- Last Wave -";
-                newWaveEnemyCount.text = "Enemies: Infinite";
-            } else {
-                newWaveNumber.text = "- Wave: " + NumberToWord(waveNumber) + " -";
-                newWaveEnemyCount.text = "Enemies: " + wave.enemyCount;
-            }
-
-            DisplayNewWaveBanner();
         }
 
         IEnumerator currentNewWaveCoroutine;
@@ -111,10 +88,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             StartCoroutine(Fade(Color.clear, fadeOutColor, fadeTime));
 
-            scoreText.gameObject.SetActive(false);
             healthBar.transform.parent.gameObject.SetActive(false);
-
-            gameOverScoreText.text = scoreText.text;
 
             gameOverUI.SetActive(true);
         }
