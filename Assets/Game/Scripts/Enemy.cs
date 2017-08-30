@@ -55,6 +55,7 @@ namespace Noc7c9.TheDigitalFrontier {
         void Awake() {
             pathfinder = GetComponent<NavMeshAgent>();
             sharedMaterial = GetComponent<Renderer>().sharedMaterial;
+            sharedMaterial.color = originalColor;
 
             GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
 
@@ -77,7 +78,6 @@ namespace Noc7c9.TheDigitalFrontier {
             pathfinder.speed = moveSpeed;
 
             material = GetComponent<Renderer>().material;
-            material.color = originalColor;
 
             if (hasTarget) {
                 currentState = State.Chasing;

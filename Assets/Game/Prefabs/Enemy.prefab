@@ -97,9 +97,9 @@ MonoBehaviour:
   startingHealth: 5
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
-  minPathSqrDistance: 250
+  minPathSqrDistance: 350
   moveSpeed: 2
-  originalColor: {r: 0, g: 1, b: 0.08965516, a: 0}
+  originalColor: {r: 0, g: 0.51156175, b: 0.7647059, a: 0}
   attackDistanceThreshold: 0.5
   timeBetweenAttacks: 1
   attackSpeed: 3
