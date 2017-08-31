@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireMode: 2
   burstCount: 0
-  fireRate: 0
-  muzzleVelocity: 0
+  fireRate: 2.5
+  muzzleVelocity: 15
   damage: 0

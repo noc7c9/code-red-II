@@ -82,6 +82,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpawnPoints:
   - {fileID: 4796576380956276}
-  fireRate: 10
-  muzzleVelocity: 5
-  damage: 1
+  fireRate: 0
+  muzzleVelocity: 10
+  damage: 0

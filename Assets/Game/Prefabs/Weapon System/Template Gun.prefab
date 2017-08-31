@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114191175322252992}
   - component: {fileID: 114157870276864800}
   m_Layer: 0
-  m_Name: Basic Machine Gun
+  m_Name: Template Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,14 +490,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 114679241439212058, guid: 20379b8de44268447b2ed77915afa98a, type: 2}
-  barrel: {fileID: 114239128304309770, guid: 02f3ba6391d9d6a4ca3b1b330f2f59e1, type: 2}
+  barrel: {fileID: 114514488715252432, guid: 184184bb5989dd6419fbfa964067aca1, type: 2}
   projectile: {fileID: 114285579837237930, guid: 6fb95895ee1c68e40858a51daa932024,
     type: 2}
-  projectileSpawnPoints:
-  - {fileID: 4799204018523772}
-  - {fileID: 4119822932188198}
-  projectilesPerMag: 100
-  reloadTime: 2
+  projectilesPerMag: 100000
+  reloadTime: 0
   maxReloadAngle: 45
   shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,
     type: 2}
