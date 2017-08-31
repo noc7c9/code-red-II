@@ -184,12 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08b52815ca92b24bb529e6d7953707e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  damage: 1
   hitEffect: {fileID: 198511785864114910, guid: b02451583208b0e4c8e6747f491ff510,
     type: 2}
   collisionMask:
     serializedVersion: 2
     m_Bits: 1280
   trailColor: {r: 1, g: 0.9939148, b: 0.7794118, a: 1}
-  damage: 1
   secsLifetime: 3
-  speed: 0

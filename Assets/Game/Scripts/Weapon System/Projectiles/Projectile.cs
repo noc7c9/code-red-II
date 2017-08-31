@@ -9,15 +9,17 @@ namespace Noc7c9.TheDigitalFrontier {
     [RequireComponent (typeof (TrailRenderer))]
     public class Projectile : MonoBehaviour {
 
+        // unique stats
+
+        // shared stats
+        public float speed;
+        public float damage;
+
         public ParticleSystem hitEffect;
 
         public LayerMask collisionMask;
         public Color trailColor;
-        public float damage;
         public float secsLifetime;
-
-        [HideInInspector]
-        public float speed;
 
         float overlapThreshold = 0.1f;
 
