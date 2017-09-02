@@ -19,6 +19,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public RectTransform healthBar;
 
+        public Text equippedGunIndicator;
+
         public float fadeTime;
         public Color fadeOutColor;
 
@@ -27,6 +29,9 @@ namespace Noc7c9.TheDigitalFrontier {
         void Awake() {
             player = GameManager.Instance.GetPlayerController();
             player.Dying += PlayerDyingEventHandler;
+
+            var gunWielder = player.GetComponent<GunWielder>();
+            gunWielder.SwappedGun += PlayerSwappedGunEventHandler;
         }
 
         void Update() {
@@ -91,6 +96,11 @@ namespace Noc7c9.TheDigitalFrontier {
             healthBar.transform.parent.gameObject.SetActive(false);
 
             gameOverUI.SetActive(true);
+        }
+
+        void PlayerSwappedGunEventHandler(bool firstGunEquipped) {
+            equippedGunIndicator.text = "Equipped Gun: " + (firstGunEquipped
+                    ? "1" : "2");
         }
 
         IEnumerator Fade(Color from, Color to, float time) {

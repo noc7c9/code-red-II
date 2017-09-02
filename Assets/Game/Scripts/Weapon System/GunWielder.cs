@@ -10,10 +10,27 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Transform gunPosition;
 
+        bool firstGunEquipped = true;
         Gun equippedGun;
 
+        public event System.Action<bool> SwappedGun;
+        protected virtual void OnSwappedGun(bool firstGunEquipped) {
+            var evt = SwappedGun;
+            if (evt != null) {
+                evt(firstGunEquipped);
+            }
+        }
+
+        public void SwapGun() {
+            firstGunEquipped = !firstGunEquipped;
+            EquipGun();
+            OnSwappedGun(firstGunEquipped);
+        }
+
         public void EquipGun() {
-            EquipGun(GameManager.Instance.gun);
+            EquipGun(firstGunEquipped
+                    ? GameManager.Instance.gun1
+                    : GameManager.Instance.gun2);
         }
 
         public void EquipGun(Gun gunToEquip) {

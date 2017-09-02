@@ -9,22 +9,13 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GameManager : Singleton<GameManager> {
 
-        // singleton manager getter methods
+        // gameplay settings
+        public Gun gun1;
+        public Gun gun2;
+        public RoomSettings roomSettings;
 
-        RoomLoader roomLoader;
-        public RoomLoader GetRoomLoader() {
-            if (roomLoader == null) {
-                roomLoader = FindObjectOfType<RoomLoader>();
-            }
-            return roomLoader;
-        }
-
-        PlayerController playerController;
-        public PlayerController GetPlayerController() {
-            if (playerController == null) {
-                playerController = FindObjectOfType<PlayerController>();
-            }
-            return playerController;
+        public void ReloadRoom() {
+            GetRoomLoader().GenerateAndLoad(roomSettings);
         }
 
         void Awake() {
@@ -43,12 +34,22 @@ namespace Noc7c9.TheDigitalFrontier {
             return playerInput.GetLookAtPoint();
         }
 
-        // gameplay settings
-        public Gun gun;
-        public RoomSettings roomSettings;
+        // singleton manager getter methods
 
-        public void ReloadRoom() {
-            GetRoomLoader().GenerateAndLoad(roomSettings);
+        RoomLoader roomLoader;
+        public RoomLoader GetRoomLoader() {
+            if (roomLoader == null) {
+                roomLoader = FindObjectOfType<RoomLoader>();
+            }
+            return roomLoader;
+        }
+
+        PlayerController playerController;
+        public PlayerController GetPlayerController() {
+            if (playerController == null) {
+                playerController = FindObjectOfType<PlayerController>();
+            }
+            return playerController;
         }
 
     }

@@ -50,6 +50,10 @@ namespace Noc7c9.TheDigitalFrontier {
             if (Input.GetKeyDown(KeyCode.R)) {
                 gunWielder.Reload();
             }
+
+            if (Input.GetKeyDown(KeyCode.Tab)) {
+                gunWielder.SwapGun();
+            }
         }
 
         Vector3 GetMoveInput() {
