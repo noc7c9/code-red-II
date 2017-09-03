@@ -60,12 +60,6 @@ namespace Noc7c9.TheDigitalFrontier {
             }
         }
 
-        public void Reload() {
-            if (equippedGun != null) {
-                equippedGun.Reload();
-            }
-        }
-
         public float GunHeight {
             get {
                 return gunPosition.position.y;

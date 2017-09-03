@@ -18,11 +18,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         EffectiveGunStats stats;
 
-        [Header("Ammo")]
-        public int projectilesPerMag;
-        public float reloadTime;
-        public float maxReloadAngle;
-
         [Header("Shells")]
         public Transform shellPrefab;
         public Transform shellEjectionPoint;
@@ -39,7 +34,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         [Header("Audio")]
         public AudioClip shootAudio;
-        public AudioClip reloadAudio;
 
         MuzzleFlash muzzleFlash;
 
@@ -48,13 +42,9 @@ namespace Noc7c9.TheDigitalFrontier {
         bool triggerReleasedSinceLastShot;
         int shotsRemainingInBurst;
 
-        int projectilesRemainingInMag;
-
         Vector3 recoilSmoothDampVelocity;
         float recoilRotSmoothDampVelocity;
         float recoilAngle;
-
-        bool isReloading;
 
         PlayerController player;
 
@@ -73,7 +63,6 @@ namespace Noc7c9.TheDigitalFrontier {
         void Start() {
             muzzleFlash = GetComponent<MuzzleFlash>();
             shotsRemainingInBurst = stats.burstCount;
-            projectilesRemainingInMag = projectilesPerMag;
             nextShotTime = Time.time;
             triggerReleasedSinceLastShot = true;
         }
@@ -87,15 +76,10 @@ namespace Noc7c9.TheDigitalFrontier {
                     ref recoilRotSmoothDampVelocity, recoilAngleRecoverTime);
             transform.localEulerAngles = transform.localEulerAngles
                 + Vector3.left * recoilAngle;
-
-            if (!isReloading && projectilesRemainingInMag == 0) {
-                Reload();
-            }
         }
 
         void Shoot() {
-            if (!isReloading && Time.time > nextShotTime
-                    && projectilesRemainingInMag > 0) {
+            if (Time.time > nextShotTime) {
                 if (stats.fireMode == FireMode.Burst) {
                     if (shotsRemainingInBurst == 0) {
                         return;
@@ -111,10 +95,6 @@ namespace Noc7c9.TheDigitalFrontier {
                 nextShotTime = Time.time + stats.msBetweenShots / 1000;
 
                 for (int i = 0; i < stats.projectileSpawnPoints.Length; i++) {
-                    if (projectilesRemainingInMag == 0) {
-                        break;
-                    }
-                    projectilesRemainingInMag--;
                     if (player.ammoCount <= 0) {
                         break;
                     }
@@ -141,40 +121,8 @@ namespace Noc7c9.TheDigitalFrontier {
             }
         }
 
-        public void Reload() {
-            if (!isReloading && projectilesRemainingInMag != projectilesPerMag) {
-                StartCoroutine(AnimateReload());
-                AudioManager.Instance.PlaySound(reloadAudio, transform.position);
-            }
-        }
-
-        IEnumerator AnimateReload() {
-            isReloading = true;
-
-            yield return new WaitForSeconds(0.2f);
-
-            float speed = 1 / reloadTime;
-            float percent = 0;
-            Vector3 initialRot = transform.localEulerAngles;
-
-            while (percent < 1) {
-                percent += Time.deltaTime * speed;
-
-                float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
-                float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
-                transform.localEulerAngles = initialRot + Vector3.left * reloadAngle;
-
-                yield return null;
-            }
-
-            isReloading = false;
-            projectilesRemainingInMag = projectilesPerMag;
-        }
-
         public void Aim(Vector3 aimPoint) {
-            if (!isReloading) {
-                transform.LookAt(aimPoint);
-            }
+            transform.LookAt(aimPoint);
         }
 
         public void OnTriggerHold() {

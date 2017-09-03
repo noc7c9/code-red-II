@@ -47,10 +47,6 @@ namespace Noc7c9.TheDigitalFrontier {
                 gunWielder.OnTriggerRelease();
             }
 
-            if (Input.GetKeyDown(KeyCode.R)) {
-                gunWielder.Reload();
-            }
-
             if (Input.GetKeyDown(KeyCode.Tab)) {
                 gunWielder.SwapGun();
             }
