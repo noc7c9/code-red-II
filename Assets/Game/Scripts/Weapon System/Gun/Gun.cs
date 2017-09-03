@@ -56,7 +56,11 @@ namespace Noc7c9.TheDigitalFrontier {
 
         bool isReloading;
 
+        PlayerController player;
+
         void Awake() {
+            player = GameManager.Instance.GetPlayerController();
+
             // instantiate body and barrel instances as children
             // and also replace the prefabs with the actual instances
             body = Instantiate(body, transform) as GunBody;
@@ -111,6 +115,10 @@ namespace Noc7c9.TheDigitalFrontier {
                         break;
                     }
                     projectilesRemainingInMag--;
+                    if (player.ammoCount <= 0) {
+                        break;
+                    }
+                    player.ammoCount--;
 
                     Projectile newProjectile = Instantiate(projectile,
                             stats.projectileSpawnPoints[i].position,

@@ -20,6 +20,7 @@ namespace Noc7c9.TheDigitalFrontier {
         public RectTransform healthBar;
 
         public Text equippedGunIndicator;
+        public Text ammoIndicator;
 
         public float fadeTime;
         public Color fadeOutColor;
@@ -40,6 +41,8 @@ namespace Noc7c9.TheDigitalFrontier {
                 healthPercent = player.health / player.startingHealth;
             }
             healthBar.localScale = new Vector3(healthPercent, 1, 1);
+
+            ammoIndicator.text = "Ammo: " + player.ammoCount;
         }
 
         IEnumerator currentNewWaveCoroutine;

@@ -11,6 +11,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float moveSpeed;
 
+        public int ammoCount;
+
         Vector3 velocity;
         Rigidbody myRigidbody;
 
@@ -42,6 +44,12 @@ namespace Noc7c9.TheDigitalFrontier {
         protected override void Die() {
             AudioManager.Instance.PlaySound("Player Death", transform.position);
             base.Die();
+        }
+
+        void OnCollisionEnter(Collision col) {
+            if (col.gameObject.tag == "AmmoPickup") {
+                ammoCount += col.gameObject.GetComponent<AmmoPickup>().value;
+            }
         }
 
     }
