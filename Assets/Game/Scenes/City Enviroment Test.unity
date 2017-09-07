@@ -1062,6 +1062,7 @@ GameObject:
   - component: {fileID: 839302397}
   - component: {fileID: 839302396}
   - component: {fileID: 839302395}
+  - component: {fileID: 839302400}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1144,6 +1145,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &839302400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839302394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47746bb6bf4a18449e8dd190f9ea182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetKey: 114
+  wasdMovementEnabled: 1
+  wsAxis: {x: 0, y: 0, z: 1}
+  adAxis: {x: -1, y: 0, z: 0}
+  useConstantSpeed: 0
+  constantSpeed: 20
+  acceleration: 5
+  maxVelocity: 20
+  frictionCoefficent: 100
+  mouseWheelMovementEnabled: 1
+  wheelAxis: {x: 0, y: -1, z: 0}
+  speed: 10
 --- !u!1001 &914163715
 Prefab:
   m_ObjectHideFlags: 0
