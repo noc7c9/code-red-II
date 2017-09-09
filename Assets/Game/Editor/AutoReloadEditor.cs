@@ -7,7 +7,6 @@ namespace Noc7c9.TheDigitalFrontier {
      * Adds automatic room regeneration on changing properties.
      */
 
-
     public abstract class AutoReloadEditor : Editor {
 
         public override void OnInspectorGUI() {
@@ -22,7 +21,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Regenerate() {
             GameManager gm = GameManager.Instance;
-            gm.ReloadRoom();
+            gm.ReloadCityBlock();
         }
 
     }

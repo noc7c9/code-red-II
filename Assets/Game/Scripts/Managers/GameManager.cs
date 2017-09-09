@@ -12,19 +12,20 @@ namespace Noc7c9.TheDigitalFrontier {
         // gameplay settings
         public Gun gun1;
         public Gun gun2;
-        public RoomSettings roomSettings;
+        public CityBlockSettings cityBlockSettings;
 
-        public void ReloadRoom() {
-            GetRoomLoader().GenerateAndLoad(roomSettings);
+        PlayerInput playerInput;
+
+        public void ReloadCityBlock() {
+            CityBlock cityBlock = CityBlockGenerator.Generate(cityBlockSettings);
+            GetCityBlockLoader().Load(cityBlock);
         }
 
         void Awake() {
             playerInput = FindObjectOfType<PlayerInput>();
 
-            ReloadRoom();
+            ReloadCityBlock();
         }
-
-        PlayerInput playerInput;
 
         // TODO: this needs to be in an input manager class
         public Vector3 GetCursorPosition() {
@@ -36,12 +37,12 @@ namespace Noc7c9.TheDigitalFrontier {
 
         // singleton manager getter methods
 
-        RoomLoader roomLoader;
-        public RoomLoader GetRoomLoader() {
-            if (roomLoader == null) {
-                roomLoader = FindObjectOfType<RoomLoader>();
+        CityBlockLoader cityBlockLoader;
+        public CityBlockLoader GetCityBlockLoader() {
+            if (cityBlockLoader == null) {
+                cityBlockLoader = FindObjectOfType<CityBlockLoader>();
             }
-            return roomLoader;
+            return cityBlockLoader;
         }
 
         PlayerController playerController;
