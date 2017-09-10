@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4989444919216594}
   - component: {fileID: 33287161513986668}
   - component: {fileID: 23903297141862544}
-  m_Layer: 0
+  - component: {fileID: 64257210978470072}
+  m_Layer: 10
   m_Name: Street Lamp Corner SE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +110,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052274753435388}
+  m_Mesh: {fileID: 4300000, guid: 46cf21f4f5916e04fa82b32d07e8926d, type: 3}
+--- !u!64 &64257210978470072
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052274753435388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 46cf21f4f5916e04fa82b32d07e8926d, type: 3}
 --- !u!108 &108102621236158482
 Light:

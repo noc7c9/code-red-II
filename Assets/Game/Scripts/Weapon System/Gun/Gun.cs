@@ -117,7 +117,7 @@ namespace Noc7c9.TheDigitalFrontier {
                 recoilAngle += Random.Range(recoilAngleOffsetMax, recoilAngleOffsetMin);
                 recoilAngle = Mathf.Clamp(recoilAngle, 0, recoilAngleAbsoluteMax);
 
-                AudioManager.Instance.PlaySound(shootAudio, transform.position);
+                // AudioManager.Instance.PlaySound(shootAudio, transform.position);
             }
         }
 

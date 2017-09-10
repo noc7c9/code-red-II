@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4524548209396302}
   - component: {fileID: 33768848495411338}
   - component: {fileID: 23070731578834250}
-  m_Layer: 0
+  - component: {fileID: 64460889352834766}
+  m_Layer: 10
   m_Name: Building Side S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,4 +80,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623424229057832}
+  m_Mesh: {fileID: 4300000, guid: a541be91610fd0046b57146661232fc9, type: 3}
+--- !u!64 &64460889352834766
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623424229057832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a541be91610fd0046b57146661232fc9, type: 3}

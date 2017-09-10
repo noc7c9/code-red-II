@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4494897820704912}
   - component: {fileID: 33488996036495068}
   - component: {fileID: 23615349659543610}
-  m_Layer: 0
+  - component: {fileID: 64488971939537944}
+  m_Layer: 10
   m_Name: Building Corner Inner SE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,4 +80,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1508345519338688}
+  m_Mesh: {fileID: 4300000, guid: aa2747974e41f014abe47e65d78efddb, type: 3}
+--- !u!64 &64488971939537944
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508345519338688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: aa2747974e41f014abe47e65d78efddb, type: 3}

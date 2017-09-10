@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4819452161327772}
   - component: {fileID: 33358067096166568}
   - component: {fileID: 23695203459956772}
-  m_Layer: 0
+  - component: {fileID: 64614818801284790}
+  m_Layer: 9
   m_Name: Pavement Corner SW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,4 +80,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1523498759466222}
+  m_Mesh: {fileID: 4300000, guid: 75b33f2f9569e444484cbc5f6acbfe3d, type: 3}
+--- !u!64 &64614818801284790
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1523498759466222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 75b33f2f9569e444484cbc5f6acbfe3d, type: 3}
