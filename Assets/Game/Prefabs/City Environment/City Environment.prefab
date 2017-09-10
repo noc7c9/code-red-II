@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1952576503071220}
+  m_IsPrefabParent: 1
+--- !u!1 &1952576503071220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4955316223159368}
+  - component: {fileID: 114423237911041966}
+  m_Layer: 0
+  m_Name: City Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4955316223159368
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952576503071220}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114423237911041966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952576503071220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b075db224c7d341a0cff6b3eaf090d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieceWidth: 9
+  roadPrefabsList:
+  - key: 1
+    value: {fileID: 4306524498165264, guid: 0f22f8210bf9d524eb96a3c25ecfc238, type: 2}
+  - key: 2
+    value: {fileID: 4203555185405634, guid: 352870b12cf96cc4f87a593d280e702f, type: 2}
+  - key: 3
+    value: {fileID: 4312263225293300, guid: fb8a870a9ce3bd44891cb147b38306ba, type: 2}
+  - key: 4
+    value: {fileID: 4734198181310768, guid: 97658e4199232654d985fe5218a628fa, type: 2}
+  - key: 5
+    value: {fileID: 4313496027520488, guid: 7f107e029fb5d984eb1458ba45c66aa4, type: 2}
+  - key: 6
+    value: {fileID: 4065069236906460, guid: 64c896141223cea4593bc4782cc9497a, type: 2}
+  - key: 7
+    value: {fileID: 4892804968743368, guid: 3cb6ff98d8862554bb252686aa5ab51b, type: 2}
+  - key: 8
+    value: {fileID: 4304394989872738, guid: 15fedac6719de334eb493c14eacef9c3, type: 2}
+  - key: 9
+    value: {fileID: 4561938732336920, guid: 5830d6ab745352e49a9511dc99360f36, type: 2}
+  - key: 10
+    value: {fileID: 4459539565704772, guid: 62f7dc1a3d0b7a64890cc15b4020f69b, type: 2}
+  - key: 11
+    value: {fileID: 4246238929441090, guid: 0dff79f44c1c8e043a6c812af8c7656c, type: 2}
+  - key: 12
+    value: {fileID: 4382856906199508, guid: 66ecd69ed7710a14782b0850185542a2, type: 2}
+  - key: 13
+    value: {fileID: 4742588096960366, guid: 2e0782b5ea397bd49a3bc72cdd90c704, type: 2}
+  pavementPrefabsList:
+  - key: 1
+    value: {fileID: 4641855632111060, guid: 2bdbc0b4c48051246b9ea46a91748925, type: 2}
+  - key: 2
+    value: {fileID: 4115306576387692, guid: d8ae2314da2e59441ac07da8f639f125, type: 2}
+  - key: 3
+    value: {fileID: 4819452161327772, guid: b33052a3234ae5b4b9affaa62c3b6b92, type: 2}
+  - key: 4
+    value: {fileID: 4789517184254448, guid: b4b53df3f68fa1245ad416135e556912, type: 2}
+  - key: 5
+    value: {fileID: 4307887763170622, guid: 580cdfefa06c8d640922eb18eab185b0, type: 2}
+  - key: 6
+    value: {fileID: 4144928627370430, guid: eb49207a5dc8eab4ba5d3e5aa2101627, type: 2}
+  - key: 7
+    value: {fileID: 4614093281523944, guid: 9129c810dfe193f43984024911906d32, type: 2}
+  - key: 8
+    value: {fileID: 4486189800888180, guid: 5dae6c312161cc44198cf7d4984ef427, type: 2}
+  buildingPrefabsList:
+  - key: 1
+    value: {fileID: 4272407255761588, guid: 2b2a243c30f38154b9628c4c59bd2424, type: 2}
+  - key: 2
+    value: {fileID: 4824231002469394, guid: c86b2133f26352343ad52148812edebf, type: 2}
+  - key: 3
+    value: {fileID: 4183082015906042, guid: 09aab2722d0a643468adcc32866aa0f4, type: 2}
+  - key: 4
+    value: {fileID: 4431328448006520, guid: cfd70645b05440f40b6121d3a448c1df, type: 2}
+  - key: 5
+    value: {fileID: 4655221044563772, guid: 462ebdb32c18b014893b8969cee720de, type: 2}
+  - key: 6
+    value: {fileID: 4888029226450930, guid: 945829734fdd5ce43ac772f4f347c342, type: 2}
+  - key: 7
+    value: {fileID: 4524548209396302, guid: 0b9329983d343694ebae4a4c9da91736, type: 2}
+  - key: 8
+    value: {fileID: 4437160007598416, guid: c94c846a481baef40b7f28abde6f37f1, type: 2}
+  - key: 9
+    value: {fileID: 4819668365871480, guid: 53f6959b2c2a60d4ab5506f8e1a9ba99, type: 2}
+  - key: 10
+    value: {fileID: 4494897820704912, guid: 493ff20b9f4020045b7e99c33259dc1e, type: 2}
+  - key: 11
+    value: {fileID: 4020947435689062, guid: e9f0e841d32ea864cb9d5d6f43d9bf7e, type: 2}
+  - key: 12
+    value: {fileID: 4295846461015656, guid: 24ab508f7cf38ae40a44630179317f71, type: 2}
+  miscPrefabsList:
+  - key: 1
+    value: {fileID: 4224587772077192, guid: efe7ff3f8927719439666378906f865d, type: 2}
+  - key: 2
+    value: {fileID: 4989444919216594, guid: 5225e08c9136b694b895cf77638e1920, type: 2}
+  - key: 3
+    value: {fileID: 4112672375225140, guid: 5b3a309e9717b0f4598260ffe3256b0a, type: 2}
+  - key: 4
+    value: {fileID: 4364852135404192, guid: c321f0e74532cb14c9cd924ffb48b757, type: 2}
