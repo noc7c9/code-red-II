@@ -7,7 +7,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
     /* Defines basic enemy behaviour.
      */
-    [RequireComponent (typeof (Renderer))]
     [RequireComponent (typeof (NavMeshAgent))]
     public class Enemy : LivingEntity {
 
@@ -32,7 +31,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Color originalColor;
 
-        public float attackDistanceThreshold;
+        public float attackRange;
+        public float attackMovedDistance;
         public float timeBetweenAttacks;
         public float attackSpeed;
         public float attackDamage;
@@ -47,14 +47,12 @@ namespace Noc7c9.TheDigitalFrontier {
         Material material;
 
         float nextAttackTime;
-        float myCollisionRadius;
-        float targetCollisionRadius;
 
         bool hasTarget;
 
         void Awake() {
             pathfinder = GetComponent<NavMeshAgent>();
-            sharedMaterial = GetComponent<Renderer>().sharedMaterial;
+            sharedMaterial = GetComponentInChildren<Renderer>().sharedMaterial;
             sharedMaterial.color = originalColor;
 
             GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
@@ -64,9 +62,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
                 target = targetObject.transform;
                 targetEntity = target.GetComponent<LivingEntity>();
-
-                myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-                targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
             } else {
                 hasTarget = false;
             }
@@ -77,7 +72,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             pathfinder.speed = moveSpeed;
 
-            material = GetComponent<Renderer>().material;
+            material = GetComponentInChildren<Renderer>().material;
 
             if (hasTarget) {
                 currentState = State.Chasing;
@@ -89,11 +84,11 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
-            AudioManager.Instance.PlaySound("Impact", transform.position);
+            // AudioManager.Instance.PlaySound("Impact", transform.position);
             if (damage >= health && !dead) {
                 OnDyingStatic();
 
-                AudioManager.Instance.PlaySound("Enemy Death", transform.position);
+                // AudioManager.Instance.PlaySound("Enemy Death", transform.position);
                 Quaternion rotation =
                     Quaternion.FromToRotation(Vector3.forward, hitDirection);
                 Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)
@@ -112,13 +107,12 @@ namespace Noc7c9.TheDigitalFrontier {
                 if (Time.time > nextAttackTime) {
                     float sqrDstToTarget = (target.position - transform.position)
                         .sqrMagnitude;
-                    float totalThreshold = attackDistanceThreshold
-                        + myCollisionRadius + targetCollisionRadius;
+                    float totalThreshold = attackRange;
 
                     if (sqrDstToTarget < Mathf.Pow(totalThreshold, 2)) {
                         nextAttackTime = Time.time + timeBetweenAttacks;
                         StartCoroutine(Attack());
-                        AudioManager.Instance.PlaySound("Enemy Attack", transform.position);
+                        // AudioManager.Instance.PlaySound("Enemy Attack", transform.position);
                     }
                 }
             }
@@ -127,7 +121,8 @@ namespace Noc7c9.TheDigitalFrontier {
         IEnumerator Attack() {
             Vector3 originalPosition = transform.position;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
-            Vector3 attackPosition = target.position - dirToTarget * myCollisionRadius;
+            // Vector3 attackPosition = target.position - dirToTarget * attackMovedDistance;
+            Vector3 attackPosition = originalPosition + dirToTarget * attackMovedDistance;
 
             float percent = 0;
 
@@ -173,9 +168,7 @@ namespace Noc7c9.TheDigitalFrontier {
                     // make sure target is close enough
                     if (dirToTarget.sqrMagnitude <= minPathSqrDistance) {
                         Vector3 targetPosition = target.position
-                            - dirToTarget.normalized
-                            * (myCollisionRadius + targetCollisionRadius
-                                    + attackDistanceThreshold / 2);
+                            - dirToTarget.normalized * attackRange * 0.8f;
                         pathfinder.SetDestination(targetPosition);
                     }
                 }

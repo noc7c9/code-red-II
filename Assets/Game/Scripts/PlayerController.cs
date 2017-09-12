@@ -81,7 +81,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         protected override void Die() {
-            AudioManager.Instance.PlaySound("Player Death", transform.position);
+            // AudioManager.Instance.PlaySound("Player Death", transform.position);
             base.Die();
         }
 

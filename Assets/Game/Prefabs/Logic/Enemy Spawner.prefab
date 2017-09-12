@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1511391278742360}
+  m_RootGameObject: {fileID: 1973683561132260}
   m_IsPrefabParent: 1
---- !u!1 &1511391278742360
+--- !u!1 &1973683561132260
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4421824313727374}
-  - component: {fileID: 114071903557957974}
+  - component: {fileID: 4325292403856472}
+  - component: {fileID: 114197390949675830}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4421824313727374
+--- !u!4 &4325292403856472
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1511391278742360}
+  m_GameObject: {fileID: 1973683561132260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,21 +40,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114071903557957974
+--- !u!114 &114197390949675830
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1511391278742360}
+  m_GameObject: {fileID: 1973683561132260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f426b1344a8fcd5419e0b8b8f7b48aab, type: 3}
+  m_Script: {fileID: 11500000, guid: 73ae62aacff62f847a917cf3c8a3dc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun1: {fileID: 114496099429643984, guid: e2642b26590abaa4285f5645e171a696, type: 2}
-  gun2: {fileID: 0}
-  cityBlockSettings:
-    seed: 0
-    width: 27
-    height: 27
-    gap: 8
+  enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
+    type: 2}
+  playerSafeRadius: 50
+  chanceOfEnemySpawnOnRoadPiece: 0.4
+  minEnemySpawnGroupSize: 3
+  maxEnemySpawnGroupSize: 7

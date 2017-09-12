@@ -16,15 +16,19 @@ namespace Noc7c9.TheDigitalFrontier {
 
         PlayerInput playerInput;
 
+        CityBlock loadedCityBlock;
+
         public void ReloadCityBlock() {
-            CityBlock cityBlock = CityBlockGenerator.Generate(cityBlockSettings);
-            GetCityBlockLoader().Load(cityBlock);
+            loadedCityBlock = CityBlockGenerator.Generate(cityBlockSettings);
+            GetCityBlockLoader().Load(loadedCityBlock);
         }
 
         void Awake() {
             playerInput = FindObjectOfType<PlayerInput>();
 
             ReloadCityBlock();
+            FindObjectOfType<EnemySpawner>().PopulateStage(
+                    loadedCityBlock, GetCityBlockLoader().pieceWidth);
         }
 
         // TODO: this needs to be in an input manager class
