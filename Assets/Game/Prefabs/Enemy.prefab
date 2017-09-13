@@ -124,11 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f41fe282ab449419e0ccd7e49b37ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
+  startingHealth: 2
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
   minPathSqrDistance: 1000
-  moveSpeed: 5
+  moveSpeed: 10
   originalColor: {r: 0, g: 0.7647059, b: 0.13184588, a: 0}
   attackRange: 3
   attackMovedDistance: 1
