@@ -11,11 +11,18 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Transform turret;
 
-        public float maxMovingTurnAngle;
-        public float turnSpeed;
-        public float moveSpeed;
-
         public int ammoCount;
+
+        public bool useTraditionalInput;
+
+        [Header("Traditional Movement")]
+        public float traditionalTurnSpeed;
+        public float traditionalMoveSpeed;
+
+        [Header("Intuitive Movement")]
+        public float maxMovingTurnAngle;
+        public float intuitiveTurnSpeed;
+        public float intuitiveMoveSpeed;
 
         Vector3 moveDir;
 
@@ -42,6 +49,30 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void FixedUpdate() {
+            if (Input.GetKeyDown(KeyCode.Tab)) {
+                useTraditionalInput = !useTraditionalInput;
+            }
+            if (useTraditionalInput) {
+                TraditionalMovement();
+            } else {
+                MoveInInputDir();
+            }
+        }
+
+        void TraditionalMovement() {
+            float driveInput = moveDir.z;
+            float turnInput = moveDir.x;
+
+            Vector3 movement = transform.forward * driveInput
+                * traditionalMoveSpeed * Time.deltaTime;
+            rb.MovePosition(rb.position + movement);
+
+            float turnAngle = turnInput * traditionalTurnSpeed * Time.deltaTime;
+            rb.MoveRotation(rb.rotation
+                    * Quaternion.AngleAxis(turnAngle, Vector3.up));
+        }
+
+        void MoveInInputDir() {
             if (moveDir.sqrMagnitude <= 0) {
                 return;
             }
@@ -59,12 +90,12 @@ namespace Noc7c9.TheDigitalFrontier {
 
             if (angle <= maxMovingTurnAngle) {
                 // moving
-                Vector3 movement = forward * moveSpeed * Time.deltaTime;
+                Vector3 movement = forward * intuitiveMoveSpeed * Time.deltaTime;
                 rb.MovePosition(rb.position + movement);
             }
 
             // rotation
-            float turn = angleSign * turnSpeed * Time.deltaTime;
+            float turn = angleSign * intuitiveTurnSpeed * Time.deltaTime;
             turn = Mathf.Clamp(turn, -angle, angle);
             Quaternion rot = Quaternion.AngleAxis(turn, Vector3.up);
             rb.MoveRotation(rb.rotation * rot);
@@ -87,7 +118,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void OnCollisionEnter(Collision col) {
             if (col.gameObject.tag == "AmmoPickup") {
-                ammoCount += col.gameObject.GetComponent<AmmoPickup>().value;
+                // ammoCount += col.gameObject.GetComponent<AmmoPickup>().value;
             }
         }
 

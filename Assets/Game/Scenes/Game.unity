@@ -24498,6 +24498,46 @@ Prefab:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1635314384}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: turnSpeed
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: maxMovingTurnAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: intuitiveTurnSpeed
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: intuitiveMoveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: traditionalTurnSpeed
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141876007945516, guid: eea4e85b152ad5845b0e175da4b81ba5,
+        type: 2}
+      propertyPath: traditionalMoveSpeed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eea4e85b152ad5845b0e175da4b81ba5, type: 2}
   m_IsPrefabParent: 0
@@ -31218,7 +31258,12 @@ Prefab:
     - target: {fileID: 114545899755661304, guid: bff66a9597032d547b2befc23b5a05a8,
         type: 2}
       propertyPath: maxSpeed
-      value: 14
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114545899755661304, guid: bff66a9597032d547b2befc23b5a05a8,
+        type: 2}
+      propertyPath: smoothTime
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bff66a9597032d547b2befc23b5a05a8, type: 2}

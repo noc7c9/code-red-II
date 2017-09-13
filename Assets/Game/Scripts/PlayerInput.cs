@@ -47,9 +47,9 @@ namespace Noc7c9.TheDigitalFrontier {
                 gunWielder.OnTriggerRelease();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab)) {
-                gunWielder.SwapGun();
-            }
+            // if (Input.GetKeyDown(KeyCode.Tab)) {
+            //     gunWielder.SwapGun();
+            // }
         }
 
         Vector3 GetMoveInput() {
