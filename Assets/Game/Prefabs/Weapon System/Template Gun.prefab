@@ -493,9 +493,6 @@ MonoBehaviour:
   barrel: {fileID: 114514488715252432, guid: 184184bb5989dd6419fbfa964067aca1, type: 2}
   projectile: {fileID: 114285579837237930, guid: 6fb95895ee1c68e40858a51daa932024,
     type: 2}
-  projectilesPerMag: 100000
-  reloadTime: 0
-  maxReloadAngle: 45
   shellPrefab: {fileID: 4437672010231050, guid: c76496c4100f3334abe420e39e3ad0af,
     type: 2}
   shellEjectionPoint: {fileID: 4119822932188198}
@@ -506,8 +503,7 @@ MonoBehaviour:
   recoilAngleOffsetMax: 0
   recoilAngleAbsoluteMax: 0
   recoilAngleRecoverTime: 0
-  shootAudio: {fileID: 8300000, guid: 41a45384c03c47c419959ce3829463d1, type: 3}
-  reloadAudio: {fileID: 8300000, guid: cf8a594bb2b419e4bbd3e2324375c5ad, type: 3}
+  shootAudio: {fileID: 8300000, guid: 17f4e92512f255946b754e64c5e0bbd4, type: 3}
 --- !u!114 &114191175322252992
 MonoBehaviour:
   m_ObjectHideFlags: 1

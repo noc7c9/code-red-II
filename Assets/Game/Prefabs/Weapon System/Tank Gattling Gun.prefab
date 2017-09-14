@@ -503,7 +503,25 @@ MonoBehaviour:
   recoilAngleOffsetMax: 0
   recoilAngleAbsoluteMax: 0
   recoilAngleRecoverTime: 0
-  shootAudio: {fileID: 8300000, guid: 41a45384c03c47c419959ce3829463d1, type: 3}
+  shootAudio: {fileID: 8300000, guid: c1bcc2a8c287fc943b3cd636e5ef216b, type: 3}
+  test:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114785003490382194
 MonoBehaviour:
   m_ObjectHideFlags: 1

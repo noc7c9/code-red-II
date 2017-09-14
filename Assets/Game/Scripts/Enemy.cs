@@ -84,11 +84,11 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
-            // AudioManager.Instance.PlaySound("Impact", transform.position);
+            AudioManager.Instance.PlaySound("Impact", transform.position);
             if (damage >= health && !dead) {
                 OnDyingStatic();
 
-                // AudioManager.Instance.PlaySound("Enemy Death", transform.position);
+                AudioManager.Instance.PlaySound("Enemy Death", transform.position);
                 Quaternion rotation =
                     Quaternion.FromToRotation(Vector3.forward, hitDirection);
                 Destroy(Instantiate(deathEffect.gameObject, hitPoint, rotation)

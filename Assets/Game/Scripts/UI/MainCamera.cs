@@ -14,27 +14,75 @@ namespace Noc7c9.TheDigitalFrontier {
         public float smoothTime;
         public float maxSpeed;
 
-        Vector3 offset;
+        public float maxOffset;
+
+        public LayerMask layerMask;
+
         Vector3 smoothVel;
 
         Transform player;
 
+        float height;
+
+        float collisionRadius = 0.1f;
+
+        Vector3 playerPosition;
+        Vector3 cursorPosition;
+        Vector3 targetPosition;
+
         void Awake() {
             player = GameManager.Instance.GetPlayerController().transform;
+            height = transform.position.y;
+
+            // if there is sphere collider get its radius
+            SphereCollider col = GetComponent<SphereCollider>();
+            collisionRadius = col.radius;
         }
 
-        void Start() {
-            if (player != null) {
-                offset = transform.position - player.position;
-            }
+        void OnDrawGizmosSelected() {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(playerPosition, maxOffset);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(cursorPosition, 1);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(playerPosition, 1);
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(targetPosition, 1);
         }
 
         void Update() {
             if (player != null) {
-                Vector3 targetPosition = offset;
-                targetPosition += player.position * (1 - cursorWeight);
-                targetPosition += GameManager.Instance.GetCursorPosition() * cursorWeight;
+                playerPosition = player.position;
+                cursorPosition = GameManager.Instance.GetCursorPosition();
 
+                // make sure positions used to calculate are at camera level
+                playerPosition.y = height;
+                cursorPosition.y = height;
+
+                // clamp max offset of the cursor position
+                cursorPosition -= playerPosition;
+                cursorPosition = Vector3.ClampMagnitude(cursorPosition, maxOffset);
+                cursorPosition += playerPosition;
+
+                // calculate target position using weights
+                targetPosition = playerPosition * (1 - cursorWeight)
+                    + cursorPosition * cursorWeight;
+
+                // raycast to make sure camera doesn't pass through objects
+                RaycastHit hit;
+                Vector3 dir = targetPosition - transform.position;
+                bool isHit = Physics.Raycast(transform.position,
+                        dir, out hit, dir.sqrMagnitude, layerMask);
+                if (isHit) {
+                    // just clamp to collision position
+                    targetPosition = hit.point - dir.normalized * collisionRadius;
+                    targetPosition.y = height;
+                }
+
+                // smooth translate to target position
                 transform.position = Vector3.SmoothDamp(transform.position,
                         targetPosition, ref smoothVel, smoothTime, maxSpeed);
             }
