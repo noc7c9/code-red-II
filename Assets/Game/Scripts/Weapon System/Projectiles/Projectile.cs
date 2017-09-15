@@ -21,22 +21,25 @@ namespace Noc7c9.TheDigitalFrontier {
         public Color trailColor;
         public float secsLifetime;
 
-        float overlapThreshold = 0.1f;
+        public float collisionRadius;
+
+        bool isDestroyed;
 
         void Start() {
             Destroy(gameObject, secsLifetime);
 
-            CheckOverlapCollisions(overlapThreshold);
+            CheckOverlapCollisions(collisionRadius);
 
             GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
         }
 
         void Update() {
             float moveDistance = Time.deltaTime * speed;
-
             CheckRayCollisions(moveDistance);
 
-            transform.Translate(Vector3.forward * moveDistance);
+            if (!isDestroyed) {
+                transform.Translate(Vector3.forward * moveDistance);
+            }
         }
 
         void CheckOverlapCollisions(float radius) {
@@ -56,7 +59,7 @@ namespace Noc7c9.TheDigitalFrontier {
             }
         }
 
-        void OnHitObject(Collider c, Vector3 hitPoint) {
+        protected virtual void OnHitObject(Collider c, Vector3 hitPoint) {
             IDamageable damageableObject = c.GetComponent<IDamageable>();
             Vector3 hitDirection = transform.forward;
 
@@ -71,8 +74,16 @@ namespace Noc7c9.TheDigitalFrontier {
                         as GameObject, hitEffect.main.startLifetime.constant);
             }
 
+            // before destroying the object set the position to be the hit point
+            transform.position = hitPoint;
+
             // and destroy the projectile
+            DestroySelf();
+        }
+
+        protected void DestroySelf() {
             GameObject.Destroy(gameObject);
+            isDestroyed = true;
         }
 
     }

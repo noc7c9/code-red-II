@@ -49,9 +49,9 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void FixedUpdate() {
-            if (Input.GetKeyDown(KeyCode.Tab)) {
-                useTraditionalInput = !useTraditionalInput;
-            }
+            // if (Input.GetKeyDown(KeyCode.Tab)) {
+            //     useTraditionalInput = !useTraditionalInput;
+            // }
             if (useTraditionalInput) {
                 TraditionalMovement();
             } else {

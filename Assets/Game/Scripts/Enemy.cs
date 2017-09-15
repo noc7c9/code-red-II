@@ -112,7 +112,7 @@ namespace Noc7c9.TheDigitalFrontier {
                     if (sqrDstToTarget < Mathf.Pow(totalThreshold, 2)) {
                         nextAttackTime = Time.time + timeBetweenAttacks;
                         StartCoroutine(Attack());
-                        // AudioManager.Instance.PlaySound("Enemy Attack", transform.position);
+                        AudioManager.Instance.PlaySound("Enemy Attack", transform.position);
                     }
                 }
             }

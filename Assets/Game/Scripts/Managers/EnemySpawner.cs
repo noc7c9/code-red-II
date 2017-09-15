@@ -52,7 +52,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void CreateEnemy(Vector3 position) {
             Instantiate(enemyPrefab, position, Quaternion.identity);
-            Debug.Log("Spawn Enemy", position);
+            // Debug.Log("Spawn Enemy", position);
         }
 
         Vector3 CoordToPosition(int x, int y, float pieceWidth) {
