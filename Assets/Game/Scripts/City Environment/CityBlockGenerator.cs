@@ -9,21 +9,84 @@ namespace Noc7c9.TheDigitalFrontier {
     public class CityBlockGenerator {
 
         public static CityBlock Generate(CityBlockSettings settings) {
+            // return GenerateGridLayout(settings);
+            return GenerateManualLayout();
+        }
+
+        static CityBlock GenerateManualLayout() {
+            int _ = 0;
+            int H = 1;
+            int V = 2;
+            int C = 3;
+
+            int[,] cityLayout = {
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, C, _, _, C, _, _, C, _, _, C, _, _, C, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, C, _, _, C, _, _, C, _, _, C, _, _, C, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, C, _, _, C, _, _, C, _, _, C, _, _, C, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, C, _, _, C, _, _, C, _, _, C, _, _, C, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+                { _, C, _, _, C, _, _, C, _, _, C, _, _, C, _, },
+                { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, },
+            };
+
+            // create the city block
+            var settings = new CityBlockSettings();
+            settings.width = cityLayout.GetLength(1);
+            settings.height = cityLayout.GetLength(0);
             var cityBlock = new CityBlock(settings);
-            int x, y;
 
+            // create road from layout
+            for (int x = 0; x < settings.width; x++) {
+                for (int y = 0; y < settings.height; y++) {
+                    var tile = cityLayout[y, x];
+                    if (tile == H) {
+                        cityBlock.SetRoadTile(x, y, RoadPiece.HORIZONTAL);
+                    } else if (tile == V) {
+                        cityBlock.SetRoadTile(x, y, RoadPiece.VERTICAL);
+                    } else if (tile == C) {
+                        cityBlock.SetRoadTile(x, y, RoadPiece.CROSS_CENTER);
+                    }
+                }
+            }
 
-            // create roads
+            // ground level
+            SetCrossroadBorders(cityBlock);
+            SetPavementWrappedWithRoad(cityBlock);
+
+            // buildings
+            // SetBuildingsOnPavement(cityBlock);
+
+            // world border
+            SetBorder(cityBlock);
+
+            // features
+            SetCornerLamps(cityBlock);
+            // SetRoadsWithCrossingsAroundCrossroads(cityBlock);
+
+            return cityBlock;
+        }
+
+        static CityBlock GenerateGridLayout(CityBlockSettings settings) {
+            var cityBlock = new CityBlock(settings);
 
             // add horizontal roads
-            for (y = 1; y < cityBlock.size.y - 1; y += settings.gap) {
-                for (x = 1; x < cityBlock.size.x - 1; x++) {
+            for (int y = 1; y < cityBlock.size.y - 1; y += settings.gap) {
+                for (int x = 1; x < cityBlock.size.x - 1; x++) {
                     cityBlock.SetRoadTile(x, y, RoadPiece.HORIZONTAL);
                 }
             }
+
             // add vertical roads
-            for (x = 1; x < cityBlock.size.x - 1; x += settings.gap) {
-                for (y = 1; y < cityBlock.size.y - 1; y++) {
+            for (int x = 1; x < cityBlock.size.x - 1; x += settings.gap) {
+                for (int y = 1; y < cityBlock.size.y - 1; y++) {
                     if (cityBlock.GetRoadTile(x, y) != RoadPiece.NONE) {
                         cityBlock.SetRoadTile(x, y, RoadPiece.CROSS_CENTER);
                     } else {
@@ -31,9 +94,27 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
-            // add the cross roads borders
-            for (x = 0; x < cityBlock.size.x; x++) {
-                for (y = 0; y < cityBlock.size.y; y++) {
+
+            // ground level
+            SetCrossroadBorders(cityBlock);
+            SetPavementWrappedWithRoad(cityBlock);
+
+            // buildings
+            SetBuildingsOnPavement(cityBlock);
+
+            // world border
+            SetBorder(cityBlock);
+
+            // features
+            SetCornerLamps(cityBlock);
+            SetRoadsWithCrossingsAroundCrossroads(cityBlock);
+
+            return cityBlock;
+        }
+
+        static void SetCrossroadBorders(CityBlock cityBlock) {
+            for (int x = 0; x < cityBlock.size.x; x++) {
+                for (int y = 0; y < cityBlock.size.y; y++) {
                     if (cityBlock.GetRoadTile(x, y) == RoadPiece.CROSS_CENTER) {
                         cityBlock.SetRoadTile(x - 1, y - 1,
                                 RoadPiece.CROSS_SW);
@@ -54,13 +135,11 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
+        }
 
-
-            // create pavements
-
-            // wrap road with pavement
-            for (x = 0; x < cityBlock.size.x; x++) {
-                for (y = 0; y < cityBlock.size.y; y++) {
+        static void SetPavementWrappedWithRoad(CityBlock cityBlock) {
+            for (int x = 0; x < cityBlock.size.x; x++) {
+                for (int y = 0; y < cityBlock.size.y; y++) {
                     var road = cityBlock.GetRoadTile(x, y);
                     if (road == RoadPiece.CROSS_NW) {
                         cityBlock.SetPavementTile(x, y, PavementPiece.CORNER_NW);
@@ -79,33 +158,13 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
+        }
 
-            // city block border pavement
-            for (x = 1; x < cityBlock.size.x-1; x++) {
-                cityBlock.SetPavementTile(x, 0, PavementPiece.SIDE_S);
-                cityBlock.SetPavementTile(x, cityBlock.size.y-1, PavementPiece.SIDE_N);
-            }
-            for (y = 1; y < cityBlock.size.y-1; y++) {
-                cityBlock.SetPavementTile(0, y, PavementPiece.SIDE_W);
-                cityBlock.SetPavementTile(cityBlock.size.x-1, y, PavementPiece.SIDE_E);
-            }
-
-            // set city block border corners
-            cityBlock.SetPavementTile(0, 0, PavementPiece.CORNER_NE);
-            cityBlock.SetPavementTile(cityBlock.size.x-1, 0,
-                    PavementPiece.CORNER_NW);
-            cityBlock.SetPavementTile(0, cityBlock.size.y-1,
-                    PavementPiece.CORNER_SE);
-            cityBlock.SetPavementTile(cityBlock.size.x-1, cityBlock.size.y-1,
-                    PavementPiece.CORNER_SW);
-
-
-            // create buildings
-
-            // set corner buildings
-            for (x = 0; x < cityBlock.size.x; x++) {
-                for (y = 0; y < cityBlock.size.y; y++) {
+        static void SetBuildingsOnPavement(CityBlock cityBlock) {
+            for (int x = 0; x < cityBlock.size.x; x++) {
+                for (int y = 0; y < cityBlock.size.y; y++) {
                     var pavement = cityBlock.GetPavementTile(x, y);
+
                     if (pavement == PavementPiece.CORNER_NW) {
                         cityBlock.SetBuildingTile(x, y, BuildingPiece.CORNER_NW);
                     } else if (pavement == PavementPiece.CORNER_SW) {
@@ -125,6 +184,34 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
+        }
+
+        static void SetBorder(CityBlock cityBlock) {
+            int x, y;
+
+            for (x = 1; x < cityBlock.size.x-1; x++) {
+                cityBlock.SetPavementTile(x, 0, PavementPiece.SIDE_S);
+                cityBlock.SetPavementTile(x, cityBlock.size.y-1, PavementPiece.SIDE_N);
+
+                cityBlock.SetBuildingTile(x, 0, BuildingPiece.SIDE_S);
+                cityBlock.SetBuildingTile(x, cityBlock.size.y-1, BuildingPiece.SIDE_N);
+            }
+            for (y = 1; y < cityBlock.size.y-1; y++) {
+                cityBlock.SetPavementTile(0, y, PavementPiece.SIDE_W);
+                cityBlock.SetPavementTile(cityBlock.size.x-1, y, PavementPiece.SIDE_E);
+
+                cityBlock.SetBuildingTile(0, y, BuildingPiece.SIDE_W);
+                cityBlock.SetBuildingTile(cityBlock.size.x-1, y, BuildingPiece.SIDE_E);
+            }
+
+            // set city block border corners
+            cityBlock.SetPavementTile(0, 0, PavementPiece.CORNER_NE);
+            cityBlock.SetPavementTile(cityBlock.size.x-1, 0,
+                    PavementPiece.CORNER_NW);
+            cityBlock.SetPavementTile(0, cityBlock.size.y-1,
+                    PavementPiece.CORNER_SE);
+            cityBlock.SetPavementTile(cityBlock.size.x-1, cityBlock.size.y-1,
+                    PavementPiece.CORNER_SW);
 
             // set city block border corner buildings
             cityBlock.SetBuildingTile(0, 0,
@@ -135,13 +222,11 @@ namespace Noc7c9.TheDigitalFrontier {
                     BuildingPiece.CORNER_INNER_NW);
             cityBlock.SetBuildingTile(cityBlock.size.x-1, cityBlock.size.y-1,
                     BuildingPiece.CORNER_INNER_NE);
+        }
 
-
-            // set street lamps
-
-            // set corner lamps
-            for (x = 0; x < cityBlock.size.x; x++) {
-                for (y = 0; y < cityBlock.size.y; y++) {
+        static void SetCornerLamps(CityBlock cityBlock) {
+            for (int x = 0; x < cityBlock.size.x; x++) {
+                for (int y = 0; y < cityBlock.size.y; y++) {
                     var pavement = cityBlock.GetPavementTile(x, y);
                     if (pavement == PavementPiece.CORNER_NW) {
                         cityBlock.SetMiscTile(x, y, MiscPiece.STREET_LAMP_CORNER_NW);
@@ -154,10 +239,11 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
+        }
 
-            // set roads with crossings
-            for (x = 0; x < cityBlock.size.x; x++) {
-                for (y = 0; y < cityBlock.size.y; y++) {
+        static void SetRoadsWithCrossingsAroundCrossroads(CityBlock cityBlock) {
+            for (int x = 0; x < cityBlock.size.x; x++) {
+                for (int y = 0; y < cityBlock.size.y; y++) {
                     var road = cityBlock.GetRoadTile(x, y);
                     if (road == RoadPiece.CROSS_N) {
                         cityBlock.SetRoadTile(x, y+1, RoadPiece.VERTICAL_WITH_CROSSING);
@@ -170,9 +256,6 @@ namespace Noc7c9.TheDigitalFrontier {
                     }
                 }
             }
-
-
-            return cityBlock;
         }
 
     }

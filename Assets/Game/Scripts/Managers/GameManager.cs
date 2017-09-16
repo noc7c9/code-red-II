@@ -12,6 +12,8 @@ namespace Noc7c9.TheDigitalFrontier {
         // gameplay settings
         public Gun gun1;
         public Gun gun2;
+
+        public bool generateLevelOnAwake;
         public CityBlockSettings cityBlockSettings;
 
         PlayerInput playerInput;
@@ -26,9 +28,11 @@ namespace Noc7c9.TheDigitalFrontier {
         void Awake() {
             playerInput = FindObjectOfType<PlayerInput>();
 
-            ReloadCityBlock();
-            FindObjectOfType<EnemySpawner>().PopulateStage(
-                    loadedCityBlock, GetCityBlockLoader().pieceWidth);
+            if (generateLevelOnAwake) {
+                ReloadCityBlock();
+                FindObjectOfType<EnemySpawner>().PopulateStage(
+                        loadedCityBlock, GetCityBlockLoader().pieceWidth);
+            }
         }
 
         // TODO: this needs to be in an input manager class

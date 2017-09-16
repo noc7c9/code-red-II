@@ -51,10 +51,13 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void CheckRayCollisions(float moveDistance) {
-            Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, moveDistance, collisionMask)) {
+            bool isHit = Physics.SphereCast(transform.position, collisionRadius,
+                    transform.forward, out hit, moveDistance, collisionMask);
+            // Ray ray = new Ray(transform.position, transform.forward);
+            // if (Physics.Raycast(ray, out hit, moveDistance, collisionMask)) {
+            if (isHit) {
                 OnHitObject(hit.collider, hit.point);
             }
         }

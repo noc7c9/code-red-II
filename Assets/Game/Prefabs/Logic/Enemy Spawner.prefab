@@ -55,5 +55,5 @@ MonoBehaviour:
     type: 2}
   playerSafeRadius: 50
   chanceOfEnemySpawnOnRoadPiece: 0.4
-  minEnemySpawnGroupSize: 3
-  maxEnemySpawnGroupSize: 7
+  minEnemySpawnGroupSize: 5
+  maxEnemySpawnGroupSize: 15

@@ -23,6 +23,7 @@ namespace Noc7c9.TheDigitalFrontier {
         Transform player;
 
         float height;
+        Vector3 offset;
 
         float collisionRadius = 0.1f;
 
@@ -33,6 +34,7 @@ namespace Noc7c9.TheDigitalFrontier {
         void Awake() {
             player = GameManager.Instance.GetPlayerController().transform;
             height = transform.position.y;
+            offset = transform.position - player.position;
 
             // if there is sphere collider get its radius
             SphereCollider col = GetComponent<SphereCollider>();
@@ -55,7 +57,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Update() {
             if (player != null) {
-                playerPosition = player.position;
+                playerPosition = player.position + offset;
                 cursorPosition = GameManager.Instance.GetCursorPosition();
 
                 // make sure positions used to calculate are at camera level
