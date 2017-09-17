@@ -68,7 +68,7 @@ namespace Noc7c9.TheDigitalFrontier {
             SetBorder(cityBlock);
 
             // features
-            SetCornerLamps(cityBlock);
+            // SetCornerLamps(cityBlock);
             // SetRoadsWithCrossingsAroundCrossroads(cityBlock);
 
             return cityBlock;

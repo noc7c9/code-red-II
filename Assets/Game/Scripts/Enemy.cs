@@ -25,6 +25,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public ParticleSystem deathEffect;
 
+        public bool useDistanceLimit;
         public float minPathSqrDistance;
 
         public float moveSpeed;
@@ -52,6 +53,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Awake() {
             pathfinder = GetComponent<NavMeshAgent>();
+
             sharedMaterial = GetComponentInChildren<Renderer>().sharedMaterial;
             sharedMaterial.color = originalColor;
 
@@ -162,11 +164,12 @@ namespace Noc7c9.TheDigitalFrontier {
             // while alive and there is a target, move towards the target
             // if the target is close enough
             while (hasTarget && !dead) {
-                if (currentState == State.Chasing) {
+                if (currentState == State.Chasing && pathfinder.enabled) {
                     Vector3 dirToTarget = target.position - transform.position;
 
                     // make sure target is close enough
-                    if (dirToTarget.sqrMagnitude <= minPathSqrDistance) {
+                    if (!useDistanceLimit ||
+                            dirToTarget.sqrMagnitude <= minPathSqrDistance) {
                         Vector3 targetPosition = target.position
                             - dirToTarget.normalized * attackRange * 0.8f;
                         pathfinder.SetDestination(targetPosition);

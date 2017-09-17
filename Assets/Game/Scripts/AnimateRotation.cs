@@ -31,7 +31,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         static Vector3 PerlinNoiseVector3(Vector3 offset, float scale) {
             float off = Time.time * scale;
-            Debug.Log(off);
             return new Vector3(
                 2 * Mathf.PerlinNoise(offset.x + off, 0) - 1,
                 2 * Mathf.PerlinNoise(offset.y + off, 0) - 1,

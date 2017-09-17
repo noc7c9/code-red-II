@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4106868336431264}
   - component: {fileID: 114439815524636524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4149265231030848}
   - component: {fileID: 114316273923330010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4316171419986948}
   - component: {fileID: 114147845761089600}
   - component: {fileID: 114416504996619652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ring Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4857962467158080}
   - component: {fileID: 114675323278432296}
   - component: {fileID: 114006351574534742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ring Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,9 +86,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4590534551209702}
   - component: {fileID: 33387019735049874}
-  - component: {fileID: 135237594621530408}
   - component: {fileID: 23758396942583514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +105,8 @@ GameObject:
   - component: {fileID: 33695051351251266}
   - component: {fileID: 135425303154720950}
   - component: {fileID: 23072668763396610}
-  m_Layer: 0
+  - component: {fileID: 114276017163878976}
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4623220465852734}
   - component: {fileID: 114822722350261328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4861067038614690}
   - component: {fileID: 114439803148783616}
   - component: {fileID: 114742053494060012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ring Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583427960570756}
   - component: {fileID: 108726831648937536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4379803710077452}
-  m_Layer: 0
+  - component: {fileID: 114024986038796696}
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,6 +462,20 @@ MonoBehaviour:
   axis: {x: 0, y: 0, z: 0}
   speed: 5
   drawGizmos: 0
+--- !u!114 &114024986038796696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403c193d38632024c98a7d822c7a9d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
+    type: 2}
+  spawnTime: 3
 --- !u!114 &114147845761089600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,6 +492,20 @@ MonoBehaviour:
     type: 2}
   radius: 8
   numberOfEnemies: 36
+--- !u!114 &114276017163878976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385097605053444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2604bb602ed32324b9d61c935f11ad52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comments: The sphere collider is bigger than the actual size of the component so
+    that it the shield can light up when the cannon fire hits it.
+  inEditMode: 1
 --- !u!114 &114316273923330010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,18 +623,6 @@ MonoBehaviour:
   axis: {x: 1, y: 0, z: 0}
   speed: 20
   drawGizmos: 0
---- !u!135 &135237594621530408
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298351393025356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135425303154720950
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -616,5 +633,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Center: {x: 0, y: 0, z: 0}
