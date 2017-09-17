@@ -170,6 +170,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4379803710077452}
+  - component: {fileID: 114719596911892086}
   - component: {fileID: 114024986038796696}
   m_Layer: 8
   m_Name: Boss
@@ -475,7 +476,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
     type: 2}
-  spawnTime: 3
+  spawnSecondsBetween: 3
+  spawnMinCount: 3
+  spawnMaxCount: 7
 --- !u!114 &114147845761089600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,6 +592,23 @@ MonoBehaviour:
     type: 2}
   radius: 4
   numberOfEnemies: 18
+--- !u!114 &114719596911892086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eff6c39a48c56348a2d547e9fb0aaf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 114024986038796696}
+  innerRing: {fileID: 114675323278432296}
+  midRing: {fileID: 114439803148783616}
+  outerRing: {fileID: 114147845761089600}
+  hackTotalTime: 0
+  barrierDownDuration: 0
 --- !u!114 &114742053494060012
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4134631579965550}
   - component: {fileID: 198732033036472700}
   - component: {fileID: 199417918525743770}
-  - component: {fileID: 114841728557577940}
   m_Layer: 0
   m_Name: Enemy Death Effect
   m_TagString: Untagged
@@ -42,21 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114841728557577940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1467444766911136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4def13031afbb44cb2610ad3405294b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoPickupPrefab: {fileID: 114131640080791882, guid: 0e6d6bc1369d9044a928b2791aeb1350,
-    type: 2}
-  maxDrops: 3
-  minDrops: 0
 --- !u!198 &198732033036472700
 ParticleSystem:
   m_ObjectHideFlags: 1

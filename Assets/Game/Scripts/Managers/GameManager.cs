@@ -61,6 +61,14 @@ namespace Noc7c9.TheDigitalFrontier {
             return playerController;
         }
 
+        BossController bossController;
+        public BossController GetBossController() {
+            if (bossController == null) {
+                bossController = FindObjectOfType<BossController>();
+            }
+            return bossController;
+        }
+
     }
 
 }

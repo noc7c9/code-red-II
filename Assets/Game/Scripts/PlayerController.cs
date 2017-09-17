@@ -116,12 +116,6 @@ namespace Noc7c9.TheDigitalFrontier {
             base.Die();
         }
 
-        void OnCollisionEnter(Collision col) {
-            if (col.gameObject.tag == "AmmoPickup") {
-                // ammoCount += col.gameObject.GetComponent<AmmoPickup>().value;
-            }
-        }
-
     }
 
 }

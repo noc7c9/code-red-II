@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 54397384537933654}
   - component: {fileID: 114273771810698358}
   - component: {fileID: 114898292087194126}
+  - component: {fileID: 114184863479574786}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -130,6 +131,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &114184863479574786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632057218792528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74da38559ee095c4b9c98f2df708850f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPrefab: {fileID: 1558976078632696, guid: 65ffc301cfd3ede488751180a5e788fe, type: 2}
+  spawnChance: 0.25
+  lifeSpan: 3
 --- !u!114 &114273771810698358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +159,7 @@ MonoBehaviour:
   startingHealth: 2
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
+  useDistanceLimit: 0
   minPathSqrDistance: 1000
   moveSpeed: 10
   originalColor: {r: 0, g: 0.7647059, b: 0.13184588, a: 0}

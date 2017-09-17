@@ -25,11 +25,23 @@ namespace Noc7c9.TheDigitalFrontier {
         public float fadeTime;
         public Color fadeOutColor;
 
+        public Text hackingIndicatorStatus;
+        public float hackingInProgressWheelDelay;
+        public Text hackingIndicatorPercentage;
+
+        int hackingInProgressWheelIter;
+        char[] hackingInProgressWheelChars = {'-', '\\', '-', '/'};
+        char hackingInProgressWheelCurrentChar;
+        float hackingInProgressNextTime;
+
         PlayerController player;
+        BossController boss;
 
         void Awake() {
             player = GameManager.Instance.GetPlayerController();
             player.Dying += PlayerDyingEventHandler;
+
+            boss = GameManager.Instance.GetBossController();
 
             var gunWielder = player.GetComponent<GunWielder>();
             gunWielder.SwappedGun += PlayerSwappedGunEventHandler;
@@ -43,6 +55,24 @@ namespace Noc7c9.TheDigitalFrontier {
             healthBar.localScale = new Vector3(healthPercent, 1, 1);
 
             ammoIndicator.text = "Ammo: " + player.ammoCount;
+
+            if (boss.barrierState == BossController.BarrierState.UP) {
+                hackingIndicatorStatus.text = hackingInProgressWheelCurrentChar
+                    + " HACKING ENEMY SHIELD...";
+                if (Time.time > hackingInProgressNextTime) {
+                    hackingInProgressNextTime
+                        = Time.time + hackingInProgressWheelDelay;
+                    hackingInProgressWheelIter
+                        = ++hackingInProgressWheelIter
+                          % hackingInProgressWheelChars.Length;
+                    hackingInProgressWheelCurrentChar
+                        = hackingInProgressWheelChars[hackingInProgressWheelIter];
+                }
+                hackingIndicatorPercentage.text = boss.GetHackPercentage() + "%";
+            } else {
+                hackingIndicatorStatus.text = "BARRIER DOWN";
+                hackingIndicatorPercentage.text = "";
+            }
         }
 
         IEnumerator currentNewWaveCoroutine;
