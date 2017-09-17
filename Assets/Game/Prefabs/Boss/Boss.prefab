@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 23072668763396610}
   - component: {fileID: 114276017163878976}
   m_Layer: 8
-  m_Name: Shield
+  m_Name: Barrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 4379803710077452}
   - component: {fileID: 114719596911892086}
   - component: {fileID: 114024986038796696}
+  - component: {fileID: 135217965223873018}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
@@ -363,7 +364,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 72b481fbd3a0af643b722a253ac3a1e3, type: 2}
+  - {fileID: 2100000, guid: 3d45c2a7083a1144cb4e0602c4f19e52, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -476,9 +477,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
     type: 2}
-  spawnSecondsBetween: 3
-  spawnMinCount: 3
-  spawnMaxCount: 7
+  spawnSecondsBetween: 5
+  spawnMinCount: 10
+  spawnMaxCount: 25
 --- !u!114 &114147845761089600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -491,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 4623220465852734}
-  enemyPrefab: {fileID: 4521044613270964, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
+  enemyPrefab: {fileID: 4115965717804492, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
     type: 2}
   radius: 8
   numberOfEnemies: 36
@@ -555,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 4149265231030848}
-  enemyPrefab: {fileID: 4521044613270964, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
+  enemyPrefab: {fileID: 4115965717804492, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
     type: 2}
   radius: 6
   numberOfEnemies: 27
@@ -588,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 4106868336431264}
-  enemyPrefab: {fileID: 4521044613270964, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
+  enemyPrefab: {fileID: 4115965717804492, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
     type: 2}
   radius: 4
   numberOfEnemies: 18
@@ -603,12 +604,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eff6c39a48c56348a2d547e9fb0aaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 2000
   spawner: {fileID: 114024986038796696}
   innerRing: {fileID: 114675323278432296}
   midRing: {fileID: 114439803148783616}
   outerRing: {fileID: 114147845761089600}
-  hackTotalTime: 0
-  barrierDownDuration: 0
+  barrier: {fileID: 1385097605053444}
+  hackTotalTime: 60
+  barrierDownDuration: 15
 --- !u!114 &114742053494060012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -643,6 +646,18 @@ MonoBehaviour:
   axis: {x: 1, y: 0, z: 0}
   speed: 20
   drawGizmos: 0
+--- !u!135 &135217965223873018
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 9.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135425303154720950
 SphereCollider:
   m_ObjectHideFlags: 1

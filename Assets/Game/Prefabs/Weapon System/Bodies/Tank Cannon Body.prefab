@@ -55,4 +55,4 @@ MonoBehaviour:
   burstCount: 0
   fireRate: 0.666
   muzzleVelocity: 150
-  damage: 5
+  damage: 50

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Noc7c9.TheDigitalFrontier {
 
-    public class BossController : MonoBehaviour {
+    public class BossController : LivingEntity {
 
         public enum Stage {
             FIRST, SECOND, LAST,
@@ -19,6 +19,8 @@ namespace Noc7c9.TheDigitalFrontier {
         public BossRing innerRing;
         public BossRing midRing;
         public BossRing outerRing;
+
+        public GameObject barrier;
 
         public Stage stage { get; private set; }
 
@@ -51,12 +53,16 @@ namespace Noc7c9.TheDigitalFrontier {
                 if (timer > hackTotalTime) {
                     timer -= hackTotalTime;
                     barrierState = BarrierState.DOWN;
+                    barrier.SetActive(false);
+                    spawner.enabled = false;
                 }
             } else {
                 timer += Time.deltaTime;
                 if (timer > barrierDownDuration) {
                     timer -= barrierDownDuration;
                     barrierState = BarrierState.UP;
+                    barrier.SetActive(true);
+                    spawner.enabled = true;
                 }
             }
         }
@@ -68,11 +74,23 @@ namespace Noc7c9.TheDigitalFrontier {
             } else {
                 // make barrier stay down longer
                 timer -= value;
+                if (timer < 0) {
+                    timer = 0;
+                }
             }
         }
 
         public float GetHackPercentage() {
             return 100 * timer / hackTotalTime;
+        }
+
+
+        public override void TakeDamage(float damage) {
+            if (barrierState == BarrierState.UP) {
+                return;
+            }
+
+            base.TakeDamage(damage);
         }
 
     }

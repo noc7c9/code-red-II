@@ -17,10 +17,10 @@ namespace Noc7c9.TheDigitalFrontier {
         public Text newWaveNumber;
         public Text newWaveEnemyCount;
 
-        public RectTransform healthBar;
+        public RectTransform playerHealthBar;
+        public RectTransform bossHealthBar;
 
         public Text equippedGunIndicator;
-        public Text ammoIndicator;
 
         public float fadeTime;
         public Color fadeOutColor;
@@ -48,14 +48,24 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void Update() {
+            UpdatePlayerUI();
+            UpdateBossUI();
+        }
+
+        void UpdatePlayerUI() {
             float healthPercent = 0;
             if (player != null) {
                 healthPercent = player.health / player.startingHealth;
             }
-            healthBar.localScale = new Vector3(healthPercent, 1, 1);
+            playerHealthBar.localScale = new Vector3(healthPercent, 1, 1);
+        }
 
-            ammoIndicator.text = "Ammo: " + player.ammoCount;
+        void UpdateBossUI() {
+            // health
+            float healthPercent = boss.health / boss.startingHealth;
+            bossHealthBar.localScale = new Vector3(healthPercent, 1, 1);
 
+            // hacking status
             if (boss.barrierState == BossController.BarrierState.UP) {
                 hackingIndicatorStatus.text = hackingInProgressWheelCurrentChar
                     + " HACKING ENEMY SHIELD...";
@@ -126,7 +136,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             StartCoroutine(Fade(Color.clear, fadeOutColor, fadeTime));
 
-            healthBar.transform.parent.gameObject.SetActive(false);
+            playerHealthBar.transform.parent.gameObject.SetActive(false);
 
             gameOverUI.SetActive(true);
         }
