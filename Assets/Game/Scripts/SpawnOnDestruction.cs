@@ -13,8 +13,14 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float lifeSpan;
 
+        bool isQuitting = true;
+
+        void OnApplicationQuit() {
+            isQuitting = true;
+        }
+
         void OnDestroy() {
-            if (GameManager.sceneIsUnloading) {
+            if (isQuitting || GameManager.sceneIsUnloading) {
                 return;
             }
             if (objPrefab != null && Random.value < spawnChance) {
