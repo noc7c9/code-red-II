@@ -44,8 +44,6 @@ namespace Noc7c9.TheDigitalFrontier {
         NavMeshAgent pathfinder;
         Transform target;
         LivingEntity targetEntity;
-        Material sharedMaterial;
-        Material material;
 
         float nextAttackTime;
 
@@ -53,9 +51,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void Awake() {
             pathfinder = GetComponent<NavMeshAgent>();
-
-            sharedMaterial = GetComponentInChildren<Renderer>().sharedMaterial;
-            sharedMaterial.color = originalColor;
 
             GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
 
@@ -73,8 +68,6 @@ namespace Noc7c9.TheDigitalFrontier {
             base.Start();
 
             pathfinder.speed = moveSpeed;
-
-            material = GetComponentInChildren<Renderer>().material;
 
             if (hasTarget) {
                 currentState = State.Chasing;
@@ -132,9 +125,6 @@ namespace Noc7c9.TheDigitalFrontier {
             currentState = State.Attacking;
             pathfinder.enabled = false;
 
-            // change color when attacking
-            material.color = attackingColor;
-
             bool hasAppliedDamage = false;
 
             // lunge animation and apply damage to player
@@ -151,9 +141,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
                 yield return null;
             }
-
-            // restore original color
-            material.color = originalColor;
 
             // start chasing again
             currentState = State.Chasing;
