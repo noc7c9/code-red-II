@@ -220,7 +220,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138107251352844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.008103683, y: 0.66310513, z: 0.0071796486, w: 0.74844795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -504,24 +504,6 @@ MonoBehaviour:
   recoilAngleAbsoluteMax: 0
   recoilAngleRecoverTime: 0
   shootAudio: {fileID: 8300000, guid: c1bcc2a8c287fc943b3cd636e5ef216b, type: 3}
-  test:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &114785003490382194
 MonoBehaviour:
   m_ObjectHideFlags: 1
