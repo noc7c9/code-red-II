@@ -51,10 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f426b1344a8fcd5419e0b8b8f7b48aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun1: {fileID: 114496099429643984, guid: e2642b26590abaa4285f5645e171a696, type: 2}
-  gun2: {fileID: 0}
+  gun1: {fileID: 114633903318563940, guid: 35e6a72cb014c4148943c7e345d544d7, type: 2}
+  gun2: {fileID: 114633903318563940, guid: db0e3cd5326e27542953413703e5e815, type: 2}
+  musicChangeBossHealth: 0.333
+  generateLevelOnAwake: 0
   cityBlockSettings:
     seed: 0
-    width: 27
-    height: 27
-    gap: 8
+    width: 17
+    height: 17
+    gap: 7

@@ -9,9 +9,10 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GameManager : Singleton<GameManager> {
 
-        // gameplay settings
         public Gun gun1;
         public Gun gun2;
+
+        public float musicChangeBossHealth;
 
         public bool generateLevelOnAwake;
         public CityBlockSettings cityBlockSettings;
@@ -32,6 +33,24 @@ namespace Noc7c9.TheDigitalFrontier {
                 ReloadCityBlock();
                 FindObjectOfType<EnemySpawner>().PopulateStage(
                         loadedCityBlock, GetCityBlockLoader().pieceWidth);
+            }
+        }
+
+        void Start() {
+            StartCoroutine(BossHealthMusicChange());
+        }
+
+        IEnumerator BossHealthMusicChange() {
+            // start checking after a moment to allow the game to initialize
+            yield return new WaitForSeconds(1);
+
+            while (true) {
+                if (GetBossController().healthPercentage() < musicChangeBossHealth) {
+                    GetMusicManager().PlayTrack(MusicManager.MusicTrack.BOSS_THEME_FAST);
+                    break;
+                } else {
+                    yield return new WaitForSeconds(0.25f);
+                }
             }
         }
 
@@ -67,6 +86,14 @@ namespace Noc7c9.TheDigitalFrontier {
                 bossController = FindObjectOfType<BossController>();
             }
             return bossController;
+        }
+
+        MusicManager musicManager;
+        public MusicManager GetMusicManager() {
+            if (musicManager == null) {
+                musicManager = FindObjectOfType<MusicManager>();
+            }
+            return musicManager;
         }
 
     }

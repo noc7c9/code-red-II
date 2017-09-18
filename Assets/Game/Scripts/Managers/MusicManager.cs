@@ -7,37 +7,44 @@ namespace Noc7c9.TheDigitalFrontier {
 
     public class MusicManager : MonoBehaviour {
 
-        public float crossFadeDuration;
-        public AudioClip mainTheme;
-        public AudioClip menuTheme;
+        public enum MusicTrack {
+            MENU_THEME,
+            BOSS_THEME_SLOW,
+            BOSS_THEME_FAST,
+        }
 
+        public MusicTrack initialTrack;
+
+        public AudioClip menuTheme;
+        public AudioClip bossThemeSlow;
+        public AudioClip bossThemeFast;
+
+        public float crossFadeDuration;
+
+        MusicTrack currentTrack;
         string sceneName;
 
-        void Awake() {
-            SceneManager.sceneLoaded += OnSceneLoaded;
+        void Start() {
+            PlayTrack(initialTrack);
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-            if (scene.name != sceneName) {
-                sceneName = scene.name;
-
-                // required due to the fact that audio manager should be a singleton
-                // but technically could be duplicated
-                Invoke("PlayMusic", .2f);
+        public void PlayTrack(MusicTrack track) {
+            if (currentTrack == track) {
+                return;
             }
-        }
+            currentTrack = track;
 
-        void PlayMusic() {
-            AudioClip clipToPlay = null;
-
-            if (sceneName == "Menu") {
-                clipToPlay = menuTheme;
-            } else if (sceneName == "Game") {
-                clipToPlay = mainTheme;
+            AudioClip clip = null;
+            if (track == MusicTrack.MENU_THEME) {
+                clip = menuTheme;
+            } else if (track == MusicTrack.BOSS_THEME_SLOW) {
+                clip = bossThemeSlow;
+            } else if (track == MusicTrack.BOSS_THEME_FAST) {
+                clip = bossThemeFast;
             }
 
-            if (clipToPlay != null) {
-                AudioManager.Instance.PlayMusic(clipToPlay, crossFadeDuration);
+            if (clip != null) {
+                AudioManager.Instance.PlayMusic(clip, crossFadeDuration);
             }
         }
 
