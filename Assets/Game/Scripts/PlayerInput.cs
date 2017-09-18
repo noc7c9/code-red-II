@@ -8,21 +8,18 @@ namespace Noc7c9.TheDigitalFrontier {
      * and passes it off to the player controller component.
      */
     [RequireComponent (typeof (PlayerController))]
-    [RequireComponent (typeof (GunWielder))]
     public class PlayerInput : MonoBehaviour {
 
         public Crosshairs crosshairs;
+        public GunWielder cannon;
+        public GunWielder turret;
 
         Camera viewCamera;
         PlayerController playerController;
-        GunWielder gunWielder;
 
         void Awake() {
             playerController = GetComponent<PlayerController>();
-            gunWielder = GetComponent<GunWielder>();
             viewCamera = Camera.main;
-
-            gunWielder.EquipGun();
         }
 
         void Update() {
@@ -36,19 +33,24 @@ namespace Noc7c9.TheDigitalFrontier {
             Vector2 aimPoint = new Vector2(point.x, point.z);
             Vector2 playerPos = new Vector2(transform.position.x, transform.position.z);
             if ((aimPoint - playerPos).sqrMagnitude > 1) {
-                gunWielder.Aim(point);
+                cannon.Aim(point);
+                turret.Aim(point);
             }
 
             // left mouse button
             if (Input.GetMouseButton(0)) {
-                gunWielder.OnTriggerHold();
+                turret.OnTriggerHold();
             }
             if (Input.GetMouseButtonUp(0)) {
-                gunWielder.OnTriggerRelease();
+                turret.OnTriggerRelease();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab)) {
-                gunWielder.SwapGun();
+            // right mouse button
+            if (Input.GetMouseButton(1)) {
+                cannon.OnTriggerHold();
+            }
+            if (Input.GetMouseButtonUp(1)) {
+                cannon.OnTriggerRelease();
             }
         }
 
@@ -66,7 +68,7 @@ namespace Noc7c9.TheDigitalFrontier {
         public Vector3 GetLookAtPoint() {
             // raycast to figure out where on the ground the mouse is pointing at.
             Ray ray = MouseAimRay();
-            Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunWielder.GunHeight);
+            Plane groundPlane = new Plane(Vector3.up, Vector3.up * turret.GunHeight);
             float intersectDistance;
 
             if (groundPlane.Raycast(ray, out intersectDistance)) {

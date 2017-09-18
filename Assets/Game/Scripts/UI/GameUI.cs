@@ -20,8 +20,6 @@ namespace Noc7c9.TheDigitalFrontier {
         public RectTransform playerHealthBar;
         public RectTransform bossHealthBar;
 
-        public Text equippedGunIndicator;
-
         public float fadeTime;
         public Color fadeOutColor;
 
@@ -42,9 +40,6 @@ namespace Noc7c9.TheDigitalFrontier {
             player.Dying += PlayerDyingEventHandler;
 
             boss = GameManager.Instance.GetBossController();
-
-            var gunWielder = player.GetComponent<GunWielder>();
-            gunWielder.SwappedGun += PlayerSwappedGunEventHandler;
         }
 
         void Update() {
@@ -139,11 +134,6 @@ namespace Noc7c9.TheDigitalFrontier {
             playerHealthBar.transform.parent.gameObject.SetActive(false);
 
             gameOverUI.SetActive(true);
-        }
-
-        void PlayerSwappedGunEventHandler(bool firstGunEquipped) {
-            equippedGunIndicator.text = "Equipped Gun: " + (firstGunEquipped
-                    ? "1" : "2");
         }
 
         IEnumerator Fade(Color from, Color to, float time) {

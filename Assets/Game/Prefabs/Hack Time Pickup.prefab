@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23188394863219874}
   - component: {fileID: 114040086125686662}
   m_Layer: 12
-  m_Name: Hack Time Pickup 1
+  m_Name: Hack Time Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
