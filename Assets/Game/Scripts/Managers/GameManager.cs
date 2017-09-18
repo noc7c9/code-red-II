@@ -9,6 +9,8 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GameManager : Singleton<GameManager> {
 
+        public static bool sceneIsUnloading;
+
         public Gun gun1;
         public Gun gun2;
 

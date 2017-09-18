@@ -152,10 +152,12 @@ namespace Noc7c9.TheDigitalFrontier {
 
         // UI input
         public void StartNewGame() {
+            GameManager.sceneIsUnloading = true;
             SceneManager.LoadScene("Game");
         }
 
         public void ReturnToMenu() {
+            GameManager.sceneIsUnloading = true;
             SceneManager.LoadScene("Menu");
         }
 
