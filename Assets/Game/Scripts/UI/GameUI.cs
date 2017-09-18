@@ -57,11 +57,14 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void UpdateBossUI() {
             // health
-            float healthPercent = boss.health / boss.startingHealth;
+            float healthPercent = 0;
+            if (boss != null) {
+                healthPercent = boss.health / boss.startingHealth;
+            }
             bossHealthBar.localScale = new Vector3(healthPercent, 1, 1);
 
             // hacking status
-            if (boss.barrierState == BossController.BarrierState.UP) {
+            if (boss != null && boss.barrierState == BossController.BarrierState.UP) {
                 hackingIndicatorStatus.text = hackingInProgressWheelCurrentChar
                     + " HACKING ENEMY SHIELD...";
                 if (Time.time > hackingInProgressNextTime) {

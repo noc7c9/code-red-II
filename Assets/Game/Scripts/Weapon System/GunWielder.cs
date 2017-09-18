@@ -11,7 +11,7 @@ namespace Noc7c9.TheDigitalFrontier {
         public Transform gunPosition;
         public Gun equippedGun;
 
-        void Awake() {
+        void Start() {
             equippedGun = Instantiate(equippedGun,
                     gunPosition.position, gunPosition.rotation) as Gun;
             equippedGun.transform.parent = gunPosition;

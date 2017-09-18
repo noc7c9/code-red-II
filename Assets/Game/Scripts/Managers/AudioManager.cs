@@ -29,9 +29,6 @@ namespace Noc7c9.TheDigitalFrontier {
         AudioSource[] musicSources;
         int activeMusicSourceIndex;
 
-        Transform audioListener;
-        Transform player;
-
         SoundLibrary library;
 
         void Awake() {
@@ -54,31 +51,11 @@ namespace Noc7c9.TheDigitalFrontier {
 
             sfx2DSource = newSfx2DSource.AddComponent<AudioSource>();
 
-            audioListener = FindObjectOfType<AudioListener>().transform;
-
             library = GetComponent<SoundLibrary>();
 
             masterVolumePercent = PlayerPrefs.GetFloat("master volume", 1);
             sfxVolumePercent = PlayerPrefs.GetFloat("sfx volume", 1);
             musicVolumePercent = PlayerPrefs.GetFloat("music volume", 1);
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-            if (player == null) {
-                PlayerController playerController
-                    = GameManager.Instance.GetPlayerController();
-                if (playerController != null) {
-                    player = playerController.transform;
-                }
-            }
-        }
-
-        void Update() {
-            if (player != null) {
-                audioListener.position = player.position;
-            }
         }
 
         public void SetVolume(float volumePercent, AudioChannel channel) {
@@ -127,15 +104,21 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         IEnumerator MusicCrossFade(float duration) {
-            float speed = 1 / duration;
-            float percent = 0;
-            while (percent < 1) {
-                percent += Time.deltaTime * speed;
-                musicSources[activeMusicSourceIndex].volume = Mathf.Lerp(0,
-                        musicVolumePercent * masterVolumePercent, percent);
-                musicSources[1 - activeMusicSourceIndex].volume = Mathf.Lerp(
-                        musicVolumePercent * masterVolumePercent, 0, percent);
-                yield return null;
+            if (duration <= 0) {
+                musicSources[activeMusicSourceIndex].volume =
+                        musicVolumePercent * masterVolumePercent;
+                musicSources[1 - activeMusicSourceIndex].volume = 0;
+            } else {
+                float speed = 1 / duration;
+                float percent = 0;
+                while (percent < 1) {
+                    percent += Time.deltaTime * speed;
+                    musicSources[activeMusicSourceIndex].volume = Mathf.Lerp(
+                            0, musicVolumePercent * masterVolumePercent, percent);
+                    musicSources[1 - activeMusicSourceIndex].volume = Mathf.Lerp(
+                            musicVolumePercent * masterVolumePercent, 0, percent);
+                    yield return null;
+                }
             }
         }
 

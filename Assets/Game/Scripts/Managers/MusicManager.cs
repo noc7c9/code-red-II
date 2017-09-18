@@ -25,10 +25,10 @@ namespace Noc7c9.TheDigitalFrontier {
         string sceneName;
 
         void Start() {
-            PlayTrack(initialTrack);
+            PlayTrack(initialTrack, false);
         }
 
-        public void PlayTrack(MusicTrack track) {
+        public void PlayTrack(MusicTrack track, bool crossFade=true) {
             if (currentTrack == track) {
                 return;
             }
@@ -44,7 +44,8 @@ namespace Noc7c9.TheDigitalFrontier {
             }
 
             if (clip != null) {
-                AudioManager.Instance.PlayMusic(clip, crossFadeDuration);
+                AudioManager.Instance.PlayMusic(clip,
+                        crossFade ? crossFadeDuration : 0);
             }
         }
 
