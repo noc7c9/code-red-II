@@ -83,10 +83,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 4698230699984970}
-  enemyPrefab: {fileID: 4521044613270964, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
+  enemyPrefab: {fileID: 4115965717804492, guid: 83d6c963e7a7e454c8b1c7a54db9f08b,
+    type: 2}
+  explodeEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
   radius: 5
   numberOfEnemies: 15
+  animationSpeed: 0
+  animationDelay: 0
 --- !u!114 &114255837085233050
 MonoBehaviour:
   m_ObjectHideFlags: 1

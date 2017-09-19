@@ -40,7 +40,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             while (t <= 1) {
                 t += Time.deltaTime * speed;
-                transform.position = Vector3.Lerp(start, end, t);
+                transform.position = Vector3.Slerp(start, end, t);
 
                 yield return null;
             }

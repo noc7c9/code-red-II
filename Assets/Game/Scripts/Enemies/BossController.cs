@@ -21,8 +21,6 @@ namespace Noc7c9.TheDigitalFrontier {
         public BossRing midRing;
         public BossRing outerRing;
 
-        public GameObject barrier;
-
         public BarrierState barrierState { get; private set; }
         public float hackTotalTime;
 
@@ -30,7 +28,13 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float barrierDownDuration;
 
+        Rigidbody rb;
+        RiseAnimation rise;
+
         void Awake() {
+            rb = GetComponent<Rigidbody>();
+            rise = GetComponent<RiseAnimation>();
+
             HackTimePickup.PickedUpStatic -= HackTimePickedupHandler;
             HackTimePickup.PickedUpStatic += HackTimePickedupHandler;
         }
@@ -48,17 +52,13 @@ namespace Noc7c9.TheDigitalFrontier {
                 timer += Time.deltaTime;
                 if (timer > hackTotalTime) {
                     timer -= hackTotalTime;
-                    barrierState = BarrierState.DOWN;
-                    barrier.SetActive(false);
-                    spawner.enabled = false;
+                    DeactivateBarrier();
                 }
             } else {
                 timer += Time.deltaTime;
                 if (timer > barrierDownDuration) {
                     timer -= barrierDownDuration;
-                    barrierState = BarrierState.UP;
-                    barrier.SetActive(true);
-                    spawner.enabled = true;
+                    ActivateBarrier();
                 }
             }
 
@@ -67,6 +67,31 @@ namespace Noc7c9.TheDigitalFrontier {
                 subBossSpawnTimer -= subBossSpawnDelay;
                 subBossSpawner.SpawnSubBoss();
             }
+        }
+
+        void DeactivateBarrier() {
+            barrierState = BarrierState.DOWN;
+
+            spawner.enabled = false;
+
+            rb.isKinematic = false;
+
+            innerRing.ExplodeAnimation();
+            midRing.ExplodeAnimation();
+            outerRing.ExplodeAnimation();
+        }
+
+        void ActivateBarrier() {
+            barrierState = BarrierState.UP;
+
+            spawner.enabled = true;
+
+            rb.isKinematic = true;
+            rise.StartAnimation();
+
+            innerRing.InitializeAnimation();
+            midRing.InitializeAnimation();
+            outerRing.InitializeAnimation();
         }
 
         void HackTimePickedupHandler(float value) {
