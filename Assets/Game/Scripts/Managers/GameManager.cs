@@ -44,7 +44,7 @@ namespace Noc7c9.TheDigitalFrontier {
             yield return new WaitForSeconds(1);
 
             while (true) {
-                if (GetBossController().healthPercentage() < musicChangeBossHealth) {
+                if (GetBossController().healthPercentage < musicChangeBossHealth) {
                     GetMusicManager().PlayTrack(MusicManager.MusicTrack.BOSS_THEME_FAST);
                     break;
                 } else {

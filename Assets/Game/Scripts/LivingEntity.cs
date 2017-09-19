@@ -16,8 +16,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float health { get; protected set; }
 
-        public float healthPercentage() {
-            return health / startingHealth;
+        public float healthPercentage {
+            get {
+                return health / startingHealth;
+            }
         }
 
         protected bool dead;

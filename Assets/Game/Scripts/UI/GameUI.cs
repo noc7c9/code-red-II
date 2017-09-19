@@ -80,13 +80,15 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void UpdateSubBossUI() {
-            float[] percentages = SubBossController.GetAllHealthPercentages();
-            for (int i = 0; i < percentages.Length; i++) {
-                var percent = percentages[i];
-                if (percent <= 0) {
+            var subBosses = SubBossController.allSubBosses;
+            for (int i = 0; i < subBosses.Length; i++) {
+                var subBoss = subBosses[i];
+                if (subBoss == null) {
                     subBossHealthBars[i].Disable();
                 } else {
-                    subBossHealthBars[i].SetHealthValue(percent);
+                    subBossHealthBars[i].SetHealthValue(subBoss.healthPercentage);
+                    string title = "V_FORK.exe[" + subBoss.number + "]";
+                    subBossHealthBars[i].SetText(title);
                 }
             }
         }
