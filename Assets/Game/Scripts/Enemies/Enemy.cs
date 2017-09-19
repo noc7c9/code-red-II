@@ -8,6 +8,7 @@ namespace Noc7c9.TheDigitalFrontier {
     /* Defines basic enemy behaviour.
      */
     [RequireComponent (typeof (NavMeshAgent))]
+    [SelectionBase]
     public class Enemy : LivingEntity {
 
         public static event System.Action DyingStatic;

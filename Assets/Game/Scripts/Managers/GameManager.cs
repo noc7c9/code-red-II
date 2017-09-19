@@ -11,9 +11,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public static bool sceneIsUnloading;
 
-        public Gun gun1;
-        public Gun gun2;
-
         public float musicChangeBossHealth;
 
         public bool generateLevelOnAwake;

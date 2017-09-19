@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: 135217965223873018}
   - component: {fileID: 114719596911892086}
   - component: {fileID: 114024986038796696}
+  - component: {fileID: 114479074930513814}
+  - component: {fileID: 114283478582392548}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
@@ -406,9 +408,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.9034486, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 4
-  m_Range: 32.521507
+  m_Range: 32
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -477,9 +479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
     type: 2}
-  spawnSecondsBetween: 5
-  spawnMinCount: 10
-  spawnMaxCount: 25
+  spawnSecondsBetween: 1
+  spawnMinCount: 1
+  spawnMaxCount: 3
 --- !u!114 &114147845761089600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,6 +512,22 @@ MonoBehaviour:
   comments: The sphere collider is bigger than the actual size of the component so
     that it the shield can light up when the cannon fire hits it.
   inEditMode: 1
+--- !u!114 &114283478582392548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c7e817ec22f304596020c6cc07cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subBossProjectilePrefab: {fileID: 54089285857583642, guid: 01387f3b5b3cfcf4f8c5a3601e9aa5e9,
+    type: 2}
+  spawnPointTransforms: []
+  fireTime: 1
+  maxActiveSubBosses: 3
 --- !u!114 &114316273923330010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,6 +595,19 @@ MonoBehaviour:
   axis: {x: 1, y: 0, z: 0}
   speed: 50
   drawGizmos: 0
+--- !u!114 &114479074930513814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72707bcc8bdc986468f3790efdbf38cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ring: {fileID: 114147845761089600}
+  spawner: {fileID: 114024986038796696}
 --- !u!114 &114675323278432296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,8 +635,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eff6c39a48c56348a2d547e9fb0aaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInfiniteHealth: 0
   startingHealth: 2000
   spawner: {fileID: 114024986038796696}
+  subBossSpawner: {fileID: 114283478582392548}
+  subBossSpawnDelay: 30
   innerRing: {fileID: 114675323278432296}
   midRing: {fileID: 114439803148783616}
   outerRing: {fileID: 114147845761089600}

@@ -8,6 +8,10 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class LivingEntity : MonoBehaviour, IDamageable {
 
+#if UNITY_EDITOR
+        public bool hasInfiniteHealth;
+#endif
+
         public float startingHealth;
 
         public float health { get; protected set; }
@@ -35,6 +39,12 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public virtual void TakeDamage(float damage) {
+#if UNITY_EDITOR
+            if (hasInfiniteHealth) {
+                return;
+            }
+#endif
+
             health -= damage;
 
             if (health <= 0 && !dead) {

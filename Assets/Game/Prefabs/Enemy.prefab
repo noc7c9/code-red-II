@@ -144,7 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objPrefab: {fileID: 1558976078632696, guid: 65ffc301cfd3ede488751180a5e788fe, type: 2}
   spawnChance: 0.25
-  lifeSpan: 3
 --- !u!114 &114273771810698358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f41fe282ab449419e0ccd7e49b37ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInfiniteHealth: 0
   startingHealth: 2
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
@@ -209,9 +209,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!195 &195118555506758470
 NavMeshAgent:
   m_ObjectHideFlags: 1

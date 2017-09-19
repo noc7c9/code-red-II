@@ -6,15 +6,16 @@ namespace Noc7c9.TheDigitalFrontier {
 
     public class BossController : LivingEntity {
 
-        public enum Stage {
-            FIRST, SECOND, LAST,
-        };
-
         public enum BarrierState {
             UP, DOWN,
         }
 
         public BossSpawner spawner;
+        public SubBossSpawner subBossSpawner;
+
+        public float subBossSpawnDelay;
+
+        float subBossSpawnTimer;
 
         public BossRing innerRing;
         public BossRing midRing;
@@ -22,29 +23,24 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public GameObject barrier;
 
-        public Stage stage { get; private set; }
-
         public BarrierState barrierState { get; private set; }
         public float hackTotalTime;
-        public float hackPercent {
-            get {
-                return 0;
-            }
-        }
 
         float timer;
 
         public float barrierDownDuration;
 
         void Awake() {
-            outerRing.Initialized += OuterRingInitializedHandler;
-
             HackTimePickup.PickedUpStatic -= HackTimePickedupHandler;
             HackTimePickup.PickedUpStatic += HackTimePickedupHandler;
         }
 
-        void OuterRingInitializedHandler() {
-            spawner.SetSpawnPoints(outerRing.enemies);
+        protected override void Start() {
+            base.Start();
+
+            subBossSpawner.SpawnSubBoss();
+            subBossSpawner.SpawnSubBoss();
+            subBossSpawnTimer = subBossSpawnDelay / 2;
         }
 
         void Update() {
@@ -64,6 +60,12 @@ namespace Noc7c9.TheDigitalFrontier {
                     barrier.SetActive(true);
                     spawner.enabled = true;
                 }
+            }
+
+            subBossSpawnTimer += Time.deltaTime;
+            if (subBossSpawnTimer > subBossSpawnDelay) {
+                subBossSpawnTimer -= subBossSpawnDelay;
+                subBossSpawner.SpawnSubBoss();
             }
         }
 
