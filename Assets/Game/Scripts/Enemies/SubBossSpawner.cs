@@ -12,7 +12,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float fireTime;
 
-        public int maxActiveSubBosses;
         int numOfActiveSubBosses;
 
         FisherYates.ShuffleList<Vector3> spawnPoints;
@@ -40,7 +39,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public Transform SpawnSubBoss() {
-            if (numOfActiveSubBosses >= maxActiveSubBosses) {
+            if (numOfActiveSubBosses >= SubBossController.MAX_SUB_BOSSES) {
                 return null;
             }
             numOfActiveSubBosses += 1;
@@ -59,7 +58,6 @@ namespace Noc7c9.TheDigitalFrontier {
             Vector3 start = transform.position;
 
             // calculate horizontal velocity
-            float t = fireTime;
             Vector3 dir = end - start;
             dir.y = 0;
             Vector3 velocity = dir / fireTime;

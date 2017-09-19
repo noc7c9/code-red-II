@@ -17,8 +17,9 @@ namespace Noc7c9.TheDigitalFrontier {
         public Text newWaveNumber;
         public Text newWaveEnemyCount;
 
-        public RectTransform playerHealthBar;
-        public RectTransform bossHealthBar;
+        public HealthBar playerHealthBar;
+        public HealthBar bossHealthBar;
+        public HealthBar[] subBossHealthBars;
 
         public float fadeTime;
         public Color fadeOutColor;
@@ -45,23 +46,18 @@ namespace Noc7c9.TheDigitalFrontier {
         void Update() {
             UpdatePlayerUI();
             UpdateBossUI();
+            UpdateSubBossUI();
         }
 
         void UpdatePlayerUI() {
-            float healthPercent = 0;
-            if (player != null) {
-                healthPercent = player.health / player.startingHealth;
-            }
-            playerHealthBar.localScale = new Vector3(healthPercent, 1, 1);
+            playerHealthBar.SetHealthValue(
+                player == null ? 0 : player.health / player.startingHealth);
         }
 
         void UpdateBossUI() {
             // health
-            float healthPercent = 0;
-            if (boss != null) {
-                healthPercent = boss.health / boss.startingHealth;
-            }
-            bossHealthBar.localScale = new Vector3(healthPercent, 1, 1);
+            bossHealthBar.SetHealthValue(
+                player == null ? 0 : boss.health / boss.startingHealth);
 
             // hacking status
             if (boss != null && boss.barrierState == BossController.BarrierState.UP) {
@@ -80,6 +76,18 @@ namespace Noc7c9.TheDigitalFrontier {
             } else {
                 hackingIndicatorStatus.text = "BARRIER DOWN";
                 hackingIndicatorPercentage.text = "";
+            }
+        }
+
+        void UpdateSubBossUI() {
+            float[] percentages = SubBossController.GetAllHealthPercentages();
+            for (int i = 0; i < percentages.Length; i++) {
+                var percent = percentages[i];
+                if (percent <= 0) {
+                    subBossHealthBars[i].Disable();
+                } else {
+                    subBossHealthBars[i].SetHealthValue(percent);
+                }
             }
         }
 
