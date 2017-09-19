@@ -971,6 +971,7 @@ MonoBehaviour:
   newWaveEnemyCount: {fileID: 114576651880141046}
   playerHealthBar: {fileID: 114850445998442522}
   bossHealthBar: {fileID: 114241640926039624}
+  bossHealthBarShieldedColor: {r: 0.33671406, g: 0, b: 0.58823526, a: 1}
   subBossHealthBars:
   - {fileID: 114583298873335152}
   - {fileID: 114548780270952658}

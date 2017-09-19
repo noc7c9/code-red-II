@@ -19,6 +19,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public HealthBar playerHealthBar;
         public HealthBar bossHealthBar;
+        public Color bossHealthBarShieldedColor;
         public HealthBar[] subBossHealthBars;
 
         public float fadeTime;
@@ -73,9 +74,13 @@ namespace Noc7c9.TheDigitalFrontier {
                         = hackingInProgressWheelChars[hackingInProgressWheelIter];
                 }
                 hackingIndicatorPercentage.text = boss.GetHackPercentage() + "%";
+
+                bossHealthBar.SetColor(bossHealthBarShieldedColor);
             } else {
                 hackingIndicatorStatus.text = "BARRIER DOWN";
                 hackingIndicatorPercentage.text = "";
+
+                bossHealthBar.SetColor();
             }
         }
 
