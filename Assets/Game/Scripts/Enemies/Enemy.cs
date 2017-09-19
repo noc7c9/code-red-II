@@ -11,6 +11,8 @@ namespace Noc7c9.TheDigitalFrontier {
     [SelectionBase]
     public class Enemy : LivingEntity {
 
+        public static int totalEntities { get; private set; }
+
         public static event System.Action DyingStatic;
         protected static void OnDyingStatic() {
             var d = DyingStatic;
@@ -51,6 +53,8 @@ namespace Noc7c9.TheDigitalFrontier {
         bool hasTarget;
 
         void Awake() {
+            totalEntities += 1;
+
             pathfinder = GetComponent<NavMeshAgent>();
 
             GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
@@ -167,6 +171,10 @@ namespace Noc7c9.TheDigitalFrontier {
                 // recalculate path at an interval for performance
                 yield return new WaitForSeconds(pathRefreshRate);
             }
+        }
+
+        void OnDestroy() {
+            totalEntities -= 1;
         }
 
     }

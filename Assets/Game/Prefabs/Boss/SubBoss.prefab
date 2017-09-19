@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114610066378218204}
   - component: {fileID: 114251304735672198}
   - component: {fileID: 114829593163200238}
+  - component: {fileID: 114749058358971174}
   m_Layer: 8
   m_Name: SubBoss
   m_TagString: Untagged
@@ -320,6 +321,19 @@ MonoBehaviour:
   axis: {x: 1, y: 0, z: 0}
   speed: 50
   drawGizmos: 0
+--- !u!114 &114749058358971174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418617346696728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74da38559ee095c4b9c98f2df708850f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPrefab: {fileID: 1558976078632696, guid: 65ffc301cfd3ede488751180a5e788fe, type: 2}
+  spawnChance: 1
 --- !u!114 &114829593163200238
 MonoBehaviour:
   m_ObjectHideFlags: 1

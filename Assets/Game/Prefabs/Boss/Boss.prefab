@@ -563,14 +563,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInfiniteHealth: 0
-  startingHealth: 2000
+  startingHealth: 1000
   spawner: {fileID: 114990175211464888}
   subBossSpawner: {fileID: 114211415309801278}
-  subBossSpawnDelay: 30
+  subBossSpawnDelay: 10
   innerRing: {fileID: 114416048372790968}
   midRing: {fileID: 114820767866539420}
   outerRing: {fileID: 114077180408793198}
-  hackTotalTime: 60
+  hackTotalTime: 5
   barrierDownDuration: 15
 --- !u!114 &114820767866539420
 MonoBehaviour:
@@ -631,9 +631,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
     type: 2}
-  spawnSecondsBetween: 1
-  spawnMinCount: 1
-  spawnMaxCount: 3
+  spawnSecondsBetween: 1e+11
+  spawnMinCount: 0
+  spawnMaxCount: 0
 --- !u!135 &135726156910351212
 SphereCollider:
   m_ObjectHideFlags: 1

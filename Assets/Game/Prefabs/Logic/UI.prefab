@@ -1209,7 +1209,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PLAYER.exe[65535]
+  m_Text: PLAYER.exe[-1]
 --- !u!114 &114648164105985514
 MonoBehaviour:
   m_ObjectHideFlags: 1

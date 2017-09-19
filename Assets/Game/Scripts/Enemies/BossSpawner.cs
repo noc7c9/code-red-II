@@ -6,6 +6,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
     public class BossSpawner : MonoBehaviour {
 
+        const int MAX_ENEMIES = 200;
+
         public Transform enemyPrefab;
 
         public float spawnSecondsBetween;
@@ -32,6 +34,10 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void SpawnEnemy() {
+            if (Enemy.totalEntities >= MAX_ENEMIES) {
+                return;
+            }
+
             Transform enemy = Instantiate(enemyPrefab);
 
             // spawn at a random spawn point

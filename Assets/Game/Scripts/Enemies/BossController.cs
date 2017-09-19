@@ -44,27 +44,30 @@ namespace Noc7c9.TheDigitalFrontier {
 
             subBossSpawner.SpawnSubBoss();
             subBossSpawner.SpawnSubBoss();
-            subBossSpawnTimer = subBossSpawnDelay / 2;
+            subBossSpawner.SpawnSubBoss();
         }
 
         void Update() {
             if (barrierState == BarrierState.UP) {
-                timer += Time.deltaTime;
-                if (timer > hackTotalTime) {
-                    timer -= hackTotalTime;
+                // timer += Time.deltaTime;
+                if (timer >= hackTotalTime) {
+                    // timer -= hackTotalTime;
+                    timer = 0;
                     DeactivateBarrier();
                 }
             } else {
                 timer += Time.deltaTime;
-                if (timer > barrierDownDuration) {
-                    timer -= barrierDownDuration;
+                if (timer >= barrierDownDuration) {
+                    // timer -= barrierDownDuration;
+                    timer = 0;
                     ActivateBarrier();
                 }
             }
 
             subBossSpawnTimer += Time.deltaTime;
-            if (subBossSpawnTimer > subBossSpawnDelay) {
-                subBossSpawnTimer -= subBossSpawnDelay;
+            float time = subBossSpawnDelay * subBossSpawner.numOfActiveSubBosses;
+            if (subBossSpawnTimer > time) {
+                subBossSpawnTimer -= time;
                 subBossSpawner.SpawnSubBoss();
             }
         }

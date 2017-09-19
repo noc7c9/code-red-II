@@ -4816,11 +4816,6 @@ Prefab:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1635314384}
-    - target: {fileID: 114489763848857574, guid: 7ee04aecd167e75438b2a351f327c28c,
-        type: 2}
-      propertyPath: hasInfiniteHealth
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ee04aecd167e75438b2a351f327c28c, type: 2}
   m_IsPrefabParent: 0

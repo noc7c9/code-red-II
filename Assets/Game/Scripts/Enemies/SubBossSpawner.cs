@@ -12,7 +12,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float fireTime;
 
-        int numOfActiveSubBosses;
+        public int numOfActiveSubBosses { get; private set; }
 
         FisherYates.ShuffleList<Vector3> spawnPoints;
 
