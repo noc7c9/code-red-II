@@ -20,7 +20,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public void SetHealthValue(float percentage) {
             gameObject.SetActive(true);
-            bar.localScale = new Vector3(percentage, 1, 1);
+            bar.localScale = new Vector3(Mathf.Clamp01(percentage), 1, 1);
         }
 
         public void Disable() {

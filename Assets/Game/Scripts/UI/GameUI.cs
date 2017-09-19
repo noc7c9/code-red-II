@@ -14,10 +14,6 @@ namespace Noc7c9.TheDigitalFrontier {
         public GameObject inGameUI;
         public GameObject gameOverUI;
 
-        public RectTransform newWaveBanner;
-        public Text newWaveNumber;
-        public Text newWaveEnemyCount;
-
         public HealthBar playerHealthBar;
         public HealthBar bossHealthBar;
         public Color bossHealthBarShieldedColor;
@@ -25,15 +21,6 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public float fadeTime;
         public Color fadeOutColor;
-
-        public Text hackingIndicatorStatus;
-        public float hackingInProgressWheelDelay;
-        public Text hackingIndicatorPercentage;
-
-        int hackingInProgressWheelIter;
-        char[] hackingInProgressWheelChars = {'-', '\\', '-', '/'};
-        char hackingInProgressWheelCurrentChar;
-        float hackingInProgressNextTime;
 
         PlayerController player;
         BossController boss;
@@ -60,31 +47,18 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void UpdateBossUI() {
-            // health
-            bossHealthBar.SetHealthValue(
-                player == null ? 0 : boss.health / boss.startingHealth);
+            if (boss == null) {
+                bossHealthBar.Disable();
+                return;
+            }
 
-            // hacking status
-            if (boss != null && boss.barrierState == BossController.BarrierState.UP) {
-                hackingIndicatorStatus.text = hackingInProgressWheelCurrentChar
-                    + " HACKING ENEMY SHIELD...";
-                if (Time.time > hackingInProgressNextTime) {
-                    hackingInProgressNextTime
-                        = Time.time + hackingInProgressWheelDelay;
-                    hackingInProgressWheelIter
-                        = ++hackingInProgressWheelIter
-                          % hackingInProgressWheelChars.Length;
-                    hackingInProgressWheelCurrentChar
-                        = hackingInProgressWheelChars[hackingInProgressWheelIter];
-                }
-                hackingIndicatorPercentage.text = boss.GetHackPercentage() + "%";
-
+            if (boss.barrierState == BossController.BarrierState.UP) {
+                bossHealthBar.SetHealthValue(1 - boss.GetHackPercentage());
                 bossHealthBar.SetColor(bossHealthBarShieldedColor);
                 bossHealthBar.SetText("V_BARRIER.exe[1]");
             } else {
-                hackingIndicatorStatus.text = "BARRIER DOWN";
-                hackingIndicatorPercentage.text = "";
-
+                bossHealthBar.SetHealthValue(
+                    boss == null ? 0 : boss.health / boss.startingHealth);
                 bossHealthBar.SetColor();
                 bossHealthBar.SetText("V_ROOT.exe[0]");
             }
@@ -102,50 +76,6 @@ namespace Noc7c9.TheDigitalFrontier {
                     subBossHealthBars[i].SetText(title);
                 }
             }
-        }
-
-        IEnumerator currentNewWaveCoroutine;
-        void DisplayNewWaveBanner() {
-            if (currentNewWaveCoroutine != null) {
-                StopCoroutine(currentNewWaveCoroutine);
-            }
-            StartCoroutine(currentNewWaveCoroutine = AnimateBanner());
-        }
-
-        IEnumerator AnimateBanner() {
-            float visibleY = -200;
-            float hiddenY = -450;
-            float delay = 2f;
-            float speed = 1.5f;
-            float percent = 0;
-
-            // display banner
-            newWaveBanner.gameObject.SetActive(true);
-            while (percent <= 1) {
-                percent += Time.deltaTime * speed;
-
-                newWaveBanner.anchoredPosition = Vector2.up
-                    * Mathf.Lerp(hiddenY, visibleY, percent);
-                yield return null;
-            }
-
-            // wait a moment
-            yield return new WaitForSeconds(delay);
-
-            // hide banner
-            while (percent >= 0) {
-                percent -= Time.deltaTime * speed;
-
-                newWaveBanner.anchoredPosition = Vector2.up
-                    * Mathf.Lerp(hiddenY, visibleY, percent);
-                yield return null;
-            }
-            newWaveBanner.gameObject.SetActive(false);
-        }
-
-        string NumberToWord(int num) {
-            string[] words = {"One", "Two", "Three", "Four", "Five"};
-            return words[num-1];
         }
 
         void PlayerDyingEventHandler() {

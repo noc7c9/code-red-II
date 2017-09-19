@@ -108,7 +108,7 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         public float GetHackPercentage() {
-            return 100 * timer / hackTotalTime;
+            return timer / hackTotalTime;
         }
 
 
