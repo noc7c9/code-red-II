@@ -26,7 +26,13 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public int number { get; private set; }
 
+        RiseAnimation rise;
+        BossSpawner spawner;
+
         void Awake() {
+            rise = GetComponent<RiseAnimation>();
+            spawner = GetComponent<BossSpawner>();
+
             allSubBossCount += 1;
             number = allSubBossCount;
 
@@ -37,6 +43,14 @@ namespace Noc7c9.TheDigitalFrontier {
                     break;
                 }
             }
+        }
+
+        void Start() {
+            spawner.enabled = false;
+            rise.Ending += () => {
+                spawner.enabled = true;
+            };
+            rise.StartAnimation();
         }
 
         protected override void Die() {

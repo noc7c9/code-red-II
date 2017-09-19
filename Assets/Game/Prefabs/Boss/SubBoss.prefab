@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114951653555632648}
   - component: {fileID: 114610066378218204}
   - component: {fileID: 114251304735672198}
+  - component: {fileID: 114829593163200238}
   m_Layer: 8
   m_Name: SubBoss
   m_TagString: Untagged
@@ -143,7 +144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418617346696728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102.3, y: 3, z: 48.6}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4296751057355718}
@@ -316,6 +317,19 @@ MonoBehaviour:
   axis: {x: 1, y: 0, z: 0}
   speed: 50
   drawGizmos: 0
+--- !u!114 &114829593163200238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418617346696728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a784e1439390f4284a3f15459a607e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHeight: 3
+  speed: 1
 --- !u!114 &114950889924812116
 MonoBehaviour:
   m_ObjectHideFlags: 1

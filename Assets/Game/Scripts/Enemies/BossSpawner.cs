@@ -16,6 +16,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         float nextSpawnTime;
 
+        void Start() {
+            nextSpawnTime = Time.time + spawnSecondsBetween;
+        }
+
         void Update() {
             if (Time.time > nextSpawnTime) {
                 nextSpawnTime = Time.time + spawnSecondsBetween;

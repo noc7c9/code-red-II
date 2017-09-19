@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 114024986038796696}
   - component: {fileID: 114479074930513814}
   - component: {fileID: 114283478582392548}
+  - component: {fileID: 114208455835916306}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
@@ -498,6 +499,19 @@ MonoBehaviour:
     type: 2}
   radius: 8
   numberOfEnemies: 36
+--- !u!114 &114208455835916306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988281708476896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a784e1439390f4284a3f15459a607e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHeight: 10
+  speed: 1
 --- !u!114 &114276017163878976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,7 +541,6 @@ MonoBehaviour:
     type: 2}
   spawnPointTransforms: []
   fireTime: 1
-  maxActiveSubBosses: 3
 --- !u!114 &114316273923330010
 MonoBehaviour:
   m_ObjectHideFlags: 1
