@@ -16,7 +16,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public HealthBar playerHealthBar;
         public HealthBar bossHealthBar;
-        public Color bossHealthBarShieldedColor;
+        public HealthBar bossShieldHealthBar;
         public HealthBar[] subBossHealthBars;
 
         public float fadeTime;
@@ -53,15 +53,17 @@ namespace Noc7c9.TheDigitalFrontier {
             }
 
             if (boss.barrierState == BossController.BarrierState.UP) {
-                bossHealthBar.SetHealthValue(1 - boss.GetHackPercentage());
-                bossHealthBar.SetColor(bossHealthBarShieldedColor);
-                bossHealthBar.SetText("V_BARRIER.exe[1]");
+                bossShieldHealthBar.SetHealthValue(1 - boss.GetHackPercentage());
+
+                bossHealthBar.SetText("");
+                bossShieldHealthBar.SetText("V_BARRIER.exe[1]");
             } else {
-                bossHealthBar.SetHealthValue(
-                    boss == null ? 0 : boss.health / boss.startingHealth);
-                bossHealthBar.SetColor();
+                bossShieldHealthBar.Disable();
+
                 bossHealthBar.SetText("V_ROOT.exe[0]");
             }
+            bossHealthBar.SetHealthValue(
+                boss == null ? 0 : boss.health / boss.startingHealth);
         }
 
         void UpdateSubBossUI() {
