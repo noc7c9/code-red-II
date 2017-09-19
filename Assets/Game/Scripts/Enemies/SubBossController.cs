@@ -46,6 +46,8 @@ namespace Noc7c9.TheDigitalFrontier {
         }
 
         void Start() {
+            base.Start();
+
             spawner.enabled = false;
             rise.Ending += () => {
                 spawner.enabled = true;

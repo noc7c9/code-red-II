@@ -11,6 +11,7 @@ namespace Noc7c9.TheDigitalFrontier {
     public class GameUI : MonoBehaviour {
 
         public Image fadeScreen;
+        public GameObject inGameUI;
         public GameObject gameOverUI;
 
         public RectTransform newWaveBanner;
@@ -42,6 +43,9 @@ namespace Noc7c9.TheDigitalFrontier {
             player.Dying += PlayerDyingEventHandler;
 
             boss = GameManager.Instance.GetBossController();
+
+            SceneManager.sceneUnloaded -= OnSceneUnloadedHandler;
+            SceneManager.sceneUnloaded += OnSceneUnloadedHandler;
         }
 
         void Update() {
@@ -76,11 +80,13 @@ namespace Noc7c9.TheDigitalFrontier {
                 hackingIndicatorPercentage.text = boss.GetHackPercentage() + "%";
 
                 bossHealthBar.SetColor(bossHealthBarShieldedColor);
+                bossHealthBar.SetText("V_BARRIER.exe[1]");
             } else {
                 hackingIndicatorStatus.text = "BARRIER DOWN";
                 hackingIndicatorPercentage.text = "";
 
                 bossHealthBar.SetColor();
+                bossHealthBar.SetText("V_ROOT.exe[0]");
             }
         }
 
@@ -92,7 +98,7 @@ namespace Noc7c9.TheDigitalFrontier {
                     subBossHealthBars[i].Disable();
                 } else {
                     subBossHealthBars[i].SetHealthValue(subBoss.healthPercentage);
-                    string title = "V_FORK.exe[" + subBoss.number + "]";
+                    string title = "V_FORK.exe[" + (1 + subBoss.number) + "]";
                     subBossHealthBars[i].SetText(title);
                 }
             }
@@ -149,8 +155,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
             StartCoroutine(Fade(Color.clear, fadeOutColor, fadeTime));
 
-            playerHealthBar.transform.parent.gameObject.SetActive(false);
-
+            inGameUI.SetActive(false);
             gameOverUI.SetActive(true);
         }
 
@@ -163,6 +168,10 @@ namespace Noc7c9.TheDigitalFrontier {
                 fadeScreen.color = Color.Lerp(from, to, percent);
                 yield return null;
             }
+        }
+
+        void OnSceneUnloadedHandler(Scene _) {
+            GameManager.sceneIsUnloading = false;
         }
 
         // UI input
