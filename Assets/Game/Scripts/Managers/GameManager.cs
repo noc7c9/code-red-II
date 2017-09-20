@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Noc7c9.TheDigitalFrontier {
 
@@ -33,6 +34,10 @@ namespace Noc7c9.TheDigitalFrontier {
                 FindObjectOfType<EnemySpawner>().PopulateStage(
                         loadedCityBlock, GetCityBlockLoader().pieceWidth);
             }
+
+            var boss = FindObjectOfType<BossController>();
+            boss.Dying -= OnBossDyingHandler;
+            boss.Dying += OnBossDyingHandler;
         }
 
         void Start() {
@@ -59,6 +64,12 @@ namespace Noc7c9.TheDigitalFrontier {
                 return Vector3.zero;
             }
             return playerInput.GetLookAtPoint();
+        }
+
+        void OnBossDyingHandler() {
+            GameManager.sceneIsUnloading = true;
+            AudioManager.Instance.PlayMusic(null);
+            SceneManager.LoadScene("PostGame");
         }
 
         // singleton manager getter methods

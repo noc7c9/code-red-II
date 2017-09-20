@@ -10,7 +10,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         void OnDestroy() {
             if (clip != null) {
-                AudioSource.PlayClipAtPoint(clip, transform.position);
+                AudioManager.Instance.PlaySound(clip, transform.position);
             }
         }
 

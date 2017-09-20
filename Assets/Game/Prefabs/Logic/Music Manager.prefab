@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca31a83c96f40e49b548ea3bd40acca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialTrack: 1
+  initialTrack: 0
   menuTheme: {fileID: 8300000, guid: a41b46a8f8c024d95b3e00def1f95838, type: 3}
   bossThemeSlow: {fileID: 8300000, guid: 753a4197d949ad2448d5ed26b0d71730, type: 3}
   bossThemeFast: {fileID: 8300000, guid: 915f89d8054ecc24ea72ec6861db890f, type: 3}
+  endTheme: {fileID: 8300000, guid: 822414002fb8b4c828a523b2bb9a9b02, type: 3}
   crossFadeDuration: 3
+  fadeInitialTrack: 0

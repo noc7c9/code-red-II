@@ -10,7 +10,7 @@ namespace Noc7c9.TheDigitalFrontier {
      */
     public class GameUI : MonoBehaviour {
 
-        public Image fadeScreen;
+        public Fade fade;
         public GameObject inGameUI;
         public GameObject gameOverUI;
 
@@ -85,21 +85,11 @@ namespace Noc7c9.TheDigitalFrontier {
 
             Cursor.visible = true;
 
-            StartCoroutine(Fade(Color.clear, fadeOutColor, fadeTime));
+            fade.SetColor(fadeOutColor);
+            fade.Animate(fadeOutColor.a, fadeTime);
 
             inGameUI.SetActive(false);
             gameOverUI.SetActive(true);
-        }
-
-        IEnumerator Fade(Color from, Color to, float time) {
-            float speed = 1 / time;
-            float percent = 0;
-
-            while (percent < 1) {
-                percent += Time.deltaTime * speed;
-                fadeScreen.color = Color.Lerp(from, to, percent);
-                yield return null;
-            }
         }
 
         void OnSceneUnloadedHandler(Scene _) {

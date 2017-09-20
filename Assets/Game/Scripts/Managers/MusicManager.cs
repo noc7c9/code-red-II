@@ -8,9 +8,11 @@ namespace Noc7c9.TheDigitalFrontier {
     public class MusicManager : MonoBehaviour {
 
         public enum MusicTrack {
+            NONE,
             MENU_THEME,
             BOSS_THEME_SLOW,
             BOSS_THEME_FAST,
+            END_THEME,
         }
 
         public MusicTrack initialTrack;
@@ -18,14 +20,17 @@ namespace Noc7c9.TheDigitalFrontier {
         public AudioClip menuTheme;
         public AudioClip bossThemeSlow;
         public AudioClip bossThemeFast;
+        public AudioClip endTheme;
 
         public float crossFadeDuration;
 
-        MusicTrack currentTrack;
+        public bool fadeInitialTrack;
+
+        MusicTrack currentTrack = MusicTrack.NONE;
         string sceneName;
 
         void Start() {
-            PlayTrack(initialTrack, false);
+            PlayTrack(initialTrack, fadeInitialTrack);
         }
 
         public void PlayTrack(MusicTrack track, bool crossFade=true) {
@@ -41,6 +46,8 @@ namespace Noc7c9.TheDigitalFrontier {
                 clip = bossThemeSlow;
             } else if (track == MusicTrack.BOSS_THEME_FAST) {
                 clip = bossThemeFast;
+            } else if (track == MusicTrack.END_THEME) {
+                clip = endTheme;
             }
 
             if (clip != null) {

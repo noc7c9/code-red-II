@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInfiniteHealth: 0
-  startingHealth: 750
+  startingHealth: 1000
   spawner: {fileID: 114990175211464888}
   subBossSpawner: {fileID: 114211415309801278}
   subBossSpawnDelay: 10

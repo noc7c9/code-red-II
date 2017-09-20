@@ -82,7 +82,9 @@ namespace Noc7c9.TheDigitalFrontier {
         public void PlayMusic(AudioClip clip, float fadeDuration=1) {
             activeMusicSourceIndex = 1 - activeMusicSourceIndex;
             musicSources[activeMusicSourceIndex].clip = clip;
-            musicSources[activeMusicSourceIndex].Play();
+            if (clip != null) {
+                musicSources[activeMusicSourceIndex].Play();
+            }
 
             StartCoroutine(MusicCrossFade(fadeDuration));
         }
