@@ -8,6 +8,8 @@ Just a final note, due to the development history the source code for this game
 is an absolute mess, I don't plan to clean it up (or continue development in
 general). You've been warned ;)
 
+![In-game Screenshot](https://github.com/noc7c9/code-red-II/blob/master/Screenshots/2.jpg "In-game Screenshot")
+
 Controls
 --------
 
