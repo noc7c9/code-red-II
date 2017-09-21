@@ -19,6 +19,8 @@ namespace Noc7c9.TheDigitalFrontier {
             masterVolumeSlider.value = AudioManager.Instance.masterVolumePercent;
             sfxVolumeSlider.value = AudioManager.Instance.sfxVolumePercent;
             musicVolumeSlider.value = AudioManager.Instance.musicVolumePercent;
+
+            Cursor.visible = true;
         }
 
         public void Play() {
