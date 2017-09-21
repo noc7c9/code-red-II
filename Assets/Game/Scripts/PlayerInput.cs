@@ -12,7 +12,7 @@ namespace Noc7c9.TheDigitalFrontier {
 
         public Crosshairs crosshairs;
         public GunWielder cannon;
-        public GunWielder turret;
+        public GunWielder gatlingGun;
 
         Camera viewCamera;
         PlayerController playerController;
@@ -34,15 +34,15 @@ namespace Noc7c9.TheDigitalFrontier {
             Vector2 playerPos = new Vector2(transform.position.x, transform.position.z);
             if ((aimPoint - playerPos).sqrMagnitude > 1) {
                 cannon.Aim(point);
-                turret.Aim(point);
+                gatlingGun.Aim(point);
             }
 
             // left mouse button
             if (Input.GetMouseButton(0)) {
-                turret.OnTriggerHold();
+                gatlingGun.OnTriggerHold();
             }
             if (Input.GetMouseButtonUp(0)) {
-                turret.OnTriggerRelease();
+                gatlingGun.OnTriggerRelease();
             }
 
             // right mouse button
@@ -68,7 +68,7 @@ namespace Noc7c9.TheDigitalFrontier {
         public Vector3 GetLookAtPoint() {
             // raycast to figure out where on the ground the mouse is pointing at.
             Ray ray = MouseAimRay();
-            Plane groundPlane = new Plane(Vector3.up, Vector3.up * turret.GunHeight);
+            Plane groundPlane = new Plane(Vector3.up, Vector3.up * gatlingGun.GunHeight);
             float intersectDistance;
 
             if (groundPlane.Raycast(ray, out intersectDistance)) {

@@ -57,7 +57,8 @@ namespace Noc7c9.TheDigitalFrontier {
 
             pathfinder = GetComponent<NavMeshAgent>();
 
-            GameObject targetObject = GameObject.FindGameObjectWithTag("Player");
+            GameObject targetObject
+                = GameManager.Instance.GetPlayerController().gameObject;
 
             if (targetObject != null) {
                 hasTarget = true;

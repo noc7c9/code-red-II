@@ -478,7 +478,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subBossProjectilePrefab: {fileID: 54089285857583642, guid: 01387f3b5b3cfcf4f8c5a3601e9aa5e9,
     type: 2}
-  spawnPointTransforms: []
+  spawnPointTransforms:
+  - {fileID: 4015120097578830, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4875515656381524, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4105148099845600, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4504588849705276, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4334040422363800, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4057042766800548, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4813958987352742, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4922562363842522, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4570048593261962, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
+  - {fileID: 4987671282813604, guid: 64782cdb643bb3a4088f954e0c475f9d, type: 2}
   fireTime: 3
 --- !u!114 &114319535771420038
 MonoBehaviour:

@@ -301,9 +301,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4921214791377404, guid: 1ee965e435348f945bf54225ffc97502,
     type: 2}
-  spawnSecondsBetween: 2
-  spawnMinCount: 3
-  spawnMaxCount: 5
+  spawnSecondsBetween: 1.75
+  spawnMinCount: 4
+  spawnMaxCount: 8
 --- !u!114 &114713324091617970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,5 +387,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}

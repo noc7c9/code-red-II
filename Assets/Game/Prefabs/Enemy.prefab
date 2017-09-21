@@ -156,12 +156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInfiniteHealth: 0
-  startingHealth: 2
+  startingHealth: 1
   deathEffect: {fileID: 198732033036472700, guid: a0ebec74fa2933d418830f0bb3fc9146,
     type: 2}
   useDistanceLimit: 0
   minPathSqrDistance: 1000
-  moveSpeed: 10
+  moveSpeed: 12.5
   originalColor: {r: 0, g: 0.7647059, b: 0.13184588, a: 0}
   attackRange: 3
   attackMovedDistance: 1

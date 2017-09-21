@@ -25,6 +25,10 @@ namespace Noc7c9.TheDigitalFrontier {
 
         bool isDestroyed;
 
+        void OnDrawGizmos() {
+            Gizmos.DrawWireSphere(transform.position, collisionRadius);
+        }
+
         void Start() {
             Destroy(gameObject, secsLifetime);
 
